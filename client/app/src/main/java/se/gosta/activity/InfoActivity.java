@@ -31,7 +31,7 @@ public class InfoActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = InfoActivity.class.getSimpleName();
 
-    private static final String DEFAULT_URL = "http://localhost:8080/resources/logos/";
+    private static final String DEFAULT_URL = "http://10.0.2.2:8080/resources/logos/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,11 +55,11 @@ public class InfoActivity extends AppCompatActivity {
 
         fetchLogo(currentCompany);
 
+
+
         ImageView iv = (ImageView) findViewById(R.id.logo);
         Bitmap bm = Utils.avatarBitmap(InfoActivity.this, currentCompany);
-
         iv.setImageBitmap(bm);
-
         Log.d(LOG_TAG, "Fetched logo of company: " + currentCompany.name());
 
         TextView tvTitle = (TextView) findViewById(R.id.companyTitle);
@@ -69,6 +69,7 @@ public class InfoActivity extends AppCompatActivity {
         TextView tv = (TextView)findViewById(R.id.companyText);
         tv.setText(currentCompany.info());
         Log.d(LOG_TAG, "Description set: " + currentCompany.info());
+
         BottomNavigationView navigation = (BottomNavigationView)
                 findViewById(R.id.navigation);
         navigation.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED);
