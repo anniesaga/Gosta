@@ -206,16 +206,7 @@ public class MainActivity extends AppCompatActivity {
                         companies = jsonToCompany(response);
                         Session.getSession().companies = companies;
                         resetListView();
-
-                        for (Company c : companies) {
-                           if (!Utils.avatarExists(MainActivity.this, c)) {
-                                Log.d(LOG_TAG, " download logo for " + c.name());
-                                //fetchLogo(c);
-                           } else {
-                               Log.d(LOG_TAG, " avatar already exists for " + c.name());
-
-                           }
-                        }
+                        Log.d(LOG_TAG, "onResponse ok");
                     }
                 }, new Response.ErrorListener() {
             @Override
