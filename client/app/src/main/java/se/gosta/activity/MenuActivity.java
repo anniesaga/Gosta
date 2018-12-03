@@ -1,4 +1,4 @@
-/*package se.gosta.activity;
+package se.gosta.activity;
 
 import se.gosta.R;
 import se.gosta.storage.MenuOption;
@@ -55,7 +55,7 @@ public class MenuActivity extends AppCompatActivity {
                 MenuOption menuOption = (MenuOption) listView.getItemAtPosition(position);
 
 
-                if(menuOption.menuNavigation == R.id.navcontainer){
+                if(menuOption.menuNavigation == R.id.main){
                     Intent mainIntent = new Intent(MenuActivity.this, MainActivity.class);
                     startActivity(mainIntent);
                 } else if(menuOption.menuNavigation == R.id.activity_map){
@@ -75,13 +75,12 @@ public class MenuActivity extends AppCompatActivity {
 
     private void createMenuOptionList(){
         menuOptions = new ArrayList<>();
-        menuOptions.add(new MenuOption("Företag", R.id.navcontainer));
+        menuOptions.add(new MenuOption("Företag", R.id.main));
         menuOptions.add(new MenuOption("Mässkarta", R.id.activity_map));
-        menuOptions.add(new MenuOption("Mässchema", R.id.navcontainer));
+        menuOptions.add(new MenuOption("Mässchema", R.id.main));
         menuOptions.add(new MenuOption("QR-läsare", R.id.readerLayout));
 
     }
 
 }
 
-*/

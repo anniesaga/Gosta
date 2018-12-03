@@ -6,4 +6,7 @@
     <string name="settings">Inställningar</string>
     <string name="schedule">Schema</string>
     <string name="title_activity_map">MapActivity</string>
+    <string name="title_activity_reader">ReaderActivity</string>
+    <string name="qr">QR Scanner</string>
+    <string name="scan">Scanna</string>
 </resources>

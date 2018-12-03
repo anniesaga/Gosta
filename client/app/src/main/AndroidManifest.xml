@@ -21,13 +21,14 @@
         </activity>
         <activity
             android:name=".activity.MenuActivity"
-            android:label="@string/title_activity_menu"
-            android:theme="@style/AppTheme.NoActionBar" />
+             />
         <activity android:name=".activity.InfoActivity" />
         <activity
             android:name=".activity.MapActivity"
-            android:label="@string/title_activity_map"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            />
+        <activity
+            android:name=".activity.ReaderActivity"
+            ></activity>
     </application>
 
 </manifest>
