@@ -34,6 +34,7 @@ import se.gosta.storage.Company;
 import se.gosta.storage.Session;
 import se.gosta.storage.Utils;
 
+
 public class MainActivity extends AppCompatActivity {
 
     private ArrayAdapter<Company> adapter;
@@ -63,8 +64,8 @@ public class MainActivity extends AppCompatActivity {
                             case R.id.action_companies:
                                 return true;
                             case R.id.action_map:
-                                //Intent intent = new Intent(MainActivity.this, MapActivity.class);
-                               // startActivity(intent);
+                                Intent intent = new Intent(MainActivity.this, MapActivity.class);
+                                startActivity(intent);
                                 // overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
                                 return true;
                             case R.id.action_schedule:
@@ -72,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
                                // startActivity(intent);
                                 return true;
                             case R.id.action_settings:
+                                intent = new Intent (MainActivity.this, MenuActivity.class);
+                                startActivity(intent);
                                 return true;
 
                         }
