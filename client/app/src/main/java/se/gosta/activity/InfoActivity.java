@@ -1,6 +1,7 @@
 package se.gosta.activity;
 
 import android.graphics.Bitmap;
+import android.icu.text.IDNA;
 import android.os.Bundle;
 import android.support.design.bottomnavigation.LabelVisibilityMode;
 import android.support.design.widget.BottomNavigationView;
@@ -54,7 +55,9 @@ public class InfoActivity extends AppCompatActivity {
         fetchLogo(currentCompany);
 
         ImageView iv = (ImageView) findViewById(R.id.logo);
-        iv.setImageBitmap(Utils.avatarBitmap(InfoActivity.this, currentCompany));
+        Bitmap bm = Utils.avatarBitmap(InfoActivity.this, currentCompany);
+
+        iv.setImageBitmap(bm);
 
         Log.d(LOG_TAG, "Fetched logo of company: " + currentCompany.name());
         TextView tv = (TextView)findViewById(R.id.companyText);
@@ -91,7 +94,7 @@ public class InfoActivity extends AppCompatActivity {
 
     public void fetchLogo(final Company company) {
         Log.d(LOG_TAG, "fetchLogos()");
-        RequestQueue queue = Volley.newRequestQueue(this);
+        RequestQueue queue = Volley.newRequestQueue(InfoActivity.this);
         Log.d(LOG_TAG, " URL: " + DEFAULT_URL + company.fileName());
         String url = DEFAULT_URL + company.fileName();
 
