@@ -34,10 +34,11 @@ public class Companies extends HttpServlet {
 
       while(rs.next()){
         JSONObject obj = new JSONObject();
-        obj.put("name", rs.getString("company_name"));
-        obj.put("email", rs.getString("company_email"));
-        obj.put("info", rs.getString("company_info"));
-        obj.put("url", rs.getString("company_url"));
+        obj.put("name", rs.getString("name"));
+        obj.put("email", rs.getString("email"));
+        obj.put("info", rs.getString("info"));
+        obj.put("fileName", rs.getString("fileName"));
+        obj.put("caseNo", rs.getInt("caseNo"));
         array.put(obj);
       }
       out.println(array.toString(1));
