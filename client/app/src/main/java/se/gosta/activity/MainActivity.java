@@ -34,6 +34,7 @@ import se.gosta.storage.Company;
 import se.gosta.storage.Session;
 import se.gosta.storage.Utils;
 
+
 public class MainActivity extends AppCompatActivity {
 
     private ArrayAdapter<Company> adapter;
