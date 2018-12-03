@@ -5,11 +5,11 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
  
 <servlet>
-   <servlet-name></servlet-name>
-   <servlet-class></servlet-class>
+   <servlet-name>companies</servlet-name>
+   <servlet-class>servlets.Companies</servlet-class>
 </servlet>
 <servlet-mapping>
-  <servlet-name></servlet-name>
-  <url-pattern></url-pattern>
+  <servlet-name>companies</servlet-name>
+  <url-pattern>/companies</url-pattern>
 </servlet-mapping>
 </web-app>
