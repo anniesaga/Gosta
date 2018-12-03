@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <item android:id="@+id/action_companies"
+            android:enabled="true"
+            app:showAsAction="ifRoom"
+            android:title="@string/companies"
+            android:icon="@drawable/companies"/>
+        <item android:id="@+id/action_map"
+            android:title="@string/map"
+            android:icon="@drawable/mapicon"
+            android:enabled="true"
+            app:showAsAction="ifRoom" />
+        <item android:id="@+id/action_schedule"
+            android:title="@string/schedule"
+            android:icon="@drawable/scheduleicon"
+            android:enabled="true"
+            app:showAsAction="ifRoom"/>
+        <item android:id="@+id/action_settings"
+            android:title="@string/settings"
+            android:icon="@drawable/menuicon"
+            android:enabled="true"
+            app:showAsAction="ifRoom"/>
+
+
+    </menu>
