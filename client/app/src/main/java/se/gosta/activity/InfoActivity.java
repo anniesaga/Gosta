@@ -61,6 +61,11 @@ public class InfoActivity extends AppCompatActivity {
         iv.setImageBitmap(bm);
 
         Log.d(LOG_TAG, "Fetched logo of company: " + currentCompany.name());
+
+        TextView tvTitle = (TextView) findViewById(R.id.companyTitle);
+        tvTitle.setText(currentCompany.name());
+        Log.d(LOG_TAG, "Title set: " + currentCompany.name());
+
         TextView tv = (TextView)findViewById(R.id.companyText);
         tv.setText(currentCompany.info());
         Log.d(LOG_TAG, "Description set: " + currentCompany.info());
