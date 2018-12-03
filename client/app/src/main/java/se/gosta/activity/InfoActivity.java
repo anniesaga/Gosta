@@ -1,5 +1,6 @@
 package se.gosta.activity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.icu.text.IDNA;
 import android.os.Bundle;
@@ -73,17 +74,21 @@ public class InfoActivity extends AppCompatActivity {
                     public boolean onNavigationItemSelected(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.action_companies:
+                                Intent intent = new Intent(InfoActivity.this, MainActivity.class);
+                                startActivity(intent);
                                 return true;
                             case R.id.action_map:
-                                //Intent intent = new Intent(MainActivity.this, MapActivity.class);
-                                // startActivity(intent);
-                                // overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
+                                intent = new Intent(InfoActivity.this, MapActivity.class);
+                                startActivity(intent);
+                               // overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
                                 return true;
                             case R.id.action_schedule:
                                 // intent = new Intent(StartActivity.this, ScheduleActivity.class);
                                 // startActivity(intent);
                                 return true;
                             case R.id.action_settings:
+                                intent = new Intent(InfoActivity.this, MenuActivity.class);
+                                startActivity(intent);
                                 return true;
 
                         }
