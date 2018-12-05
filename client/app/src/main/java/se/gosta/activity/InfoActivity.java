@@ -105,6 +105,7 @@ public class InfoActivity extends AppCompatActivity {
                 });
     }
 
+
     public void fetchLogo(final Company company) {
         Log.d(LOG_TAG, "fetchLogos()");
         RequestQueue queue = Volley.newRequestQueue(InfoActivity.this);
