@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(MenuItem item) {
+                        Session.setCurrentCompanyName(null);
                         switch (item.getItemId()) {
                             case R.id.action_companies:
                                 return true;
@@ -95,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
 
         registerForContextMenu(listView);
 
+
         listView.setOnItemClickListener(new ListView.OnItemClickListener() {
 
             @Override
@@ -106,14 +108,15 @@ public class MainActivity extends AppCompatActivity {
 
                 Company comp = (Company)listView.getItemAtPosition(position);
                 Session.getSession().put(comp.name(), comp);
-
                 Intent intent = new Intent(MainActivity.this, InfoActivity.class);
                 Bundle extras = new Bundle();
                 extras.putString("companyName", comp.name());
+                Session.setCurrentCompanyName(comp.name());
                 intent.putExtras(extras);
                 startActivity(intent);
             }
         });
+        //Company company = Session.get(Session.currentCompanyName);
 
     }
     @Override
@@ -161,6 +164,11 @@ public class MainActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, companies);
         listView.setAdapter(adapter);
+        if(Session.currentCompanyName != null) {
+            int position = companies.indexOf(Session.get(Session.currentCompanyName));
+            Log.d(LOG_TAG, "Fetched company on index: " + position);
+            listView.setSelection(position);
+        }
     }
 
     @Override

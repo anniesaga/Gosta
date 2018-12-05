@@ -46,5 +46,13 @@ public class Company {
         return name;
     }
 
+    @Override
+    public boolean equals(Object o){
+        if(!(o instanceof Company))
+            return false;
+        Company other = (Company)o;
+        return other.name().equals(this.name);
+    }
+
 }
 

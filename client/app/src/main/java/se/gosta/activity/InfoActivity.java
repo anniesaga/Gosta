@@ -52,8 +52,9 @@ public class InfoActivity extends AppCompatActivity {
             compName= (String) savedInstanceState.getSerializable("companyName");
         }
         Company currentCompany = Session.get(compName);
-
+        Session.setCurrentCompanyName(currentCompany.name());
         fetchLogo(currentCompany);
+        Log.d(LOG_TAG, "Displaying company: " + currentCompany);
 
 
 
@@ -78,6 +79,7 @@ public class InfoActivity extends AppCompatActivity {
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(MenuItem item) {
+                        Session.setCurrentCompanyName(null);
                         switch (item.getItemId()) {
                             case R.id.action_companies:
                                 Intent intent = new Intent(InfoActivity.this, MainActivity.class);

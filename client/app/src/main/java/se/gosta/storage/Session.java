@@ -26,6 +26,10 @@ public class Session {
         return map.get(name);
     }
 
+    public static void setCurrentCompanyName(String companyName) {
+        currentCompanyName = companyName;
+    }
+
     // I t ex main activity:
     // Session.getSession().put(companyName, company);
     // intent... bla bla gå till X

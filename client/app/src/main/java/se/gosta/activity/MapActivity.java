@@ -20,6 +20,7 @@ public class MapActivity extends AppCompatActivity{
 
 
         ImageView iv = (ImageView) findViewById(R.id.map);
+        iv.setImageResource(R.drawable.gostamap);
         BottomNavigationView navigation = (BottomNavigationView)
                 findViewById(R.id.navigation);
         navigation.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED);
