@@ -1,6 +1,7 @@
 package se.gosta.activity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.icu.text.IDNA;
 import android.support.design.bottomnavigation.LabelVisibilityMode;
 import android.support.design.widget.BottomNavigationView;
@@ -13,12 +14,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -26,6 +29,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int MENU_ENTRY_CONTACT = 0 ;
     private static final int MENU_ENTRY_INFO = 1 ;
+
+    private static final String DEFAULT_URL = "http://10.0.2.2:8080/resources/logos/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -214,6 +221,9 @@ public class MainActivity extends AppCompatActivity {
                         companies = jsonToCompany(response);
                         Session.getSession().companies = companies;
                         resetListView();
+                        for(Company c : companies) {
+                            fetchLogo(c);
+                        }
                         Log.d(LOG_TAG, "onResponse ok");
                     }
                 }, new Response.ErrorListener() {
@@ -225,6 +235,43 @@ public class MainActivity extends AppCompatActivity {
         });
         queue.add(jsonArrayRequest);
 
+    }
+    public void fetchLogo(final Company company) {
+        Log.d(LOG_TAG, "fetchLogos()");
+        RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
+        Log.d(LOG_TAG, " URL: " + DEFAULT_URL + company.fileName());
+        String url = DEFAULT_URL + company.fileName();
+
+        if ( ( url == null) || url.equals("null") ) {
+            // Add default url??
+            return;
+        }
+        Log.d(LOG_TAG, "download URL: " + url);
+
+        ImageRequest imageRequest = new ImageRequest(url, new Response.Listener<Bitmap>() {
+            @Override
+            public void onResponse(Bitmap bitmap) {
+                Log.d(LOG_TAG, "onResponse ok: " + bitmap.toString());
+                try {
+                    // Create a file from the bitmap
+                    File f = Utils.createImageFile(MainActivity.this, company, bitmap);
+                    Log.d(LOG_TAG, " created file: " + f);
+                } catch (IOException e) {
+                    // Since we failed creating the file, we don't need to remove any
+                    Log.d(LOG_TAG, " failed created file: " + e);
+                    e.printStackTrace();
+                    return;
+                }
+            }
+        }, 500, 500, ImageView.ScaleType.CENTER,
+                Bitmap.Config.RGB_565,
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d(LOG_TAG, "onResponse fail");
+                    }
+                });
+        queue.add(imageRequest);
     }
 
 }
