@@ -24,7 +24,7 @@ public class MapActivity extends AppCompatActivity{
         BottomNavigationView navigation = (BottomNavigationView)
                 findViewById(R.id.navigation);
         navigation.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED);
-        navigation.setSelectedItemId(R.id.action_companies);
+        navigation.setSelectedItemId(R.id.action_map);
         navigation.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
