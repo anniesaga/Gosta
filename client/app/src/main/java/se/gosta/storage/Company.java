@@ -2,7 +2,7 @@ package se.gosta.storage;
 
 import java.util.List;
 
-public class Company {
+public class Company implements Comparable<Company> {
 
 
     private String name;
@@ -52,6 +52,11 @@ public class Company {
             return false;
         Company other = (Company)o;
         return other.name().equals(this.name);
+    }
+
+    @Override
+    public int compareTo(Company c) {
+        return this.name.compareTo(c.name());
     }
 
 }

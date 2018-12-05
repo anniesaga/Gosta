@@ -11,27 +11,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/company_list"
-            android:background="@color/white">
+            android:background="@color/white"
+            android:layout_marginBottom="50dp">
         </ListView>
 
 
-        <android.support.design.widget.BottomNavigationView
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/navigation"
-            android:layout_gravity="bottom"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="0dp"
-            android:layout_marginEnd="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:itemBackground="@color/red"
-            app:itemIconTint="@color/tint"
-            app:itemTextColor="@color/tint"
-            app:menu="@menu/menubottom"
-            />
-
+    <include layout="@layout/layout_menu" />
 
     </FrameLayout>

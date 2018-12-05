@@ -58,13 +58,20 @@ public class InfoActivity extends AppCompatActivity {
 
 
         ImageView iv = (ImageView) findViewById(R.id.logo);
-        Bitmap bm = Utils.avatarBitmap(InfoActivity.this, currentCompany);
-        iv.setImageBitmap(bm);
+        iv.setImageBitmap(Utils.avatarBitmap(InfoActivity.this, currentCompany));
         Log.d(LOG_TAG, "Fetched logo of company: " + currentCompany.name());
 
         TextView tvTitle = (TextView) findViewById(R.id.companyTitle);
         tvTitle.setText(currentCompany.name());
         Log.d(LOG_TAG, "Title set: " + currentCompany.name());
+
+        TextView tvCase = (TextView) findViewById(R.id.companyCaseNo);
+        tvCase.setText("Monter: " + currentCompany.caseNo());
+        Log.d(LOG_TAG, "Title set: " + currentCompany.caseNo());
+
+        TextView tvContact = (TextView) findViewById(R.id.companyContact);
+        tvContact.setText("Kontakt: " + currentCompany.email());
+        Log.d(LOG_TAG, "Title set: " + currentCompany.email());
 
         TextView tv = (TextView)findViewById(R.id.companyText);
         tv.setText(currentCompany.info());

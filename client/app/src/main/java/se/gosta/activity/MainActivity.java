@@ -32,6 +32,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import se.gosta.R;
@@ -182,11 +183,14 @@ public class MainActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         getCompanies();
+        for (Company c : companies) {
+            Log.d(LOG_TAG, c.toString());
+        }
     }
 
     private List<Company> jsonToCompany(JSONArray array) {
         List<Company> companyList = new ArrayList<>();
-        for (int i = 0; i< array.length(); i++) {
+        for (int i = 0; i < array.length(); i++) {
             try {
                 JSONObject row = array.getJSONObject(i);
                 String name = row.getString("name");
@@ -196,7 +200,9 @@ public class MainActivity extends AppCompatActivity {
                 int caseNo = row.getInt("caseNo");
 
                 Company c = new Company(name, email, info, fileName, caseNo);
+                Log.d(LOG_TAG, "jsonToCompany(): " + c);
                 companyList.add(c);
+                Collections.sort(companyList);
 
             } catch (JSONException e) {
                 ;

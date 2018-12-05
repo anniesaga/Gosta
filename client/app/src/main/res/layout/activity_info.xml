@@ -20,8 +20,7 @@
             android:id="@+id/logo"
             android:layout_width="200dp"
             android:layout_height="175dp"
-            android:padding="10dp"
-            android:layout_centerHorizontal="true"/>
+            android:padding="10dp"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -32,7 +31,25 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="10dp"
-            android:layout_gravity="center_horizontal"/>
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/companyCaseNo"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/companyContact"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_gravity="center_horizontal" />
 
         <TextView
             android:layout_width="match_parent"
@@ -40,21 +57,11 @@
             android:layout_marginBottom="50dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:id="@+id/companyText"
-            android:layout_toEndOf="@id/logo">
+            android:id="@+id/companyText">
         </TextView>
 
     </LinearLayout>
-    <android.support.design.widget.BottomNavigationView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/navigation"
-        app:itemBackground="@color/red"
-        app:itemTextColor="@color/white"
-        app:itemIconTint="@color/white"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        app:menu="@menu/menubottom" />
+
+    <include layout="@layout/layout_menu" />
 
 </FrameLayout>

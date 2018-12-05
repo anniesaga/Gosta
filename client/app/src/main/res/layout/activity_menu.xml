@@ -16,5 +16,7 @@
 
     </ListView>
 
+    <include layout="@layout/layout_menu" />
+
 
 </FrameLayout>

@@ -2,10 +2,16 @@ package se.gosta.activity;
 
 import se.gosta.R;
 import se.gosta.storage.MenuOption;
+import se.gosta.storage.Session;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.bottomnavigation.LabelVisibilityMode;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -70,6 +76,37 @@ public class MenuActivity extends AppCompatActivity {
 
             }
         });
+        BottomNavigationView navigation = (BottomNavigationView)
+                findViewById(R.id.navigation);
+        navigation.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED);
+        navigation.setSelectedItemId(R.id.action_settings);
+        navigation.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem item) {
+                        Session.setCurrentCompanyName(null);
+                        switch (item.getItemId()) {
+                            case R.id.action_companies:
+                                Intent intent = new Intent(MenuActivity.this, MainActivity.class);
+                                startActivity(intent);
+                                return true;
+                            case R.id.action_map:
+                                intent = new Intent(MenuActivity.this, MapActivity.class);
+                                startActivity(intent);
+                                // overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
+                                return true;
+                            case R.id.action_schedule:
+                                // intent = new Intent(StartActivity.this, ScheduleActivity.class);
+                                // startActivity(intent);
+                                return true;
+                            case R.id.action_settings:
+
+                                return true;
+
+                        }
+                        return false;
+                    }
+                });
 
     }
 
