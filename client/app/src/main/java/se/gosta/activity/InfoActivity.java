@@ -53,7 +53,6 @@ public class InfoActivity extends AppCompatActivity {
         }
         Company currentCompany = Session.get(compName);
         Session.setCurrentCompanyName(currentCompany.name());
-        fetchLogo(currentCompany);
         Log.d(LOG_TAG, "Displaying company: " + currentCompany);
 
 
@@ -111,37 +110,6 @@ public class InfoActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(InfoActivity.this);
         Log.d(LOG_TAG, " URL: " + DEFAULT_URL + company.fileName());
         String url = DEFAULT_URL + company.fileName();
-
-        if ( ( url == null) || url.equals("null") ) {
-            // Add default url??
-            return;
-        }
-        Log.d(LOG_TAG, "download URL: " + url);
-
-        ImageRequest imageRequest = new ImageRequest(url, new Response.Listener<Bitmap>() {
-            @Override
-            public void onResponse(Bitmap bitmap) {
-                Log.d(LOG_TAG, "onResponse ok: " + bitmap.toString());
-                try {
-                    // Create a file from the bitmap
-                    File f = Utils.createImageFile(InfoActivity.this, company, bitmap);
-                    Log.d(LOG_TAG, " created file: " + f);
-                } catch (IOException e) {
-                    // Since we failed creating the file, we don't need to remove any
-                    Log.d(LOG_TAG, " failed created file: " + e);
-                    e.printStackTrace();
-                    return;
-                }
-            }
-        }, 500, 500, ImageView.ScaleType.CENTER,
-                Bitmap.Config.RGB_565,
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.d(LOG_TAG, "onResponse fail");
-                    }
-                });
-        queue.add(imageRequest);
     }
 
 }
