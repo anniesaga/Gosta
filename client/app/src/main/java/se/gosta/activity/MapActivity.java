@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import se.gosta.R;
+import se.gosta.storage.TouchImageView;
 
 
 public class MapActivity extends AppCompatActivity{
@@ -19,7 +20,7 @@ public class MapActivity extends AppCompatActivity{
         setContentView(R.layout.activity_map);
 
 
-        ImageView iv = (ImageView) findViewById(R.id.map);
+        TouchImageView iv = (TouchImageView) findViewById(R.id.map);
         iv.setImageResource(R.drawable.gostamap);
         BottomNavigationView navigation = (BottomNavigationView)
                 findViewById(R.id.navigation);

@@ -9,7 +9,7 @@
     tools:context=".activity.MapActivity"
     android:id="@+id/activity_map">
 
-    <ImageView
+    <se.gosta.storage.TouchImageView
         android:contentDescription="@string/map"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
