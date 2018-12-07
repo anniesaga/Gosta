@@ -9,4 +9,5 @@
     <string name="title_activity_reader">ReaderActivity</string>
     <string name="qr">QR Scanner</string>
     <string name="scan">Scanna</string>
+    <string name="title_activity_schecule">ScheculeActivity</string>
 </resources>

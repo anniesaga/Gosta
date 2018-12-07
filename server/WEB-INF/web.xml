@@ -8,8 +8,20 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns
    <servlet-name>companies</servlet-name>
    <servlet-class>servlets.Companies</servlet-class>
 </servlet>
+
+<servlet>
+  <servlet-name>schedule</servlet-name>
+  <servlet-class>servlets.Schedule</servlet-class>
+</servlet>
+
 <servlet-mapping>
   <servlet-name>companies</servlet-name>
   <url-pattern>/companies</url-pattern>
 </servlet-mapping>
+
+<servlet-mapping>
+  <servlet-name>schedule</servlet-name>
+  <url-pattern>/schedule</url-pattern>
+</servlet-mapping>
+
 </web-app>
