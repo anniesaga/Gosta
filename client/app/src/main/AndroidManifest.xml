@@ -23,10 +23,7 @@
         <activity android:name=".activity.InfoActivity" />
         <activity android:name=".activity.MapActivity" />
         <activity android:name=".activity.ReaderActivity" />
-        <activity
-            android:name=".activity.ScheculeActivity"
-            android:label="@string/title_activity_schecule"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".activity.ScheduleActivity" />
     </application>
 
 </manifest>
