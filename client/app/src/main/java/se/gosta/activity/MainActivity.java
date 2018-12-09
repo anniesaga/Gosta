@@ -29,11 +29,18 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import se.gosta.R;
 import se.gosta.storage.Company;
@@ -46,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
     private ArrayAdapter<Company> adapter;
     private ListView listView;
     private List<Company> companies;
+    public static Map<Integer, Integer[]> coordsMap;
+    public static Map<Integer, Company>  companyMap;
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
 
@@ -183,6 +192,7 @@ public class MainActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         getCompanies();
+        getCases();
         for (Company c : companies) {
             Log.d(LOG_TAG, c.toString());
         }
@@ -205,16 +215,71 @@ public class MainActivity extends AppCompatActivity {
                 Collections.sort(companyList);
 
             } catch (JSONException e) {
-                ;
+                Log.d(LOG_TAG, "Error parsing JSON: " + e.getMessage());
             }
         }
         return companyList;
     }
 
+    private Map<Integer,Integer[]> jsonToCase(JSONArray array) {
+
+
+        Map<Integer, Integer[]> coordsMap = new HashMap<>();
+
+        try {
+            for (int i = 0; i < array.length(); i++) {
+                JSONObject row = array.getJSONObject(i);
+                int id = row.getInt("caseNo");
+                JSONArray arr = row.getJSONArray("coords");
+                Integer[] coords = new Integer[]{
+                        (Integer) arr.get(0),
+                        (Integer) arr.get(1),
+                        (Integer) arr.get(2),
+                        (Integer) arr.get(3)
+                };
+                coordsMap.put(id, coords);
+
+            }
+
+        } catch (JSONException jsone) {
+            Log.d(LOG_TAG, "Error parsing JSON: " + jsone.getMessage());
+        }
+        return coordsMap;
+    }
+
+        private void getCases() {
+
+        Log.d(LOG_TAG, "getCases()");
+        String url = "http://10.0.2.2:8080/cases";
+
+            RequestQueue queue = Volley.newRequestQueue(this);
+
+            JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
+                    Request.Method.GET,
+                    url,
+                    null,
+                    new Response.Listener<JSONArray>() {
+                        @Override
+                        public void onResponse(JSONArray response) {
+                            coordsMap = jsonToCase(response);
+                            Log.d(LOG_TAG, "onResponse ok");
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.d(LOG_TAG, " cause: " + error.getCause().getMessage());
+
+                }
+            });
+            queue.add(jsonArrayRequest);
+
+        }
+
     private void getCompanies() {
         Log.d(LOG_TAG, "getCompanies()");
         String url = "http://10.0.2.2:8080/companies";
 
+        companyMap = new HashMap<>();
         RequestQueue queue = Volley.newRequestQueue(this);
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
@@ -228,6 +293,7 @@ public class MainActivity extends AppCompatActivity {
                         Session.getSession().companies = companies;
                         resetListView();
                         for(Company c : companies) {
+                            companyMap.put(c.caseNo(), c);
                             fetchLogo(c);
                         }
                         Log.d(LOG_TAG, "onResponse ok");

@@ -3,7 +3,7 @@
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
- 
+
 <servlet>
    <servlet-name>companies</servlet-name>
    <servlet-class>servlets.Companies</servlet-class>
@@ -12,6 +12,11 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns
 <servlet>
   <servlet-name>schedule</servlet-name>
   <servlet-class>servlets.Schedule</servlet-class>
+</servlet>
+
+<servlet>
+   <servlet-name>cases</servlet-name>
+   <servlet-class>servlets.Cases</servlet-class>
 </servlet>
 
 <servlet-mapping>
@@ -24,4 +29,8 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns
   <url-pattern>/schedule</url-pattern>
 </servlet-mapping>
 
+<servlet-mapping>
+  <servlet-name>cases</servlet-name>
+  <url-pattern>/cases</url-pattern>
+</servlet-mapping>
 </web-app>
