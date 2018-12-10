@@ -116,6 +116,7 @@ public class MenuActivity extends AppCompatActivity {
         menuOptions.add(new MenuOption("Mässkarta", R.id.activity_map));
         menuOptions.add(new MenuOption("Mässchema", R.id.main));
         menuOptions.add(new MenuOption("QR-läsare", R.id.readerLayout));
+        menuOptions.add(new MenuOption("Sponsorer", R.id.main));
 
     }
 
