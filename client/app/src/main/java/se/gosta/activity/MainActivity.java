@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         setupList();
         BottomNavigationView navigation = (BottomNavigationView)
                 findViewById(R.id.navigation);
@@ -87,8 +88,8 @@ public class MainActivity extends AppCompatActivity {
                                 // overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
                                 return true;
                             case R.id.action_schedule:
-                               // intent = new Intent(StartActivity.this, ScheduleActivity.class);
-                               // startActivity(intent);
+                                intent = new Intent (MainActivity.this, ScheduleActivity.class);
+                                startActivity(intent);
                                 return true;
                             case R.id.action_settings:
                                 intent = new Intent (MainActivity.this, MenuActivity.class);

@@ -1,7 +1,7 @@
 package se.gosta.activity;
-import android.content.Context;
+
 import android.content.Intent;
-import android.graphics.Rect;
+
 import android.os.Bundle;
 import android.support.design.bottomnavigation.LabelVisibilityMode;
 import android.support.design.widget.BottomNavigationView;
