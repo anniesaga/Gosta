@@ -16,6 +16,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -52,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ArrayAdapter<Company> adapter;
     private ListView listView;
+    private SearchView searchView;
     private List<Company> companies;
     public static Map<Integer, Integer[]> coordsMap;
     public static Map<Integer, Company>  companyMap;
@@ -106,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
 
         companies = new ArrayList<>();
 
+        searchView = (SearchView) findViewById(R.id.searchView) ;
         listView = (ListView) findViewById(R.id.company_list);
 
         adapter = new ArrayAdapter<Company>(this,android.R.layout.simple_list_item_1, companies);
@@ -113,6 +117,27 @@ public class MainActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
 
         registerForContextMenu(listView);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                for (Company c : companies) {
+                    if (c.name().contains(query)) {
+                        adapter.getFilter().filter(query);
+                    } else {
+                        //Toast.makeText(MainActivity.this, "Ingen utställare funnen", Toast.LENGTH_LONG).show();
+                    }
+
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
 
 
         listView.setOnItemClickListener(new ListView.OnItemClickListener() {

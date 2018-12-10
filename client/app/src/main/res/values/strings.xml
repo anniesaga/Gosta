@@ -11,4 +11,6 @@
     <string name="scan">Scanna</string>
     <string name="title_activity_schecule">ScheculeActivity</string>
     <string name="title_activity_popup">PopupActivity</string>
+    <string name="search_hint">Sök utställare</string>
+    <string name="list_title">Utställare</string>
 </resources>

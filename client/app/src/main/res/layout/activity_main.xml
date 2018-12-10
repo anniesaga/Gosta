@@ -7,6 +7,39 @@
     tools:context=".activity.MainActivity"
     android:id="@+id/main">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:id="@+id/mainlinear"
+        android:layout_gravity="top"
+        android:background="@color/white">
+
+    <SearchView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:queryHint="@string/search_hint"
+        android:iconifiedByDefault="false"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/list_title"
+            android:id="@+id/listTitle"
+            android:textSize="25sp"
+            android:textColor="@color/black"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_gravity="center_horizontal" />
+
         <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -14,7 +47,7 @@
             android:background="@color/white"
             android:layout_marginBottom="50dp">
         </ListView>
-
+    </LinearLayout>
 
     <include layout="@layout/layout_menu" />
 
