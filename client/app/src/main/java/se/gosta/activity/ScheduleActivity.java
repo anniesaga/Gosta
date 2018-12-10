@@ -68,10 +68,12 @@ public class ScheduleActivity extends AppCompatActivity {
                             case R.id.action_companies:
                                 Intent intent = new Intent(ScheduleActivity.this, MainActivity.class);
                                 startActivity(intent);
+                                overridePendingTransition(0, 0);
                                 return true;
                             case R.id.action_map:
                                  intent = new Intent(ScheduleActivity.this, MapActivity.class);
                                  startActivity(intent);
+                                overridePendingTransition(0, 0);
                                 return true;
                             case R.id.action_schedule:
                                 // intent = new Intent(StartActivity.this, ScheduleActivity.class);
@@ -80,6 +82,7 @@ public class ScheduleActivity extends AppCompatActivity {
                             case R.id.action_settings:
                                 intent = new Intent(ScheduleActivity.this, MenuActivity.class);
                                 startActivity(intent);
+                                overridePendingTransition(0, 0);
                                 return true;
 
                         }

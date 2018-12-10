@@ -53,8 +53,6 @@ public class MapActivity extends AppCompatActivity implements OnClickableAreaCli
                                                     MainActivity.coordsMap.get(caseNo)[3],
                                                     MainActivity.companyMap.get(caseNo)));
         }
-        //clickableAreas.add(new ClickableArea(, Session.get("Acando")));
-        Log.d(LOG_TAG, "Added company: " + Session.get("Acando") + "as clickable");
         clickableAreasImage.setClickableAreas(clickableAreas);
 
 
@@ -70,19 +68,23 @@ public class MapActivity extends AppCompatActivity implements OnClickableAreaCli
                             case R.id.action_companies:
                                 Intent intent = new Intent(MapActivity.this, MainActivity.class);
                                 startActivity(intent);
+                                overridePendingTransition(0, 0);
                                 return true;
                             case R.id.action_map:
                                 intent = new Intent(MapActivity.this, MapActivity.class);
                                 startActivity(intent);
+                                overridePendingTransition(0, 0);
                                 // overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
                                 return true;
                             case R.id.action_schedule:
                                  intent = new Intent(MapActivity.this, ScheduleActivity.class);
                                  startActivity(intent);
+                                overridePendingTransition(0, 0);
                                 return true;
                             case R.id.action_settings:
                                 intent = new Intent(MapActivity.this, MenuActivity.class);
                                 startActivity(intent);
+                                overridePendingTransition(0, 0);
                                 return true;
 
                         }

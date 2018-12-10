@@ -18,7 +18,7 @@
     <ImageView
         android:id="@+id/logo"
         android:layout_width="200dp"
-        android:layout_height="175dp"
+        android:layout_height="75dp"
         android:padding="10dp"
         android:src="@drawable/gosta2019vit"/>
     <TextView
