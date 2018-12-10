@@ -6,11 +6,14 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.design.bottomnavigation.LabelVisibilityMode;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,6 +59,37 @@ public class ScheduleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_schedule);
         setupEventList();
 
+
+        BottomNavigationView navigation = (BottomNavigationView)
+                findViewById(R.id.navigation);
+        navigation.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED);
+        navigation.setSelectedItemId(R.id.action_schedule);
+        navigation.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.action_companies:
+                                Intent intent = new Intent(ScheduleActivity.this, MainActivity.class);
+                                startActivity(intent);
+                                return true;
+                            case R.id.action_map:
+                                 intent = new Intent(ScheduleActivity.this, MapActivity.class);
+                                 startActivity(intent);
+                                return true;
+                            case R.id.action_schedule:
+                                // intent = new Intent(StartActivity.this, ScheduleActivity.class);
+                                // startActivity(intent);
+                                return true;
+                            case R.id.action_settings:
+                                intent = new Intent(ScheduleActivity.this, MenuActivity.class);
+                                startActivity(intent);
+                                return true;
+
+                        }
+                        return false;
+                    }
+                });
 
 
     }

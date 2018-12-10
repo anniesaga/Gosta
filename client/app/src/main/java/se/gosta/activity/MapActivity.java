@@ -75,8 +75,8 @@ public class MapActivity extends AppCompatActivity implements OnClickableAreaCli
                                 // overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
                                 return true;
                             case R.id.action_schedule:
-                                // intent = new Intent(StartActivity.this, ScheduleActivity.class);
-                                // startActivity(intent);
+                                 intent = new Intent(MapActivity.this, ScheduleActivity.class);
+                                 startActivity(intent);
                                 return true;
                             case R.id.action_settings:
                                 intent = new Intent(MapActivity.this, MenuActivity.class);
