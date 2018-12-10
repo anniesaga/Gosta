@@ -6,15 +6,41 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     app:theme="@style/AppTheme"
-    tools:context="se.gosta.activity.MenuActivity">
+    tools:context="se.gosta.activity.MenuActivity"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/header"
+        android:gravity="center_horizontal"
+        android:layout_gravity="top">
+
+    <ImageView
+        android:id="@+id/menuheader"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/gosta2019"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/menutitle"
+        android:text="@string/menutitle"
+        android:textSize="25sp"/>
 
     <ListView
         android:id="@+id/menu_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp">
 
 
     </ListView>
+
+    </LinearLayout>
 
     <include layout="@layout/layout_menu" />
 

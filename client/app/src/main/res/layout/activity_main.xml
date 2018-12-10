@@ -14,18 +14,28 @@
         android:gravity="center"
         android:id="@+id/mainlinear"
         android:layout_gravity="top"
-        android:background="@color/white">
+        android:background="@drawable/gradient_bg">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:id="@+id/mainlinear"
+        android:layout_gravity="top"
+        android:background="@drawable/gradient_bg">
 
     <SearchView
         android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:queryHint="@string/search_hint"
+        android:background="@color/zxing_transparent"
         android:iconifiedByDefault="false"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
+
         />
 
         <TextView
@@ -34,18 +44,19 @@
             android:text="@string/list_title"
             android:id="@+id/listTitle"
             android:textSize="25sp"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="10dp"
             android:layout_gravity="center_horizontal" />
-
+    </LinearLayout>
         <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/company_list"
-            android:background="@color/white"
-            android:layout_marginBottom="50dp">
+            android:background="@drawable/rounded_corner"
+            android:layout_marginBottom="50dp"
+            android:paddingTop="10dp">
         </ListView>
     </LinearLayout>
 

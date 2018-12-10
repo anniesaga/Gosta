@@ -13,4 +13,5 @@
     <string name="title_activity_popup">PopupActivity</string>
     <string name="search_hint">Sök utställare</string>
     <string name="list_title">Utställare</string>
+    <string name="menutitle">Inställningar</string>
 </resources>
