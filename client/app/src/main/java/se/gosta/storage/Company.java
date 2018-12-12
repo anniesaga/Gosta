@@ -13,12 +13,22 @@ public class Company implements Comparable<Company> {
 
     public static List<Company> companies;
 
-    public Company(String name, String email, String info, String fileName, int caseNo){
+    public Company(String name, String email, String info, String fileName, int caseNo) {
+
         this.name = name;
-        this.email = email;
-        this.info = info;
-        this.fileName = fileName;
-        this.caseNo = caseNo;
+
+        if(email != null && email.contains("@")) {
+            this.email = email;
+        }
+        if (info != null) {
+            this.info = info;
+        }
+        if (fileName != null) {
+            this.fileName = fileName;
+        }
+        if (caseNo != 0) {
+            this.caseNo = caseNo;
+        }
     }
 
 

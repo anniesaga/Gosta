@@ -47,11 +47,13 @@ public class MapActivity extends AppCompatActivity implements OnClickableAreaCli
 
         List<ClickableArea> clickableAreas = new ArrayList<>();
         for(int caseNo : MainActivity.coordsMap.keySet()) {
-            clickableAreas.add(new ClickableArea(   MainActivity.coordsMap.get(caseNo)[0],
-                                                    MainActivity.coordsMap.get(caseNo)[1],
-                                                    MainActivity.coordsMap.get(caseNo)[2],
-                                                    MainActivity.coordsMap.get(caseNo)[3],
-                                                    MainActivity.companyMap.get(caseNo)));
+            if (MainActivity.companyMap.get(caseNo) != null) {
+                clickableAreas.add(new ClickableArea(MainActivity.coordsMap.get(caseNo)[0],
+                        MainActivity.coordsMap.get(caseNo)[1],
+                        MainActivity.coordsMap.get(caseNo)[2],
+                        MainActivity.coordsMap.get(caseNo)[3],
+                        MainActivity.companyMap.get(caseNo)));
+            }
         }
         clickableAreasImage.setClickableAreas(clickableAreas);
 
@@ -102,13 +104,7 @@ public class MapActivity extends AppCompatActivity implements OnClickableAreaCli
             Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
             Log.d(LOG_TAG, "Clicked on ClickableArea");
 
-     /*       Session.getSession().put(company.name(), company);
-            Intent intent = new Intent(MapActivity.this, InfoActivity.class);
-            Bundle extras = new Bundle();
-            extras.putString("companyName", company.name());
-            Session.setCurrentCompanyName(company.name());
-            intent.putExtras(extras);
-            startActivity(intent);*/
+
         }
 
     }
