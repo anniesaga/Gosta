@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int MENU_ENTRY_CONTACT = 0 ;
     private static final int MENU_ENTRY_INFO = 1 ;
 
+
     private static final String DEFAULT_URL = "http://10.0.2.2:8080";
 
     @Override
@@ -206,6 +207,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void resetListView() {
+        Log.d(LOG_TAG, "resetListView() " + companies.size());
+
         listView = (ListView) findViewById(R.id.company_list);
         adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, companies);
@@ -279,7 +282,12 @@ public class MainActivity extends AppCompatActivity {
         private void getCases() {
 
         Log.d(LOG_TAG, "getCases()");
+<<<<<<< HEAD
         String url = DEFAULT_URL + "/cases";
+=======
+        String url = "http://10.0.2.2:8080/cases";
+        //    final String url = "http://192.168.43.128:8080/cases";
+>>>>>>> b043e27cd38ce8087bd72b94933d7dc707f4e5f6
 
             RequestQueue queue = Volley.newRequestQueue(this);
 
@@ -296,7 +304,9 @@ public class MainActivity extends AppCompatActivity {
                     }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Log.d(LOG_TAG, " cause: " + error.getCause().getMessage());
+                //    Log.d(LOG_TAG, " cause 1: " + url);
+                    Log.d(LOG_TAG, " cause 1: " + error.getCause().getMessage());
+                    error.printStackTrace();
 
                 }
             });
@@ -306,7 +316,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void getCompanies() {
         Log.d(LOG_TAG, "getCompanies()");
+<<<<<<< HEAD
         String url = DEFAULT_URL + "/companies";
+=======
+        String url = "http://10.0.2.2:8080/companies";
+       // String url = "http://192.168.43.128:8080/companies";
+>>>>>>> b043e27cd38ce8087bd72b94933d7dc707f4e5f6
 
         companyMap = new HashMap<>();
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -330,7 +345,7 @@ public class MainActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d(LOG_TAG, " cause: " + error.getCause().getMessage());
+                Log.d(LOG_TAG, " cause 2: " + error.getCause().getMessage());
 
             }
         });
