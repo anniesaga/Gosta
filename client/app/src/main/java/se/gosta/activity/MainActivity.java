@@ -60,14 +60,15 @@ public class MainActivity extends AppCompatActivity {
     public static Map<Integer, Integer[]> coordsMap;
     public static Map<Integer, Company>  companyMap;
 
+
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
 
 
     private static final int MENU_ENTRY_CONTACT = 0 ;
     private static final int MENU_ENTRY_INFO = 1 ;
 
-  //  private static final String DEFAULT_URL = "http://10.0.2.2:8080/resources/logos/";
-    private static final String DEFAULT_URL = "http://10.27.63.236:8080/resources/logos/";
+
+    private static final String DEFAULT_URL = "http://10.0.2.2:8080";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,8 +128,6 @@ public class MainActivity extends AppCompatActivity {
                 for (Company c : companies) {
                     if (c.name().contains(query)) {
                         adapter.getFilter().filter(query);
-                    } else {
-                        //Toast.makeText(MainActivity.this, "Ingen utställare funnen", Toast.LENGTH_LONG).show();
                     }
 
                 }
@@ -163,11 +162,11 @@ public class MainActivity extends AppCompatActivity {
                 overridePendingTransition(0, 0);
             }
         });
-        //Company company = Session.get(Session.currentCompanyName);
-
     }
+
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+
         ListView listview = (ListView) v;
         AdapterView.AdapterContextMenuInfo acMenuInfo = (AdapterView.AdapterContextMenuInfo) menuInfo;
         Company company = (Company)listview.getItemAtPosition(acMenuInfo.position);
@@ -180,6 +179,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
+
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         Log.d(LOG_TAG, "itemId" + item.getItemId());
         Log.d(LOG_TAG, "title: " +item.getTitle());
@@ -282,8 +282,12 @@ public class MainActivity extends AppCompatActivity {
         private void getCases() {
 
         Log.d(LOG_TAG, "getCases()");
+<<<<<<< HEAD
+        String url = DEFAULT_URL + "/cases";
+=======
         String url = "http://10.0.2.2:8080/cases";
         //    final String url = "http://192.168.43.128:8080/cases";
+>>>>>>> b043e27cd38ce8087bd72b94933d7dc707f4e5f6
 
             RequestQueue queue = Volley.newRequestQueue(this);
 
@@ -312,8 +316,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void getCompanies() {
         Log.d(LOG_TAG, "getCompanies()");
+<<<<<<< HEAD
+        String url = DEFAULT_URL + "/companies";
+=======
         String url = "http://10.0.2.2:8080/companies";
        // String url = "http://192.168.43.128:8080/companies";
+>>>>>>> b043e27cd38ce8087bd72b94933d7dc707f4e5f6
 
         companyMap = new HashMap<>();
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -348,7 +356,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d(LOG_TAG, "fetchLogos()");
         RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
         Log.d(LOG_TAG, " URL: " + DEFAULT_URL + company.fileName());
-        String url = DEFAULT_URL + company.fileName();
+        String url = DEFAULT_URL + "/resources/logos/" + company.fileName();
 
         if ( ( url == null) || url.equals("null") ) {
             // Add default url??
