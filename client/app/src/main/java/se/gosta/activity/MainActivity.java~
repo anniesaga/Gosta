@@ -47,39 +47,38 @@ import java.util.Map;
 
 import se.gosta.R;
 import se.gosta.storage.Company;
-import se.gosta.storage.FairFetcher;
 import se.gosta.storage.Session;
 import se.gosta.storage.Utils;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String LOG_TAG = MainActivity.class.getSimpleName();
-
     private ArrayAdapter<Company> adapter;
     private ListView listView;
     private SearchView searchView;
-    private List<Company> companies = new ArrayList<>();;
-
-    public static Map<Integer, Company> companyMap = new HashMap<>();
-
-
+    private List<Company> companies;
+    public static Map<Integer, Integer[]> coordsMap;
+    public static Map<Integer, Company>  companyMap;
 
 
+    private static final String LOG_TAG = MainActivity.class.getSimpleName();
 
 
     private static final int MENU_ENTRY_CONTACT = 0 ;
     private static final int MENU_ENTRY_INFO = 1 ;
 
-
+<<<<<<< HEAD
     private static final String DEFAULT_URL = "http://10.0.2.2:8080";
+=======
+  //  private static final String DEFAULT_URL = "http://10.0.2.2:8080/resources/logos/";
+    private static final String DEFAULT_URL = "http://10.27.63.236:8080/resources/logos/";
+>>>>>>> b043e27cd38ce8087bd72b94933d7dc707f4e5f6
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setupList();
-        resetListView(companies);
         BottomNavigationView navigation = (BottomNavigationView)
                 findViewById(R.id.navigation);
         navigation.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED);
@@ -116,11 +115,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void setupList(){
 
+        companies = new ArrayList<>();
 
         searchView = (SearchView) findViewById(R.id.searchView) ;
         listView = (ListView) findViewById(R.id.company_list);
 
-        adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, companies);
+        adapter = new ArrayAdapter<Company>(this,android.R.layout.simple_list_item_1, companies);
 
         listView.setAdapter(adapter);
 
@@ -210,7 +210,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    private void resetListView(List<Company> companies) {
+    private void resetListView() {
         Log.d(LOG_TAG, "resetListView() " + companies.size());
 
         listView = (ListView) findViewById(R.id.company_list);
@@ -227,34 +227,135 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        FairFetcher fetcher = new FairFetcher(this);
-        fetcher.registerFairListener(new FairFetcher.FairListener() {
-                     @Override
-                     public void companiesUpdated(List<Company> companyList) {
-                         Log.d(LOG_TAG, "companies: " + companyList);
-                         for(Company c : companyList) {
-                             companies.add(c);
-                             companyMap.put(c.caseNo(), c);
-                         }
-                     }
-
-                     @Override
-                     public void casesUpdated(Map<Integer, Integer[]> coordsMap) {
-
-                     }
-                 });
-                fetcher.getCompanies();
-                resetListView(companies);
-        //getCases();
-
+        getCompanies();
+        getCases();
+        for (Company c : companies) {
+            Log.d(LOG_TAG, c.toString());
+        }
     }
 
+    private List<Company> jsonToCompany(JSONArray array) {
+        List<Company> companyList = new ArrayList<>();
+        for (int i = 0; i < array.length(); i++) {
+            try {
+                JSONObject row = array.getJSONObject(i);
+                String name = row.getString("name");
+                String email = row.getString("email");
+                String info = row.getString("info");
+                String fileName = row.getString("fileName");
+                int caseNo = row.getInt("caseNo");
+
+                Company c = new Company(name, email, info, fileName, caseNo);
+                Log.d(LOG_TAG, "jsonToCompany(): " + c);
+                companyList.add(c);
+                Collections.sort(companyList);
+
+            } catch (JSONException e) {
+                Log.d(LOG_TAG, "Error parsing JSON: " + e.getMessage());
+            }
+        }
+        return companyList;
+    }
+
+    private Map<Integer,Integer[]> jsonToCase(JSONArray array) {
 
 
+        Map<Integer, Integer[]> coordsMap = new HashMap<>();
 
+        try {
+            for (int i = 0; i < array.length(); i++) {
+                JSONObject row = array.getJSONObject(i);
+                int id = row.getInt("caseNo");
+                JSONArray arr = row.getJSONArray("coords");
+                Integer[] coords = new Integer[]{
+                        (Integer) arr.get(0),
+                        (Integer) arr.get(1),
+                        (Integer) arr.get(2),
+                        (Integer) arr.get(3)
+                };
+                coordsMap.put(id, coords);
 
+            }
 
+        } catch (JSONException jsone) {
+            Log.d(LOG_TAG, "Error parsing JSON: " + jsone.getMessage());
+        }
+        return coordsMap;
+    }
 
+        private void getCases() {
+
+        Log.d(LOG_TAG, "getCases()");
+<<<<<<< HEAD
+        String url = DEFAULT_URL + "/cases";
+=======
+        String url = "http://10.0.2.2:8080/cases";
+        //    final String url = "http://192.168.43.128:8080/cases";
+>>>>>>> b043e27cd38ce8087bd72b94933d7dc707f4e5f6
+
+            RequestQueue queue = Volley.newRequestQueue(this);
+
+            JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
+                    Request.Method.GET,
+                    url,
+                    null,
+                    new Response.Listener<JSONArray>() {
+                        @Override
+                        public void onResponse(JSONArray response) {
+                            coordsMap = jsonToCase(response);
+                            Log.d(LOG_TAG, "onResponse ok");
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                //    Log.d(LOG_TAG, " cause 1: " + url);
+                    Log.d(LOG_TAG, " cause 1: " + error.getCause().getMessage());
+                    error.printStackTrace();
+
+                }
+            });
+            queue.add(jsonArrayRequest);
+
+        }
+
+    private void getCompanies() {
+        Log.d(LOG_TAG, "getCompanies()");
+<<<<<<< HEAD
+        String url = DEFAULT_URL + "/companies";
+=======
+        String url = "http://10.0.2.2:8080/companies";
+       // String url = "http://192.168.43.128:8080/companies";
+>>>>>>> b043e27cd38ce8087bd72b94933d7dc707f4e5f6
+
+        companyMap = new HashMap<>();
+        RequestQueue queue = Volley.newRequestQueue(this);
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
+                Request.Method.GET,
+                url,
+                null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        companies = jsonToCompany(response);
+                        Session.getSession().companies = companies;
+                        resetListView();
+                        for(Company c : companies) {
+                            companyMap.put(c.caseNo(), c);
+                            fetchLogo(c);
+                        }
+                        Log.d(LOG_TAG, "onResponse ok");
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(LOG_TAG, " cause 2: " + error.getCause().getMessage());
+
+            }
+        });
+        queue.add(jsonArrayRequest);
+
+    }
     public void fetchLogo(final Company company) {
         Log.d(LOG_TAG, "fetchLogos()");
         RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
@@ -290,7 +391,6 @@ public class MainActivity extends AppCompatActivity {
                         Log.d(LOG_TAG, "onResponse fail");
                     }
                 });
-
         queue.add(imageRequest);
     }
 
