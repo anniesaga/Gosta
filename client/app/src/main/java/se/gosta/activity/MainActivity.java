@@ -7,6 +7,7 @@ import android.support.design.bottomnavigation.LabelVisibilityMode;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.transition.Transition;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -72,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         setupList();
         BottomNavigationView navigation = (BottomNavigationView)
                 findViewById(R.id.navigation);
@@ -89,15 +89,17 @@ public class MainActivity extends AppCompatActivity {
                             case R.id.action_map:
                                 Intent intent = new Intent(MainActivity.this, MapActivity.class);
                                 startActivity(intent);
-                                // overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
+                                overridePendingTransition(0, 0);
                                 return true;
                             case R.id.action_schedule:
                                 intent = new Intent (MainActivity.this, ScheduleActivity.class);
                                 startActivity(intent);
+                                overridePendingTransition(0, 0);
                                 return true;
                             case R.id.action_settings:
                                 intent = new Intent (MainActivity.this, MenuActivity.class);
                                 startActivity(intent);
+                                overridePendingTransition(0, 0);
                                 return true;
 
                         }
@@ -158,6 +160,7 @@ public class MainActivity extends AppCompatActivity {
                 Session.setCurrentCompanyName(comp.name());
                 intent.putExtras(extras);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
         //Company company = Session.get(Session.currentCompanyName);

@@ -89,15 +89,18 @@ public class MenuActivity extends AppCompatActivity {
                             case R.id.action_companies:
                                 Intent intent = new Intent(MenuActivity.this, MainActivity.class);
                                 startActivity(intent);
+                                overridePendingTransition(0, 0);
                                 return true;
                             case R.id.action_map:
                                 intent = new Intent(MenuActivity.this, MapActivity.class);
                                 startActivity(intent);
+                                overridePendingTransition(0, 0);
                                 // overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
                                 return true;
                             case R.id.action_schedule:
                                  intent = new Intent(MenuActivity.this, ScheduleActivity.class);
                                  startActivity(intent);
+                                overridePendingTransition(0, 0);
                                 return true;
                             case R.id.action_settings:
 
