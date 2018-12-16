@@ -47,6 +47,7 @@ import java.util.Map;
 
 import se.gosta.R;
 import se.gosta.storage.Company;
+import se.gosta.storage.Event;
 import se.gosta.storage.FairFetcher;
 import se.gosta.storage.Session;
 import se.gosta.storage.Utils;
@@ -63,14 +64,8 @@ public class MainActivity extends AppCompatActivity {
 
     public static Map<Integer, Company> companyMap = new HashMap<>();
 
-
-
-
-
-
     private static final int MENU_ENTRY_CONTACT = 0 ;
     private static final int MENU_ENTRY_INFO = 1 ;
-
 
     private static final String DEFAULT_URL = "http://10.0.2.2:8080";
 
@@ -240,19 +235,19 @@ public class MainActivity extends AppCompatActivity {
 
                      @Override
                      public void casesUpdated(Map<Integer, Integer[]> coordsMap) {
-
+                         // Do nothing with cases in this Activity
                      }
-                 });
+
+                    @Override
+                    public void eventsUpdated(List<Event> eventList) {
+                        // Do nothing with events in this Activity
+                    }
+        });
                 fetcher.getCompanies();
                 resetListView(companies);
         //getCases();
 
     }
-
-
-
-
-
 
 
     public void fetchLogo(final Company company) {

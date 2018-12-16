@@ -35,6 +35,7 @@ import at.lukle.clickableareasimage.ClickableAreasImage;
 import at.lukle.clickableareasimage.OnClickableAreaClickedListener;
 import se.gosta.R;
 import se.gosta.storage.Company;
+import se.gosta.storage.Event;
 import se.gosta.storage.FairFetcher;
 import se.gosta.storage.Session;
 import uk.co.senab.photoview.PhotoViewAttacher;
@@ -52,11 +53,9 @@ public class MapActivity extends AppCompatActivity implements OnClickableAreaCli
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
-
-
-
         BottomNavigationView navigation = (BottomNavigationView)
                 findViewById(R.id.navigation);
         navigation.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED);
@@ -117,7 +116,12 @@ public class MapActivity extends AppCompatActivity implements OnClickableAreaCli
                      coordsMap.putAll(tmp);
                      setClickableAreas();
                  }
-            });
+
+            @Override
+            public void eventsUpdated(List<Event> eventList) {
+                //Do nothing with events in this activity
+            }
+        });
         fetcher.getCases();
 
     }

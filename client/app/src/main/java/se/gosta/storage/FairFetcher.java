@@ -80,6 +80,73 @@ public class FairFetcher {
 
     }
 
+    public void getCases() {
+
+        Log.d(LOG_TAG, "getCases()");
+
+        String url = DEFAULT_URL + "/cases";
+
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
+                Request.Method.GET,
+                url,
+                null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Map<Integer, Integer[]> coordsMap = jsonToCase(response);
+                        Log.d(LOG_TAG, "onResponse ok");
+                        for(FairListener l : fairListenerList) {
+                            l.casesUpdated(coordsMap);
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //    Log.d(LOG_TAG, " cause 1: " + url);
+                Log.d(LOG_TAG, " cause 1: " + error.getCause().getMessage());
+                error.printStackTrace();
+
+            }
+        });
+        queue.add(jsonArrayRequest);
+
+    }
+
+    public void getEvents() {
+
+        Log.d(LOG_TAG, "getEvents()");
+        String url =  DEFAULT_URL + "/schedule";
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
+                Request.Method.GET,
+                url,
+                null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        List<Event> events = new ArrayList<>();
+                        events = jsonToEvent(response);
+                        Log.d(LOG_TAG, "onResponse ok");
+                        for(FairListener l : fairListenerList) {
+                            l.eventsUpdated(events);
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(LOG_TAG, " cause: " + error.getCause().getMessage());
+
+            }
+        });
+        queue.add(jsonArrayRequest);
+
+    }
+
     private List<Company> jsonToCompany(JSONArray array) {
         List<Company> companyList = new ArrayList<>();
         for (int i = 0; i < array.length(); i++) {
@@ -128,47 +195,35 @@ public class FairFetcher {
         }
         return coordsMap;
     }
+    private List<Event> jsonToEvent(JSONArray array) {
+        List<Event> eventList = new ArrayList<>();
+        for (int i = 0; i < array.length(); i++) {
+            try {
+                JSONObject row = array.getJSONObject(i);
+                String start_time = row.getString("start_time");
+                String name = row.getString("name");
+                String info = row.getString("info");
+                Event e = new Event(start_time, name, info);
+                Log.d(LOG_TAG, "jsonToEvent(): " + e);
+                eventList.add(e);
 
-    public void getCases() {
 
-        Log.d(LOG_TAG, "getCases()");
-
-        String url = DEFAULT_URL + "/cases";
-
-
-        RequestQueue queue = Volley.newRequestQueue(context);
-
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
-                Request.Method.GET,
-                url,
-                null,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        Map<Integer, Integer[]> coordsMap = jsonToCase(response);
-                        Log.d(LOG_TAG, "onResponse ok");
-                        for(FairListener l : fairListenerList) {
-                            l.casesUpdated(coordsMap);
-                        }
-                    }
-                }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    //    Log.d(LOG_TAG, " cause 1: " + url);
-                    Log.d(LOG_TAG, " cause 1: " + error.getCause().getMessage());
-                    error.printStackTrace();
-
-                }
-        });
-        queue.add(jsonArrayRequest);
-
+            } catch (JSONException ex) {
+                ;
+            }
+        }
+        return eventList;
     }
+
+
 
     public interface FairListener {
 
         void companiesUpdated(List<Company> companyList);
 
         void casesUpdated(Map<Integer, Integer[]> coords);
+
+        void eventsUpdated(List<Event> eventList);
     }
 
 }

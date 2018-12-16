@@ -35,9 +35,12 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import se.gosta.R;
+import se.gosta.storage.Company;
 import se.gosta.storage.Event;
+import se.gosta.storage.FairFetcher;
 
 public class ScheduleActivity extends AppCompatActivity {
 
@@ -94,15 +97,12 @@ public class ScheduleActivity extends AppCompatActivity {
     public void setupEventList(){
 
         events = new ArrayList<>();
-
         listView = (ListView) findViewById(R.id.schedule_list);
 
         adapter = new ArrayAdapter<Event>(this, android.R.layout.simple_list_item_1,
                 events);
 
         listView.setAdapter(adapter);
-
-
         listView.setOnItemClickListener(new ListView.OnItemClickListener() {
 
             @Override
@@ -130,73 +130,45 @@ public class ScheduleActivity extends AppCompatActivity {
 
     }
 
-
-    private void resetListView() {
+    private void resetListView(List<Event> eventList) {
         listView = (ListView) findViewById(R.id.schedule_list);
         adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, events);
+                android.R.layout.simple_list_item_1, eventList);
         listView.setAdapter(adapter);
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        getEvents();
         for (Event e : events) {
             Log.d(LOG_TAG, e.toString());
         }
-    }
-
-    private List<Event> jsonToEvent(JSONArray array) {
-        List<Event> eventList = new ArrayList<>();
-        for (int i = 0; i < array.length(); i++) {
-            try {
-                JSONObject row = array.getJSONObject(i);
-                String start_time = row.getString("start_time");
-                String name = row.getString("name");
-                String info = row.getString("info");
-                Event e = new Event(start_time, name, info);
-                Log.d(LOG_TAG, "jsonToEvent(): " + e);
-                eventList.add(e);
-
-
-            } catch (JSONException ex) {
-                ;
-            }
-        }
-        return eventList;
-    }
-
-    private void getEvents() {
-        Log.d(LOG_TAG, "getEvents()");
-        String url = "http://10.0.2.2:8080/schedule";
-      //  String url = "http://192.168.43.128:8080/schedule";
-
-        RequestQueue queue = Volley.newRequestQueue(this);
-
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
-                Request.Method.GET,
-                url,
-                null,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        events = jsonToEvent(response);
-                     //   Session.getSession().companies = companies;
-                        resetListView();
-
-                        Log.d(LOG_TAG, "onResponse ok");
-                    }
-                }, new Response.ErrorListener() {
+        FairFetcher fetcher = new FairFetcher(this);
+        fetcher.registerFairListener(new FairFetcher.FairListener() {
             @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d(LOG_TAG, " cause: " + error.getCause().getMessage());
+            public void companiesUpdated(List<Company> companyList) {
+                // Do nothing with companies in this Activity
+            }
 
+            @Override
+            public void casesUpdated(Map<Integer, Integer[]> coordsMap) {
+                // Do nothing with cases in this Activity
+            }
+
+            @Override
+            public void eventsUpdated(List<Event> eventList) {
+                for (Event e : eventList) {
+                    events.add(e);
+                }
             }
         });
-        queue.add(jsonArrayRequest);
-
+        fetcher.getEvents();
+        resetListView(events);
     }
+
+
+
+
 
     private PopupWindow pw;
     private void initiatePopupWindow() {
