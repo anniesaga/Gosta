@@ -121,6 +121,7 @@ public class SponsorActivity extends AppCompatActivity {
                 initiatePopupWindow();
                 ((TextView)pw.getContentView().findViewById(R.id.popupname)).setText(sponsor.sponsorName());
                 ((TextView)pw.getContentView().findViewById(R.id.popuptime)).setText(sponsor.sponsorInfo());
+                ((TextView)pw.getContentView().findViewById(R.id.popupinfo)).setText(sponsor.sponsorWebsite());
 
                 dimBehind(pw);
 

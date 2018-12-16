@@ -1,11 +1,13 @@
 package se.gosta.activity;
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.bottomnavigation.LabelVisibilityMode;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +21,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -41,6 +44,7 @@ public class MapActivity extends AppCompatActivity implements OnClickableAreaCli
 
     private final String LOG_TAG = MapActivity.class.getSimpleName();
 
+    @SuppressLint("UseSparseArrays")
     private Map<Integer, Integer[]> coordsMap = new HashMap<>();
 
     ClickableAreasImage clickableAreasImage;
@@ -61,7 +65,7 @@ public class MapActivity extends AppCompatActivity implements OnClickableAreaCli
         navigation.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
-                    public boolean onNavigationItemSelected(MenuItem item) {
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.action_companies:
                                 Intent intent = new Intent(MapActivity.this, MainActivity.class);
@@ -136,6 +140,8 @@ public class MapActivity extends AppCompatActivity implements OnClickableAreaCli
             Log.d(LOG_TAG, "Clicked on ClickableArea");
 
             initiatePopupWindow();
+            ((TextView)pw.getContentView().findViewById(R.id.popupname)).setText(company.name());
+            ((TextView)pw.getContentView().findViewById(R.id.popuptime)).setText(company.info());
             dimBehind(pw);
         }
 
@@ -148,6 +154,7 @@ public class MapActivity extends AppCompatActivity implements OnClickableAreaCli
             LayoutInflater inflater = (LayoutInflater) MapActivity.this
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             //Inflate the view from a predefined XML layout
+            assert inflater != null;
             View layout = inflater.inflate(R.layout.popup,
                     (ViewGroup) findViewById(R.id.popup));
 
@@ -178,6 +185,7 @@ public class MapActivity extends AppCompatActivity implements OnClickableAreaCli
         WindowManager.LayoutParams p = (WindowManager.LayoutParams) container.getLayoutParams();
         p.flags |= WindowManager.LayoutParams.FLAG_DIM_BEHIND;
         p.dimAmount = 0.3f;
+        assert wm != null;
         wm.updateViewLayout(container, p);
 
     }
