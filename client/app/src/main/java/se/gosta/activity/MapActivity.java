@@ -37,6 +37,7 @@ import se.gosta.R;
 import se.gosta.storage.Company;
 import se.gosta.storage.FairFetcher;
 import se.gosta.storage.Session;
+import se.gosta.storage.Sponsor;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
 
@@ -106,6 +107,7 @@ public class MapActivity extends AppCompatActivity implements OnClickableAreaCli
                      // Do nothing with companies in this activity
                  }
 
+
                  @Override
                  public void casesUpdated(Map<Integer, Integer[]> coords) {
 
@@ -117,6 +119,12 @@ public class MapActivity extends AppCompatActivity implements OnClickableAreaCli
                      coordsMap.putAll(tmp);
                      setClickableAreas();
                  }
+
+                 @Override
+                  public void sponsorsUpdated(List<Sponsor> sponsorList){
+
+            }
+
             });
         fetcher.getCases();
 

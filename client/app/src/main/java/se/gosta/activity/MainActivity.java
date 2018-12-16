@@ -49,6 +49,7 @@ import se.gosta.R;
 import se.gosta.storage.Company;
 import se.gosta.storage.FairFetcher;
 import se.gosta.storage.Session;
+import se.gosta.storage.Sponsor;
 import se.gosta.storage.Utils;
 
 
@@ -71,8 +72,9 @@ public class MainActivity extends AppCompatActivity {
     private static final int MENU_ENTRY_CONTACT = 0 ;
     private static final int MENU_ENTRY_INFO = 1 ;
 
-
     private static final String DEFAULT_URL = "http://10.0.2.2:8080";
+
+ //   private static final String DEFAULT_URL = "http://192.168.43.128:8080";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -240,6 +242,11 @@ public class MainActivity extends AppCompatActivity {
 
                      @Override
                      public void casesUpdated(Map<Integer, Integer[]> coordsMap) {
+
+                     }
+
+                     @Override
+                     public void sponsorsUpdated(List<Sponsor> sponsorList){
 
                      }
                  });
