@@ -133,10 +133,53 @@ public class MapActivity extends AppCompatActivity implements OnClickableAreaCli
             Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
             Log.d(LOG_TAG, "Clicked on ClickableArea");
 
-
+            initiatePopupWindow();
+            dimBehind(pw);
         }
 
     }
+
+    private PopupWindow pw;
+    private void initiatePopupWindow() {
+        try {
+            //We need to get the instance of the LayoutInflater, use the context of this activity
+            LayoutInflater inflater = (LayoutInflater) MapActivity.this
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            //Inflate the view from a predefined XML layout
+            View layout = inflater.inflate(R.layout.popup,
+                    (ViewGroup) findViewById(R.id.popup));
+
+            // create a 300px width and 470px height PopupWindow
+            pw = new PopupWindow(layout, LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT, true);
+            // display the popup in the center
+            pw.setAnimationStyle(R.style.popup_window_animation);
+            pw.setOutsideTouchable(true);
+            pw.setFocusable(true);
+            pw.setTouchable(true);
+            pw.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            pw.showAtLocation(layout, Gravity.CENTER, 0, 0);
+
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+    public static void dimBehind(PopupWindow pw) {
+        View container = pw.getContentView().getRootView();
+        Context context = pw.getContentView().getContext();
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        WindowManager.LayoutParams p = (WindowManager.LayoutParams) container.getLayoutParams();
+        p.flags |= WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+        p.dimAmount = 0.3f;
+        wm.updateViewLayout(container, p);
+
+    }
+
 
     private void setClickableAreas() {
 
