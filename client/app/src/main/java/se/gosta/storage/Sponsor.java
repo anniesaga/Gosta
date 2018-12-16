@@ -16,7 +16,7 @@ public class Sponsor {
         this.sponsorName = sponsorName;
         this.sponsorWebsite = sponsorWebsite;
         this.sponsorInfo = sponsorInfo;
-        this. sponsorFileName = sponsorFileName;
+        this.sponsorFileName = sponsorFileName;
     }
 
 

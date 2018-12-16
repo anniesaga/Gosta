@@ -1,22 +1,18 @@
 package se.gosta.activity;
 
+
 import android.content.Context;
 import android.content.Intent;
-
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.design.bottomnavigation.LabelVisibilityMode;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.PopupMenu;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -114,11 +110,13 @@ public class MapActivity extends AppCompatActivity implements OnClickableAreaCli
                      Log.d(LOG_TAG, "cases: " + coords);
 
                      //Tried coords.forEach(coordsMap::putIfAbsent) but required API level 24..
-                     Map tmp = new HashMap(coords);
-                     tmp.keySet().removeAll(coordsMap.keySet());
-                     coordsMap.putAll(tmp);
-                     setClickableAreas();
-                 }
+
+
+                         Map tmp = new HashMap(coords);
+                         tmp.keySet().removeAll(coordsMap.keySet());
+                         coordsMap.putAll(tmp);
+                         setClickableAreas();
+                     }
 
                  @Override
                   public void sponsorsUpdated(List<Sponsor> sponsorList){

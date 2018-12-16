@@ -237,6 +237,7 @@ public class MainActivity extends AppCompatActivity {
                          for(Company c : companyList) {
                              companies.add(c);
                              companyMap.put(c.caseNo(), c);
+                             listView.requestLayout();
                          }
                      }
 
@@ -252,6 +253,7 @@ public class MainActivity extends AppCompatActivity {
                  });
                 fetcher.getCompanies();
                 resetListView(companies);
+
         //getCases();
 
     }
