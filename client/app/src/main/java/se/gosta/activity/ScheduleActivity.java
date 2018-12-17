@@ -132,12 +132,14 @@ public class ScheduleActivity extends AppCompatActivity {
 
     }
 
-    private void resetListView(List<Event> eventList) {
+    private void resetListView(List<Event> events) {
         listView = (ListView) findViewById(R.id.schedule_list);
         adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, eventList);
+                android.R.layout.simple_list_item_1, events);
         listView.setAdapter(adapter);
     }
+
+
 
     @Override
     public void onStart() {
@@ -171,11 +173,13 @@ public class ScheduleActivity extends AppCompatActivity {
         });
         fetcher.getEvents();
         resetListView(events);
+
     }
     @Override
     protected void onResume() {
         super.onResume();
         setContentView(R.layout.activity_schedule);
+        setupEventList();
         BottomNavigationView navigation = (BottomNavigationView)
                 findViewById(R.id.navigation);
         navigation.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED);

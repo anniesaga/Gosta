@@ -117,7 +117,7 @@ public class SponsorActivity extends AppCompatActivity {
 
                 Sponsor sponsor = (Sponsor)listView.getItemAtPosition(position);
 
-                // getEvents();
+
 
                 initiatePopupWindow();
                 ((TextView)pw.getContentView().findViewById(R.id.popupname)).setText(sponsor.sponsorName());
@@ -175,67 +175,7 @@ public class SponsorActivity extends AppCompatActivity {
 
     }
 
-   /* @Override
-    public void onStart() {
-        super.onStart();
-        getSponsors();
-        for (Sponsor s : sponsors) {
-            Log.d(LOG_TAG, s.toString());
-        }
-    }*/
 
-  /*  private List<Sponsor> jsonToSponsor(JSONArray array) {
-        List<Sponsor> sponsorList = new ArrayList<>();
-        for (int i = 0; i < array.length(); i++) {
-            try {
-                JSONObject row = array.getJSONObject(i);
-                String name = row.getString("name");
-                String website = row.getString("website");
-                String info = row.getString("info");
-                String fileName = row.getString("fileName");
-                Sponsor s = new Sponsor(name, website, info, fileName);
-                Log.d(LOG_TAG, "jsonToSponsor(): " + s);
-                sponsorList.add(s);
-
-
-            } catch (JSONException ex) {
-                ;
-            }
-        }
-        return sponsorList;
-    }
-*/
-  /*
-    private void getSponsors() {
-        Log.d(LOG_TAG, "getSponsors()");
-        String url = "http://10.0.2.2:8080/sponsors";
-        //  String url = "http://192.168.43.128:8080/sponsors";
-
-        RequestQueue queue = Volley.newRequestQueue(this);
-
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
-                Request.Method.GET,
-                url,
-                null,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        sponsors = jsonToSponsor(response);
-
-                        resetListView();
-
-                        Log.d(LOG_TAG, "onResponse ok");
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d(LOG_TAG, " cause: " + error.getCause().getMessage());
-
-            }
-        });
-        queue.add(jsonArrayRequest);
-
-    }*/
 
     private PopupWindow pw;
     private void initiatePopupWindow() {

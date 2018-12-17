@@ -4,10 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    app:theme="@style/AppTheme"
-    tools:context="se.gosta.activity.MenuActivity"
-    android:background="@color/white">
+    tools:context="activity.MenuActivity"
+    android:background="@drawable/gradient_bg">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,20 +13,33 @@
         android:orientation="vertical"
         android:id="@+id/header"
         android:gravity="center_horizontal"
-        android:layout_gravity="top">
+        android:layout_gravity="top"
+        >
 
-    <ImageView
-        android:id="@+id/menuheader"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:src="@drawable/gosta2019"/>
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="200dp"
+            android:layout_height="75dp"
+            android:padding="10dp"
+            android:src="@drawable/gosta2019vit"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/menutitle"
-        android:text="@string/menutitle"
-        android:textSize="25sp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/menutitle"
+            android:id="@+id/menuTitle"
+            android:textSize="25sp"
+            android:textColor="@color/white"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/rounded_corner">
 
     <ListView
         android:id="@+id/menu_list"
@@ -40,6 +51,7 @@
 
     </ListView>
 
+    </LinearLayout>
     </LinearLayout>
 
     <include layout="@layout/layout_menu" />
