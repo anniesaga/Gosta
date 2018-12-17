@@ -39,6 +39,7 @@ import java.util.Map;
 
 import se.gosta.R;
 import se.gosta.storage.Company;
+import se.gosta.storage.Event;
 import se.gosta.storage.FairFetcher;
 import se.gosta.storage.Sponsor;
 
@@ -154,12 +155,17 @@ public class SponsorActivity extends AppCompatActivity {
             }
             @Override
             public void companiesUpdated(List<Company> companyList){
+                // Do nothing in this activity
+            }
 
+            @Override
+            public void eventsUpdated(List<Event> eventList) {
+                // Do nothing in this activity
             }
 
             @Override
             public void casesUpdated(Map<Integer, Integer[]> coordsMap) {
-
+                // Do nothing in this activity
             }
 
         });

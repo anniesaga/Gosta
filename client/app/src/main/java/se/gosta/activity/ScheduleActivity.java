@@ -41,6 +41,7 @@ import se.gosta.R;
 import se.gosta.storage.Company;
 import se.gosta.storage.Event;
 import se.gosta.storage.FairFetcher;
+import se.gosta.storage.Sponsor;
 
 public class ScheduleActivity extends AppCompatActivity {
 
@@ -160,6 +161,11 @@ public class ScheduleActivity extends AppCompatActivity {
                 for (Event e : eventList) {
                     events.add(e);
                 }
+            }
+
+            @Override
+            public void sponsorsUpdated(List<Sponsor> sponsorList) {
+                //Do nothing in this activity
             }
         });
         fetcher.getEvents();
