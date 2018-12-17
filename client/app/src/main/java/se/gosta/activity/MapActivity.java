@@ -205,13 +205,18 @@ public class MapActivity extends AppCompatActivity implements OnClickableAreaCli
         clickableAreasImage = new ClickableAreasImage(new PhotoViewAttacher(img), this);
         List<ClickableArea> clickableAreas = new ArrayList<>();
         for(int caseNo : coordsMap.keySet()) {
-              if (MainActivity.companyMap.get(caseNo) != null) {
+
+            try {
+            if (MainActivity.companyMap.get(caseNo) != null) {
                 clickableAreas.add(new ClickableArea(coordsMap.get(caseNo)[0],
                         coordsMap.get(caseNo)[1],
                         coordsMap.get(caseNo)[2],
                         coordsMap.get(caseNo)[3],
                         MainActivity.companyMap.get(caseNo)));
-         }
+            }
+        }catch (NullPointerException npe){
+            Log.d(LOG_TAG, "Error when fetching from coordsMap" + npe.getMessage());
+            }
         }
         clickableAreasImage.setClickableAreas(clickableAreas);
 
