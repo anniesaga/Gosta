@@ -34,9 +34,15 @@ public class Companies extends HttpServlet {
 
       while(rs.next()){
         JSONObject obj = new JSONObject();
-        obj.put("name", rs.getString("name"));
-        obj.put("email", rs.getString("email"));
+        obj.put("name", rs.getString("comp_name"));
+        obj.put("contact_name", rs.getString("contact_name"));
+        obj.put("contact_email", rs.getString("contact_email"));
         obj.put("info", rs.getString("info"));
+        obj.put("emp_swe", rs.getInt("emp_swe"));
+        obj.put("emp_global", rs.getInt("emp_global"));
+        obj.put("recruiting", rs.getInt("recruiting"));
+        obj.put("part_time", rs.getInt("part_time"));
+        obj.put("thesis", rs.getInt("thesis"));
         obj.put("fileName", rs.getString("fileName"));
         obj.put("caseNo", rs.getInt("caseNo"));
         array.put(obj);

@@ -1,26 +1,59 @@
 PRAGMA foreign_keys=OFF;
 
-CREATE TABLE IF NOT EXISTS companies(id integer primary key not null, name text not null, email text, info text, fileName text, caseNo integer);
+CREATE TABLE IF NOT EXISTS companies(id integer primary key not null, comp_name text not null, contact_name text, contact_email text, info text, emp_swe text, emp_global text, recruiting integer, part_time integer, thesis integer, fileName text, caseNo integer);
 BEGIN TRANSACTION;
-INSERT INTO "companies" VALUES(1,'Acando','acando@mail.se', 'Text om Acando','Acando.png', 1);
-INSERT INTO "companies" VALUES(2,'ATEA','info@atea.se', 'Text om ATEA:s företag','ATEA.png', 2);
-INSERT INTO "companies" VALUES(3,'Academic Work','info@academicwork.se', 'Här finns info om Academic Work','AcademicWork.png', 3);
-INSERT INTO "companies" VALUES(4,'ÅF','info@af.se', 'Här står info om ÅF','AF.png', 4);
-INSERT INTO "companies" VALUES(5,'Alektum Group','info@alektum.com', 'Information om Alektum Group','AlektumGroup.png', 5);
-INSERT INTO "companies" VALUES(6,'CGI','info@cgi.com', 'Text om CGI','CGI.png', 6);
-INSERT INTO "companies" VALUES(7,'Canea','info@canea.com', 'Information om Canea','Canea.png', 7);
-INSERT INTO "companies" VALUES(8,'Capgemini','info@capgemini.com', 'Capgeminis information går här','Capgemini.png', 8);
-INSERT INTO "companies" VALUES(9,'Centiro','info@centiro.com', 'Här finns info om Centiro','Centiro.png', 9);
-INSERT INTO "companies" VALUES(10,'FourOne','info@fourone.se', 'FourOne text text text','FourOne.png', 10);
-INSERT INTO "companies" VALUES(11,'IFS','info@ifsworld.com', 'Här kommer information om IFS','IFS.png', 11);
-INSERT INTO "companies" VALUES(12,'Knowit','info@knowit.se', 'Här kommer information om Knowit','Knowit.png', 12);
-INSERT INTO "companies" VALUES(13,'Lime','info@lime.com', 'Information om företaget Lime','Lime.png', 13);
-INSERT INTO "companies" VALUES(14,'PwC','info@pwc.com', 'Här finns info om PwC','PwC.png', 14);
-INSERT INTO "companies" VALUES(15,'Sigma','info@sigmatechnologies.com', 'Här står det info om Sigma','Sigma.png', 15);
-INSERT INTO "companies" VALUES(16,'Skatteverket','info@skatteverket.se', 'Information om Skatteverket','Skatteverket.png', 16);
-INSERT INTO "companies" VALUES(17,'Stratsys','info@stratsys.se', 'Text om Stratsys','Stratsys.png', 17);
-INSERT INTO "companies" VALUES(18,'Trafikverket','info@trafikverket.se', 'Information om Trafikverket','Trafikverket.png', 18);
-INSERT INTO "companies" VALUES(19,'WirelessCar','info@wirelesscar.com', 'Här finns info om WirelessCar','WirelessCar.png', 19);
+INSERT INTO "companies" VALUES(1,'Acando Consulting', 'Jonas Gille', 'jonas.gille@acando.com','Text om Acando', 0, 0, 0, 0, 0,'Acando.png', 1);
+INSERT INTO "companies" VALUES(2,'IFS', 'Jenny Henriksson', 'jenny.henriksson@ifsworld.com', 'At IFS you will work in a growing, global enterprise software company where informal hierarchies promote simplicity and trust with responsibility. We strive to deepen our expertise by taking on challenging and varying work assignments in a collaborative environment together with committed colleagues. With professionalism and a strong customer focus in everything we do, from Product Development to Sales and Consultancy, we are proud to serve world-class customers all over the globe with our leading products. Join a truly great place to work!',450,3500,1,0,1,'ATEA.png', 2);
+INSERT INTO "companies" VALUES(3,'Centiro Solutions', 'Hampus Bergström', 'hampus.bergstrom@centiro.com', 'Här finns info om Centiro', 0, 0, 0, 0, 0,'Centiro.png', 3);
+INSERT INTO "companies" VALUES(4,'Knowit Experience','Måns Hjertstrand', 'mans.hjertstrand@knowit.se', 'Här står info om Knowit', 0, 0, 0, 0, 0,'Knowit.png', 4);
+INSERT INTO "companies" VALUES(5,'Trafikverket','Denise Olsson','denise.olsson@trafikverket.se', 'Information om Trafikverket', 0, 0, 0, 0, 0,'Trafikverket.png', 5);
+INSERT INTO "companies" VALUES(6,'Sigma','Andreas Angin', 'andreas.angin@sigma.se', 'Text om Sigma', 0, 0, 0, 0, 0,'Sigma.png', 6);
+INSERT INTO "companies" VALUES(7,'Lime','Cornelia Olserius', 'cornelia.olserius@lime.tech', 'Information om Lime', 0, 0, 0, 0, 0,'Lime.png', 7);
+INSERT INTO "companies" VALUES(8,'CANEA Parner Group','Sara Pettersson', 'sara.pettersson@canea.se', 'Caneas information går här', 0, 0, 0, 0, 0,'Canea.png', 8);
+INSERT INTO "companies" VALUES(9,'Academic Work','Sanne Pedersén', 'sanne.pedersen@academicwork.se', 'Vi vill vara din karriärpartner! Academic Work är Home of the Young Professionals.
+Vi arbetar med personaluthyrning och rekrytering av akademiker i början av sina karriärer.
+Det är vår nisch, vårt expertområde och en målgrupp vi tror på.
+Academic Work finns i sex länder och förmedlar över 16 000 jobb per år. Vi vänder oss till dig som studerar och vill ha ett meriterande deltidsjobb eller är akademiker med upp till fem års arbetslivserfarenhet och söker heltidsjobb. Genom oss kan du få utvecklande och meriterande jobb inom våra affärsområden IT, teknik och ekonomi, knyta viktiga kontakter inför framtiden och få en bra start på din karriär.
+Kom förbi oss och fråga om våra aktuella tjänster eller låt oss ge dig våra bästa CV-tips',900,1700,1,1,0, 'AcademicWork.png', 9);
+INSERT INTO "companies" VALUES(10,'Pagero','Emma Hulten', 'emma.hulten@pagero.com', 'Pagero text text text', 0, 0, 0, 0, 0,'Pagero.png', 10);
+INSERT INTO "companies" VALUES(11,'DirSys','Lovisa Åsgården', 'lovisa.asgarden@dirsys.com', 'Här kommer information om DirSys', 0, 0, 0, 0, 0,'DirSys.png', 11);
+INSERT INTO "companies" VALUES(12,'Accenture', 'Jonas Magnusson', 'j.magnusson@accenture.com', 'Accenture är ett globalt företag med verksamhet inom management, IT och outsourcing, med cirka 459 000 medarbetare och kunder i över 120 länder. Genom att kombinera erfarenhet och kunskap inom olika branscher och affärsfunktioner med omfattande forskning av världens mest framgångsrika företag, hjälper vi våra kunder att bli högpresterande företag och organisationer. På Accenture får du arbeta med spännande projekt för flera av Sveriges största företag i ett globalt nätverk. Vi arbetar utifrån en stark teamkänsla i en resultatorienterad företagskultur. Vi har gedigna karriärmodeller och lägger stor vikt vid coaching och kompetensutvecklingsprogram.',1300,459000,1,0,0,'Accenture.png', 12);
+INSERT INTO "companies" VALUES(13,'Invativa','Anton Olofsson', 'anton.olofsson@invativa.se', 'Information om företaget Invativa',0,0,0,0,0,'Invativa.png', 13);
+INSERT INTO "companies" VALUES(14,'Pulsen Integration','Karin Nordström', 'karin.nordstrom@pulsen.se', 'Här finns info om Pulsen Integration',0,0,0,0,0,'Pulsen.png', 14);
+INSERT INTO "companies" VALUES(15,'FourOne','Rolf Hedendahl', 'rolf@fourone.se', 'Vi är ett specialistföretag som jobbar med att förändra och förbättra våra kunders affärsrelaterade processer. Detta gör vi genom att implementera och anpassa Microsoft Dynamics 365 efter kundens behov.
+Hos oss får du arbeta nära kunderna och vara med i samtliga delar av utvecklingsprocessen, vilket ger en unik kompetens inom Microsoft Dynamics 365.
+Vi söker dig som är intresserad av programmering och vill lära dig mer om affärsprocesser så att du, tillsammans med oss, kan utvecklas och leverera affärsnytta till våra kunder.
+Kom förbi vår monter så berättar vi mer!', 15, 15, 1, 0, 0,'FourOne.png', 15);
+INSERT INTO "companies" VALUES(16,'Stratsys','Emma Kavsjö', 'emma.kavsjo@stratsys.se', 'Information om Stratsys', 0, 0, 0, 0, 0,'Stratsys.png', 16);
+INSERT INTO "companies" VALUES(17,'Xamera','Malin', 'malin@xamera.se', 'Text om Xamera', 0, 0, 0, 0, 0,'Xamera.png', 17);
+INSERT INTO "companies" VALUES(18,'Lindex','Amanda Rydqvist', 'amanda.rydqvist@lindex.com', 'Information om Lindex kommer inom kort.',400,5000,1,1,1,'Lindex.png', 18);
+INSERT INTO "companies" VALUES(19,'BusinessNow Sweden','Jerker Lund','jerker.lund@businessnow.se', 'Här finns info om BusinessNow',0,0,0,0,0,'BusinessNow.png', 19);
+INSERT INTO "companies" VALUES(20,'Alektum Group','Isabell Konjic', 'isabell.konjic@alektumgroup.com', 'Här finns info om Alektum', 0, 0, 0, 0, 0,'AlektumGroup.png', 20);
+INSERT INTO "companies" VALUES(21,'Jusek','Hampus Gjoresclark','hampus.gjoresclark@jusek.se', 'Här finns info om Jusek', 0, 0, 0, 0, 0,'Jusek.png', 21);
+INSERT INTO "companies" VALUES(22,'Tamro','Sofia Nordenmark', 'sofia.nordenmark@tamro.com', 'Här finns info om Tamro', 0, 0, 0, 0, 0,'Tamro.png', 22);
+INSERT INTO "companies" VALUES(23,'Skatteverket','Aksel Strömberg', 'aksel.stromberg@skatteverket.se', 'Här finns info om Skatteverket', 0, 0, 0, 0, 0,'Skatteverket.png', 23);
+INSERT INTO "companies" VALUES(24,'Capgemini','Alice Öberg', 'alice.oberg@capgemini.com', 'Som en global ledare inom konsult- och tekniktjänster och digital transformation ligger
+Capgemini i framkant av innovation för att bemöta sina kunders behov inom molntjänster, digitalisering och plattformar. Med hjälp av sitt 50-åriga arv och gedigna branschspecifika kompetens gör Capgemini det möjligt för organisationer att förverkliga sina affärsmål genom en rad olika tjänster, från strategi till operation. Capgemini sätter människorna i fokus och drivs framåt av övertygelsen att teknikens affärsvärde kommer från och genom människor. Bolaget är multikulturellt med 200 000 anställda i över 40 länder. 2017 redovisade Capgemini globala intäkter på 12,8 miljarder euro.
+Besök oss på www.capgemini.com. People matter, results count.',2000,200000,1,0,0,'Capgemini.png', 24);
+INSERT INTO "companies" VALUES(25,'ÅF','Frida Hornquist', 'frida.hornquist@afconsult.com', 'Här finns info om ÅF',0,0,0,0,0,'AF.png', 25);
+INSERT INTO "companies" VALUES(26,'Atea Sverige','Madeleine Ohlin', 'madeleine.ohlin@atea.se', 'Vill du vara med och göra skillnad? Hos oss kan du göra det. Vi bygger Sverige med it. Vår kultur präglas av våra värderingar, en kultur där framåtanda, humor, kamratskap och ett visst mått av galenskap är helt naturligt. En kultur som gjort oss till Sveriges största leverantör av it-infrastruktur och tillhörande tjänster. När du hälsar på i vår monter kan du vara med och bidra till Nobelpristagarens Dr Mukweges Panzi sjukhuset i Kongo. Kom förbi så berättar vi mer om våra CSR-initiativ och hur vi jobbar med digitalisering och hållbar it. Varmt välkommen till vår monter!',2500,6900,1,0,1,'ATEA.png', 26);
+INSERT INTO "companies" VALUES(27,'Matthews Marking Systems','Tobias Jäger', 'tobias.jager@matthews.se', 'Här finns info om Matthews Marking Systems', 0, 0, 0, 0, 0,'Matthews.png', 27);
+INSERT INTO "companies" VALUES(28,'DevPort','Jonas Amdin', 'jonas.amdin@devport.se', 'Här finns info om DevPort', 0, 0, 0, 0, 0,'DevPort.png', 28);
+INSERT INTO "companies" VALUES(29,'Certaincy','Ola Möller', 'ola.moller@certaincy.com', 'Här finns info om Certaincy', 0, 0, 0, 0, 0,'Certaincy.png', 29);
+INSERT INTO "companies" VALUES(30,'WirelessCar','Emelie Friis', 'emelie.friis@wirelesscar.com', 'Här finns info om WirelessCar', 0, 0, 0, 0, 0,'WirelessCar.png', 30);
+INSERT INTO "companies" VALUES(31,'CGI','Annika Pettersson', 'annika.pettersson@cgi.com', 'Här finns info om CGI', 0, 0, 0, 0, 0,'CGI.png', 31);
+INSERT INTO "companies" VALUES(32,'PwC','Elin Johansson', 'elin.x.johansson@pwc.com', 'Vad står överst på din önskelista när du tänker på ditt framtida yrkesliv? Vill du jobba med komplexa analyser eller utvärdera företags IT-risker? Är du redo att ständigt lära dig nytt för att ge företag, organisationer och myndigheter det stöd de behöver? Då är det dig vi letar efter!
+Risk Advisory är PwCs specialistavdelning med fokus på risker kopplade till IT. Vårt team består av målmedvetna, ambitiösa och glädjefyllda människor som har kunskap inom en mängd olika områden. Som nyanställd på Risk Advisory har du chansen att utveckla dina egenskaper genom coachning av dessa mer erfarna kollegor. Kom gärna förbi och prata med oss i montern för att få reda på mer!', 2800,250000,1,0,0,'PwC.png', 32);
+INSERT INTO "companies" VALUES(33,'Consid','Anna Kaiser', 'anna.kaiser@consid.se', 'Här finns info om Consid', 0, 0, 0, 0, 0,'Consid.png', 33);
+INSERT INTO "companies" VALUES(34,'Kits','Hoi-Man Lui', 'hoi-man.lui@kits.se', 'KITS är ett it-konsultbolag baserat i Göteborg. Vi är en blandning av talanger och experter. Våra experter är de bästa konsulterna inom sina respektive teknik-/verksamhetsområden och våra talanger är på väg mot att bli experter. Vi har stort fokus på kompetensutveckling och kompetensspridning inom våra teknik- och verksamhetsområden. Vi jobbar metodiskt och målinriktat med att hela tiden utveckla KITS till ett bättre bolag där det är högt i tak, processerna är agila och där det är kul på jobbet.
+Vi är grymma på arkitektur, mentorskap, systemutveckling, projektledning och metoder inom Java, JavaScript, .NET och Open source. Vår spetskompetens kommer bäst till nytta inom web/mobilitet, telematik/Internet of things, säkerhet och integration.
+Vår vision är att bli norra Europas bästa bolag för engagerade och kreativa konsulter. Vår mission är att utveckla talanger till experter och låta experter förbli experter.',35,35,1,0,1,'Kits.png', 34);
+INSERT INTO "companies" VALUES(35,'Deloitte','Agnes Holm Hedberg', 'aholmhedberg@deloitte.se', 'Är du nyfiken på en karriär inom Consulting eller Risk Advisory? Deloitte erbjuder tjänster inom många olika områden och är idag världens största revisions- och konsultnätverk med medarbetare i över 150 länder. Med förstklassig kompetens och lokal expertis samverkar vi inom nätverket för att skapa och skydda värden för våra klienter, oavsett var i världen de bedriver sin verksamhet. I Sverige är vi 1500 medarbetare som arbetar för att nå nätverkets gemensamma vision – To make an impact that matters.',1500,289000,1,0,1,'Deloitte.png', 35);
+INSERT INTO "companies" VALUES(36,'NetRelations','Emma Anderberg', 'emma.anderberg@netrelations.com', 'Här finns info om NetRelations', 0, 0, 0, 0, 0,'NetRelations.png', 36);
+INSERT INTO "companies" VALUES(37,'EVRY','Eva Gunnarsson', 'eva.gunnarsson@evry.com', 'Här finns info om EVRY', 0, 0, 0, 0, 0,'EVRY.png', 37);
+INSERT INTO "companies" VALUES(38,'Hypergene','Clara Geite', 'clara.geite@hypergene.se', 'Här finns info om Hypergene', 0, 0, 0, 0, 0,'Hypergene.png', 38);
+INSERT INTO "companies" VALUES(39,'Institutionen för Data- och Informationsteknik','Simon Ungman','simon.ungman.hain@cse.gu.se', 'Här finns info om GU', 0, 0, 0, 0, 0,'GU.png', 39);
+INSERT INTO "companies" VALUES(40,'Crepdio','Jakob Stewén','jakob.stewen@crepido.com', 'Här finns info om Crepdio', 0, 0, 0, 0, 0,'Crepido.png', 40);
 
 
 

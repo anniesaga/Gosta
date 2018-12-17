@@ -1,12 +1,15 @@
 package se.gosta.storage;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.util.Log;
+import android.widget.ImageView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -14,11 +17,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import se.gosta.activity.MainActivity;
 
 
 public class FairFetcher {
@@ -62,7 +69,7 @@ public class FairFetcher {
                         Session.getSession().companies = companies;
                         for(Company c : companies) {
                             companyMap.put(c.caseNo(), c);
-                            // TODO: fetchLogo(c);
+                            fetchLogo(c);
                         }
                         for(FairListener listener : fairListenerList) {
                             listener.companiesUpdated(companies);
@@ -153,12 +160,18 @@ public class FairFetcher {
             try {
                 JSONObject row = array.getJSONObject(i);
                 String name = row.getString("name");
-                String email = row.getString("email");
+                String contact = row.getString("contact_name");
+                String email = row.getString("contact_email");
                 String info = row.getString("info");
+                int empSwe = row.getInt("emp_swe");
+                int empGlobal = row.getInt("emp_global");
+                int recruiting = row.getInt("recruiting");
+                int partTime = row.getInt("part_time");
+                int thesis = row.getInt("thesis");
                 String fileName = row.getString("fileName");
                 int caseNo = row.getInt("caseNo");
 
-                Company c = new Company(name, email, info, fileName, caseNo);
+                Company c = new Company(name, contact, email, info, empSwe, empGlobal, recruiting, partTime, thesis, fileName, caseNo);
                 Log.d(LOG_TAG, "jsonToCompany(): " + c);
                 companyList.add(c);
                 Collections.sort(companyList);
@@ -213,6 +226,44 @@ public class FairFetcher {
             }
         }
         return eventList;
+    }
+    public void fetchLogo(final Company company) {
+        Log.d(LOG_TAG, "fetchLogos()");
+        RequestQueue queue = Volley.newRequestQueue(context);
+        Log.d(LOG_TAG, " URL: " + DEFAULT_URL + company.fileName());
+        String url = DEFAULT_URL + "/resources/logos/" + company.fileName();
+
+        if ( ( url == null) || url.equals("null") ) {
+            // Add default url??
+            return;
+        }
+        Log.d(LOG_TAG, "download URL: " + url);
+
+        ImageRequest imageRequest = new ImageRequest(url, new Response.Listener<Bitmap>() {
+            @Override
+            public void onResponse(Bitmap bitmap) {
+                Log.d(LOG_TAG, "onResponse ok: " + bitmap.toString());
+                try {
+                    // Create a file from the bitmap
+                    File f = Utils.createImageFile(context, company, bitmap);
+                    Log.d(LOG_TAG, " created file: " + f);
+                } catch (IOException e) {
+                    // Since we failed creating the file, we don't need to remove any
+                    Log.d(LOG_TAG, " failed created file: " + e);
+                    e.printStackTrace();
+                    return;
+                }
+            }
+        }, 500, 500, ImageView.ScaleType.CENTER,
+                Bitmap.Config.RGB_565,
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d(LOG_TAG, "onResponse fail");
+                    }
+                });
+
+        queue.add(imageRequest);
     }
 
 
