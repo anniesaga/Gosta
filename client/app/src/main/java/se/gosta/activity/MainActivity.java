@@ -50,6 +50,7 @@ import se.gosta.storage.Company;
 import se.gosta.storage.Event;
 import se.gosta.storage.FairFetcher;
 import se.gosta.storage.Session;
+import se.gosta.storage.Sponsor;
 import se.gosta.storage.Utils;
 
 
@@ -68,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
     private static final int MENU_ENTRY_INFO = 1 ;
 
     private static final String DEFAULT_URL = "http://10.0.2.2:8080";
+
+ //   private static final String DEFAULT_URL = "http://192.168.43.128:8080";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -230,6 +233,7 @@ public class MainActivity extends AppCompatActivity {
                          for(Company c : companyList) {
                              companies.add(c);
                              companyMap.put(c.caseNo(), c);
+                             listView.requestLayout();
                          }
                      }
 
@@ -238,18 +242,25 @@ public class MainActivity extends AppCompatActivity {
                          // Do nothing with cases in this Activity
                      }
 
+
                     @Override
                     public void eventsUpdated(List<Event> eventList) {
                         // Do nothing with events in this Activity
                     }
-        });
+
+
+                     @Override
+                     public void sponsorsUpdated(List<Sponsor> sponsorList){
+
+                     }
+                 });
+
                 fetcher.getCompanies();
                 resetListView(companies);
+
         //getCases();
 
     }
-
-
 
 
 }

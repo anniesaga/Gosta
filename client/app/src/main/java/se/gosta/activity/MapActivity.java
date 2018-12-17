@@ -1,28 +1,27 @@
 package se.gosta.activity;
 
+
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.bottomnavigation.LabelVisibilityMode;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.PopupMenu;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -38,6 +37,7 @@ import se.gosta.storage.Company;
 import se.gosta.storage.Event;
 import se.gosta.storage.FairFetcher;
 import se.gosta.storage.Session;
+import se.gosta.storage.Sponsor;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
 
@@ -45,6 +45,7 @@ public class MapActivity extends AppCompatActivity implements OnClickableAreaCli
 
     private final String LOG_TAG = MapActivity.class.getSimpleName();
 
+    @SuppressLint("UseSparseArrays")
     private Map<Integer, Integer[]> coordsMap = new HashMap<>();
 
     ClickableAreasImage clickableAreasImage;
@@ -63,7 +64,7 @@ public class MapActivity extends AppCompatActivity implements OnClickableAreaCli
         navigation.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
-                    public boolean onNavigationItemSelected(MenuItem item) {
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.action_companies:
                                 Intent intent = new Intent(MapActivity.this, MainActivity.class);
@@ -105,26 +106,38 @@ public class MapActivity extends AppCompatActivity implements OnClickableAreaCli
                      // Do nothing with companies in this activity
                  }
 
+
                  @Override
                  public void casesUpdated(Map<Integer, Integer[]> coords) {
 
                      Log.d(LOG_TAG, "cases: " + coords);
 
                      //Tried coords.forEach(coordsMap::putIfAbsent) but required API level 24..
+
                      Map tmp = new HashMap(coords);
                      tmp.keySet().removeAll(coordsMap.keySet());
                      coordsMap.putAll(tmp);
                      setClickableAreas();
+
                  }
 
             @Override
             public void eventsUpdated(List<Event> eventList) {
                 //Do nothing with events in this activity
             }
-        });
+
+
+                 @Override
+                  public void sponsorsUpdated(List<Sponsor> sponsorList){
+
+            }
+
+            });
+
         fetcher.getCases();
 
     }
+
     @Override
     public void onClickableAreaTouched(Object item){
         if (item instanceof Company) {
@@ -134,6 +147,8 @@ public class MapActivity extends AppCompatActivity implements OnClickableAreaCli
             Log.d(LOG_TAG, "Clicked on ClickableArea");
 
             initiatePopupWindow();
+            ((TextView)pw.getContentView().findViewById(R.id.popupname)).setText(company.name());
+            ((TextView)pw.getContentView().findViewById(R.id.popuptime)).setText(company.info());
             dimBehind(pw);
         }
 
@@ -146,6 +161,7 @@ public class MapActivity extends AppCompatActivity implements OnClickableAreaCli
             LayoutInflater inflater = (LayoutInflater) MapActivity.this
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             //Inflate the view from a predefined XML layout
+            assert inflater != null;
             View layout = inflater.inflate(R.layout.popup,
                     (ViewGroup) findViewById(R.id.popup));
 
@@ -176,6 +192,7 @@ public class MapActivity extends AppCompatActivity implements OnClickableAreaCli
         WindowManager.LayoutParams p = (WindowManager.LayoutParams) container.getLayoutParams();
         p.flags |= WindowManager.LayoutParams.FLAG_DIM_BEHIND;
         p.dimAmount = 0.3f;
+        assert wm != null;
         wm.updateViewLayout(container, p);
 
     }

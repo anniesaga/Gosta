@@ -32,6 +32,9 @@ public class FairFetcher {
 
     private static final String DEFAULT_URL = "http://10.0.2.2:8080";
 
+  //  private static final String DEFAULT_URL = "http://192.168.43.128:8080";
+
+
     private static final String LOG_TAG = FairFetcher.class.getSimpleName();
 
     private List<FairListener> fairListenerList = new ArrayList<>();
@@ -267,6 +270,63 @@ public class FairFetcher {
     }
 
 
+    public void getSponsors() {
+
+        Log.d(LOG_TAG, "getSponsors()");
+        String url = DEFAULT_URL + "/sponsors";
+
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
+                Request.Method.GET,
+                url,
+                null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+
+                        List<Sponsor> sponsors = new ArrayList<>();
+
+                        sponsors = jsonToSponsor(response);
+
+
+                        for(FairListener listener : fairListenerList) {
+                            listener.sponsorsUpdated(sponsors);
+                        }
+                        Log.d(LOG_TAG, "onResponse ok");
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(LOG_TAG, " cause 2: " + error.getCause().getMessage());
+
+            }
+        });
+        queue.add(jsonArrayRequest);
+
+    }
+    private List<Sponsor> jsonToSponsor(JSONArray array) {
+        List<Sponsor> sponsorList = new ArrayList<>();
+        for (int i = 0; i < array.length(); i++) {
+            try {
+                JSONObject row = array.getJSONObject(i);
+                String name = row.getString("name");
+                String website = row.getString("website");
+                String info = row.getString("info");
+                String fileName = row.getString("fileName");
+                Sponsor s = new Sponsor(name, website, info, fileName);
+                Log.d(LOG_TAG, "jsonToSponsor(): " + s);
+                sponsorList.add(s);
+
+
+            } catch (JSONException ex) {
+                ;
+            }
+        }
+        return sponsorList;
+    }
+
 
     public interface FairListener {
 
@@ -274,7 +334,11 @@ public class FairFetcher {
 
         void casesUpdated(Map<Integer, Integer[]> coords);
 
+
         void eventsUpdated(List<Event> eventList);
+
+        void sponsorsUpdated(List<Sponsor> sponsorList);
+
     }
 
 }

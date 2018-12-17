@@ -70,8 +70,13 @@ public class MenuActivity extends AppCompatActivity {
                 } else if(menuOption.menuNavigation == R.id.readerLayout){
                     Intent readerIntent = new Intent(MenuActivity.this, ReaderActivity.class);
                     startActivity(readerIntent);
+                }else if(menuOption.menuNavigation == R.id.activity_schedule) {
+                    Intent scheduleIntent = new Intent(MenuActivity.this, ScheduleActivity.class);
+                    startActivity(scheduleIntent);
+                }else if(menuOption.menuNavigation == R.id.activity_sponsor) {
+                    Intent sponsorIntent = new Intent(MenuActivity.this, SponsorActivity.class);
+                    startActivity(sponsorIntent);
                 }
-
 
 
             }
@@ -117,9 +122,9 @@ public class MenuActivity extends AppCompatActivity {
         menuOptions = new ArrayList<>();
         menuOptions.add(new MenuOption("Företag", R.id.main));
         menuOptions.add(new MenuOption("Mässkarta", R.id.activity_map));
-        menuOptions.add(new MenuOption("Mässchema", R.id.main));
+        menuOptions.add(new MenuOption("Mässchema", R.id.activity_schedule));
         menuOptions.add(new MenuOption("QR-läsare", R.id.readerLayout));
-        menuOptions.add(new MenuOption("Sponsorer", R.id.main));
+        menuOptions.add(new MenuOption("Sponsorer", R.id.activity_sponsor));
 
     }
 

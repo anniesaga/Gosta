@@ -33,6 +33,8 @@ public class InfoActivity extends AppCompatActivity {
 
     private static final String DEFAULT_URL = "http://10.0.2.2:8080/resources/logos/";
 
+ //   private static final String DEFAULT_URL = "http://192.168.43.128:8080/resources/logos/";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
