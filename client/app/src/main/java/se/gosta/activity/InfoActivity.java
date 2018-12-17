@@ -27,6 +27,8 @@ import se.gosta.storage.Company;
 import se.gosta.storage.Session;
 import se.gosta.storage.Utils;
 
+import static se.gosta.storage.Session.currentCompanyName;
+
 public class InfoActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = InfoActivity.class.getSimpleName();
@@ -53,33 +55,11 @@ public class InfoActivity extends AppCompatActivity {
         } else {
             compName= (String) savedInstanceState.getSerializable("companyName");
         }
-        Company currentCompany = Session.get(compName);
-        Session.setCurrentCompanyName(currentCompany.name());
-        Log.d(LOG_TAG, "Displaying company: " + currentCompany);
 
+        Session.setCurrentCompanyName(compName);
 
-
-        ImageView iv = (ImageView) findViewById(R.id.logo);
-        if(Utils.avatarExists(InfoActivity.this,currentCompany)) {
-            iv.setImageBitmap(Utils.avatarBitmap(InfoActivity.this, currentCompany));
-            Log.d(LOG_TAG, "Fetched logo of company: " + currentCompany.name());
-        }
-
-        TextView tvTitle = (TextView) findViewById(R.id.companyTitle);
-        tvTitle.setText(currentCompany.name());
-        Log.d(LOG_TAG, "Title set: " + currentCompany.name());
-
-        TextView tvCase = (TextView) findViewById(R.id.companyCaseNo);
-        tvCase.setText("Monter: " + currentCompany.caseNo());
-        Log.d(LOG_TAG, "Title set: " + currentCompany.caseNo());
-
-        TextView tvContact = (TextView) findViewById(R.id.companyContact);
-        tvContact.setText("Kontakt: " + currentCompany.email());
-        Log.d(LOG_TAG, "Title set: " + currentCompany.email());
-
-        TextView tv = (TextView)findViewById(R.id.companyText);
-        tv.setText(currentCompany.info());
-        Log.d(LOG_TAG, "Description set: " + currentCompany.info());
+        setupInfo();
+        Log.d(LOG_TAG, "Displaying company: " + Session.get(currentCompanyName));
 
         BottomNavigationView navigation = (BottomNavigationView)
                 findViewById(R.id.navigation);
@@ -113,6 +93,49 @@ public class InfoActivity extends AppCompatActivity {
                         return false;
                     }
                 });
+    }
+
+    private void setupInfo() {
+        ImageView iv = (ImageView) findViewById(R.id.logo);
+        if(Utils.avatarExists(InfoActivity.this, Session.get(currentCompanyName))) {
+            iv.setImageBitmap(Utils.avatarBitmap(InfoActivity.this, Session.get(currentCompanyName)));
+            Log.d(LOG_TAG, "Fetched logo of company: " + Session.get(currentCompanyName).name());
+        }
+
+        TextView tvTitle = (TextView) findViewById(R.id.companyTitle);
+        tvTitle.setText(Session.get(currentCompanyName).name());
+        Log.d(LOG_TAG, "Title set: " + Session.get(currentCompanyName).name());
+
+        TextView tvCase = (TextView) findViewById(R.id.companyCaseNo);
+        tvCase.setText("Monter: " + Session.get(currentCompanyName).caseNo());
+        Log.d(LOG_TAG, "Case set: " + Session.get(currentCompanyName).caseNo());
+
+        TextView tvContact = (TextView) findViewById(R.id.companyContact);
+        tvContact.setText("Kontakt: " + Session.get(currentCompanyName).email());
+        Log.d(LOG_TAG, "Title set: " + Session.get(currentCompanyName).email());
+
+        TextView tv = (TextView)findViewById(R.id.companyText);
+        tv.setText(Session.get(currentCompanyName).info());
+        Log.d(LOG_TAG, "Description set: " + Session.get(currentCompanyName).info());
+
+        TextView recruit = (TextView) findViewById(R.id.recruit);
+        if(Session.get(currentCompanyName).isRecruiting()){
+            recruit.setTextColor(getResources().getColor(R.color.red));
+        } else {
+            recruit.setTextColor(getResources().getColor(R.color.grey));
+        }
+        TextView partTime = (TextView) findViewById(R.id.parttime);
+        if(Session.get(currentCompanyName).hasPartTime()){
+            partTime.setTextColor(getResources().getColor(R.color.red));
+        } else {
+            partTime.setTextColor(getResources().getColor(R.color.grey));
+        }
+        TextView thesis = (TextView) findViewById(R.id.thesis);
+        if(Session.get(currentCompanyName).hasThesis()){
+            thesis.setTextColor(getResources().getColor(R.color.red));
+        } else {
+            thesis.setTextColor(getResources().getColor(R.color.grey));
+        }
     }
 
 }

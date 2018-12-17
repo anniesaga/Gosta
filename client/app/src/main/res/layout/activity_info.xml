@@ -35,23 +35,93 @@
             android:layout_marginBottom="10dp"
             android:layout_gravity="center_horizontal" />
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/companyCaseNo"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="10dp"
-            android:layout_gravity="center_horizontal" />
+            android:orientation="horizontal"
+            >
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/companyContact"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="10dp"
-            android:layout_gravity="center_horizontal" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="left"
+                android:layout_marginLeft="20dp"
+                >
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/companyCaseNo"
+                    android:layout_marginBottom="10dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/companyContact"
+
+                    android:layout_marginBottom="10dp"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/companyEmail"
+                    android:layout_marginBottom="10dp"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="end"
+                android:textAlignment="textEnd"
+                android:layout_marginEnd="20dp"
+                >
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/recruit"
+                    android:text="Rekryteringsbehov"
+                    android:gravity="end"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="10dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/parttime"
+                    android:text="Erbjuder deltidsjobb"
+                    android:gravity="end"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="10dp"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Erbjuder ex-jobb"
+                    android:gravity="end"
+                    android:id="@+id/thesis"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="10dp"
+                    />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
 
         <TextView
             android:layout_width="match_parent"
