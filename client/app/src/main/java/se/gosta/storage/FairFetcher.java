@@ -213,6 +213,7 @@ public class FairFetcher {
         }
         return coordsMap;
     }
+
     private List<Event> jsonToEvent(JSONArray array) {
         List<Event> eventList = new ArrayList<>();
         for (int i = 0; i < array.length(); i++) {
@@ -249,6 +250,7 @@ public class FairFetcher {
             public void onResponse(Bitmap bitmap) {
                 Log.d(LOG_TAG, "onResponse ok: " + bitmap.toString());
                 if (!Utils.avatarExists(context, company)) {
+
                 try {
                     // Create a file from the bitmap
 
