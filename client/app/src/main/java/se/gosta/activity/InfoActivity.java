@@ -3,6 +3,7 @@ package se.gosta.activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.icu.text.IDNA;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.bottomnavigation.LabelVisibilityMode;
 import android.support.design.widget.BottomNavigationView;
@@ -10,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -111,8 +113,30 @@ public class InfoActivity extends AppCompatActivity {
         Log.d(LOG_TAG, "Case set: " + Session.get(currentCompanyName).caseNo());
 
         TextView tvContact = (TextView) findViewById(R.id.companyContact);
-        tvContact.setText("Kontakt: " + Session.get(currentCompanyName).email());
-        Log.d(LOG_TAG, "Title set: " + Session.get(currentCompanyName).email());
+        tvContact.setText(Session.get(currentCompanyName).contact());
+        Log.d(LOG_TAG, "Contact set: " + Session.get(currentCompanyName).contact());
+
+        ImageView ivMail = (ImageView) findViewById(R.id.mailimg);
+        ivMail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("plain/text");
+                intent.putExtra(Intent.EXTRA_EMAIL, new String[]{Session.get(Session.currentCompanyName).email()});
+                intent.putExtra(Intent.EXTRA_SUBJECT, "subject");
+                intent.putExtra(Intent.EXTRA_TEXT, "mail body");
+                startActivity(Intent.createChooser(intent, ""));
+            }
+        });
+
+        ImageView ivWeb = (ImageView) findViewById(R.id.webimg);
+        ivWeb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse("http://www.google.com"));
+                startActivity(intent);
+            }
+        });
 
         TextView tv = (TextView)findViewById(R.id.companyText);
         tv.setText(Session.get(currentCompanyName).info());

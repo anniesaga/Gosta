@@ -52,7 +52,6 @@ public class ScheduleActivity extends AppCompatActivity {
     private ListView listView;
     private List<Event> events;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

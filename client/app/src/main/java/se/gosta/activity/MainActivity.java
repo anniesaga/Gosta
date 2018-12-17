@@ -123,7 +123,6 @@ public class MainActivity extends AppCompatActivity {
 
         listView.setAdapter(adapter);
 
-        registerForContextMenu(listView);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -167,47 +166,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-
-        ListView listview = (ListView) v;
-        AdapterView.AdapterContextMenuInfo acMenuInfo = (AdapterView.AdapterContextMenuInfo) menuInfo;
-        Company company = (Company)listview.getItemAtPosition(acMenuInfo.position);
-        menu.setHeaderTitle(company.name());
-        menu.add(Menu.NONE, MENU_ENTRY_CONTACT, Menu.NONE, company.email());
-        Session.getSession().put(company.name(), company);
-        Session.getSession().currentCompanyName = company.name();
-        menu.add(Menu.NONE,MENU_ENTRY_INFO, Menu.NONE, "More info");
-    }
-
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-
-        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        Log.d(LOG_TAG, "itemId" + item.getItemId());
-        Log.d(LOG_TAG, "title: " +item.getTitle());
-
-        if (item.getItemId() == MENU_ENTRY_CONTACT) {
-            Intent intent = new Intent(Intent.ACTION_SEND);
-            intent.setType("plain/text");
-            intent.putExtra(Intent.EXTRA_EMAIL, new String[]{Session.get(Session.currentCompanyName).email()});
-            intent.putExtra(Intent.EXTRA_SUBJECT, "subject");
-            intent.putExtra(Intent.EXTRA_TEXT, "mail body");
-            startActivity(Intent.createChooser(intent, ""));
-
-        }
-
-        if (item.getItemId() == MENU_ENTRY_INFO ) {
-            //Intent intent = new Intent(this, InfoActivity.class);
-           // Bundle extras = new Bundle();
-            //extras.putString("companyName", Session.getSession().currentCompanyName);
-
-           // intent.putExtras(extras);
-            //startActivity(intent);
-        }
-
-        return true;
-    }
 
     private void resetListView(List<Company> companies) {
         Log.d(LOG_TAG, "resetListView() " + companies.size());
@@ -258,9 +216,6 @@ public class MainActivity extends AppCompatActivity {
 
                 fetcher.getCompanies();
                 resetListView(companies);
-
-        //getCases();
-
     }
 
     @Override
@@ -304,6 +259,5 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
     }
-
 
 }

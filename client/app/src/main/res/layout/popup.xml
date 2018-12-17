@@ -37,7 +37,7 @@
         android:layout_marginRight="15dp"
         android:textSize="15sp"
         android:id="@+id/popuptime"
-        android:maxLines="2"
+        android:maxLines="4"
         android:ellipsize="end"/>
 
 
@@ -50,6 +50,18 @@
             android:textSize="15sp"
             android:id="@+id/popupinfo"
 />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textbutton"
+            android:text="@string/moreinfo"
+            android:gravity="end"
+            android:layout_margin="15dp"
+            android:layout_marginBottom="5dp"
+            android:textSize="15sp"
+            android:clickable="true"
+            android:focusable="true"/>
 
 
 </LinearLayout>

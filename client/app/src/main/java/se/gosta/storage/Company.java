@@ -30,7 +30,10 @@ public class Company implements Comparable<Company> {
         if(email != null && email.contains("@")) {
             this.email = email;
         }
-        if (info != null) {
+
+        if (info == null) {
+            this.info = "Mer info kommer inom kort.";
+        } else {
             this.info = info;
         }
 

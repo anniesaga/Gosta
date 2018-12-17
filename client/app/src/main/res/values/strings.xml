@@ -15,4 +15,5 @@
     <string name="list_title">Utställare</string>
     <string name="menutitle">Inställningar</string>
     <string name="sponsortitle">Sponsorer</string>
+    <string name="moreinfo"><u>Mer info</u></string>
 </resources>

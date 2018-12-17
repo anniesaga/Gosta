@@ -35,8 +35,11 @@ import se.gosta.R;
 import se.gosta.storage.Company;
 import se.gosta.storage.Event;
 import se.gosta.storage.FairFetcher;
+import se.gosta.storage.Session;
 import se.gosta.storage.Sponsor;
 import uk.co.senab.photoview.PhotoViewAttacher;
+
+import static se.gosta.storage.Session.currentCompanyName;
 
 
 public class MapActivity extends AppCompatActivity implements OnClickableAreaClickedListener {
@@ -182,8 +185,19 @@ public class MapActivity extends AppCompatActivity implements OnClickableAreaCli
         if (item instanceof Company) {
             Company company = ((Company) item);
             Log.d(LOG_TAG, "Clicked on ClickableArea");
-
+            Session.setCurrentCompanyName(company.name());
+            Session.getSession().put(company.name(), company);
             initiatePopupWindow();
+            ((TextView)pw.getContentView().findViewById(R.id.textbutton)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(MapActivity.this, InfoActivity.class);
+                    Bundle extras = new Bundle();
+                    extras.putString("companyName", currentCompanyName);
+                    intent.putExtras(extras);
+                    startActivity(intent);
+                }
+            });
             ((TextView)pw.getContentView().findViewById(R.id.popupname)).setText(company.name());
             ((TextView)pw.getContentView().findViewById(R.id.popuptime)).setText(company.info());
             dimBehind(pw);
@@ -191,12 +205,16 @@ public class MapActivity extends AppCompatActivity implements OnClickableAreaCli
 
     }
 
+
+
     private PopupWindow pw;
+
     private void initiatePopupWindow() {
         try {
             //We need to get the instance of the LayoutInflater, use the context of this activity
             LayoutInflater inflater = (LayoutInflater) MapActivity.this
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
             //Inflate the view from a predefined XML layout
             assert inflater != null;
             View layout = inflater.inflate(R.layout.popup,

@@ -235,7 +235,7 @@ public class FairFetcher {
     }
 
     private void fetchLogo(final Company company) {
-        Log.d(LOG_TAG, "fetchLogos()");
+        Log.d(LOG_TAG, "fetchLogo()");
         RequestQueue queue = Volley.newRequestQueue(context);
         Log.d(LOG_TAG, " URL: " + DEFAULT_URL + "/resources/logos/" + company.fileName());
         String url = DEFAULT_URL + "/resources/logos/" + company.fileName();
@@ -244,17 +244,15 @@ public class FairFetcher {
             return;
         }
 
-        Log.d(LOG_TAG, "download URL: " + url);
+
 
         ImageRequest imageRequest = new ImageRequest(url, new Response.Listener<Bitmap>() {
             @Override
             public void onResponse(Bitmap bitmap) {
                 Log.d(LOG_TAG, "onResponse ok: " + bitmap.toString());
                 if (!Utils.avatarExists(context, company)) {
-
                 try {
                     // Create a file from the bitmap
-
                         File f = Utils.createImageFile(context, company, bitmap);
                         Log.d(LOG_TAG, " created file: " + f);
                     } catch(IOException e){
@@ -316,6 +314,7 @@ public class FairFetcher {
         queue.add(jsonArrayRequest);
 
     }
+
     private List<Sponsor> jsonToSponsor(JSONArray array) {
         List<Sponsor> sponsorList = new ArrayList<>();
         for (int i = 0; i < array.length(); i++) {
