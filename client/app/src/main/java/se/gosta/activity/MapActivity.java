@@ -22,7 +22,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,7 +35,6 @@ import se.gosta.R;
 import se.gosta.storage.Company;
 import se.gosta.storage.Event;
 import se.gosta.storage.FairFetcher;
-import se.gosta.storage.Session;
 import se.gosta.storage.Sponsor;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
@@ -78,8 +76,8 @@ public class MapActivity extends AppCompatActivity implements OnClickableAreaCli
                                 // overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
                                 return true;
                             case R.id.action_schedule:
-                                 intent = new Intent(MapActivity.this, ScheduleActivity.class);
-                                 startActivity(intent);
+                                intent = new Intent(MapActivity.this, ScheduleActivity.class);
+                                startActivity(intent);
                                 overridePendingTransition(0, 0);
                                 return true;
                             case R.id.action_settings:
@@ -101,25 +99,25 @@ public class MapActivity extends AppCompatActivity implements OnClickableAreaCli
         ImageView img = (ImageView) findViewById(R.id.map);
         img.setImageResource(R.drawable.gostamap);
         fetcher.registerFairListener(new FairFetcher.FairListener() {
-                 @Override
-                 public void companiesUpdated(List<Company> companyList) {
-                     // Do nothing with companies in this activity
-                 }
+            @Override
+            public void companiesUpdated(List<Company> companyList) {
+                // Do nothing with companies in this activity
+            }
 
 
-                 @Override
-                 public void casesUpdated(Map<Integer, Integer[]> coords) {
+            @Override
+            public void casesUpdated(Map<Integer, Integer[]> coords) {
 
-                     Log.d(LOG_TAG, "cases: " + coords);
+                Log.d(LOG_TAG, "cases: " + coords);
 
-                     //Tried coords.forEach(coordsMap::putIfAbsent) but required API level 24..
+                //Tried coords.forEach(coordsMap::putIfAbsent) but required API level 24..
 
-                     Map tmp = new HashMap(coords);
-                     tmp.keySet().removeAll(coordsMap.keySet());
-                     coordsMap.putAll(tmp);
-                     setClickableAreas();
+                Map tmp = new HashMap(coords);
+                tmp.keySet().removeAll(coordsMap.keySet());
+                coordsMap.putAll(tmp);
+                setClickableAreas();
 
-                 }
+            }
 
             @Override
             public void eventsUpdated(List<Event> eventList) {
@@ -127,23 +125,62 @@ public class MapActivity extends AppCompatActivity implements OnClickableAreaCli
             }
 
 
-                 @Override
-                  public void sponsorsUpdated(List<Sponsor> sponsorList){
+            @Override
+            public void sponsorsUpdated(List<Sponsor> sponsorList){
 
             }
 
-            });
+        });
 
         fetcher.getCases();
 
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        setContentView(R.layout.activity_map);
+        BottomNavigationView navigation = (BottomNavigationView)
+                findViewById(R.id.navigation);
+        navigation.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED);
+        navigation.setSelectedItemId(R.id.action_map);
+        navigation.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.action_companies:
+                                Intent intent = new Intent(MapActivity.this, MainActivity.class);
+                                startActivity(intent);
+                                overridePendingTransition(0, 0);
+                                return true;
+                            case R.id.action_map:
+                                intent = new Intent(MapActivity.this, MapActivity.class);
+                                startActivity(intent);
+                                overridePendingTransition(0, 0);
+                                // overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
+                                return true;
+                            case R.id.action_schedule:
+                                intent = new Intent(MapActivity.this, ScheduleActivity.class);
+                                startActivity(intent);
+                                overridePendingTransition(0, 0);
+                                return true;
+                            case R.id.action_settings:
+                                intent = new Intent(MapActivity.this, MenuActivity.class);
+                                startActivity(intent);
+                                overridePendingTransition(0, 0);
+                                return true;
+
+                        }
+                        return false;
+                    }
+                });
+    }
+
+    @Override
     public void onClickableAreaTouched(Object item){
         if (item instanceof Company) {
             Company company = ((Company) item);
-            String text = company.name();
-            Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
             Log.d(LOG_TAG, "Clicked on ClickableArea");
 
             initiatePopupWindow();
@@ -177,8 +214,6 @@ public class MapActivity extends AppCompatActivity implements OnClickableAreaCli
             pw.showAtLocation(layout, Gravity.CENTER, 0, 0);
 
 
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -205,18 +240,15 @@ public class MapActivity extends AppCompatActivity implements OnClickableAreaCli
         clickableAreasImage = new ClickableAreasImage(new PhotoViewAttacher(img), this);
         List<ClickableArea> clickableAreas = new ArrayList<>();
         for(int caseNo : coordsMap.keySet()) {
-              if (MainActivity.companyMap.get(caseNo) != null) {
+            if (MainActivity.companyMap.get(caseNo) != null) {
                 clickableAreas.add(new ClickableArea(coordsMap.get(caseNo)[0],
                         coordsMap.get(caseNo)[1],
                         coordsMap.get(caseNo)[2],
                         coordsMap.get(caseNo)[3],
                         MainActivity.companyMap.get(caseNo)));
-         }
+            }
         }
         clickableAreasImage.setClickableAreas(clickableAreas);
-
-
-        //TODO: Write code to populate clickableareas from maps and update gui
     }
 
 }
