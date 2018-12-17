@@ -37,7 +37,85 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
 
         createMenuOptionList();
+        setupMenuList();
 
+        BottomNavigationView navigation = (BottomNavigationView)
+                findViewById(R.id.navigation);
+        navigation.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED);
+        navigation.setSelectedItemId(R.id.action_settings);
+        navigation.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem item) {
+                        Session.setCurrentCompanyName(null);
+                        switch (item.getItemId()) {
+                            case R.id.action_companies:
+                                Intent intent = new Intent(MenuActivity.this, MainActivity.class);
+                                startActivity(intent);
+                                overridePendingTransition(0, 0);
+                                return true;
+                            case R.id.action_map:
+                                intent = new Intent(MenuActivity.this, MapActivity.class);
+                                startActivity(intent);
+                                overridePendingTransition(0, 0);
+                                // overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
+                                return true;
+                            case R.id.action_schedule:
+                                 intent = new Intent(MenuActivity.this, ScheduleActivity.class);
+                                 startActivity(intent);
+                                overridePendingTransition(0, 0);
+                                return true;
+                            case R.id.action_settings:
+
+                                return true;
+
+                        }
+                        return false;
+                    }
+                });
+
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setContentView(R.layout.activity_menu);
+        setupMenuList();
+        BottomNavigationView navigation = (BottomNavigationView)
+                findViewById(R.id.navigation);
+        navigation.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED);
+        navigation.setSelectedItemId(R.id.action_settings);
+        navigation.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.action_companies:
+                                Intent intent = new Intent(MenuActivity.this, MainActivity.class);
+                                startActivity(intent);
+                                overridePendingTransition(0, 0);
+                                return true;
+                            case R.id.action_map:
+                                intent = new Intent(MenuActivity.this, MapActivity.class);
+                                startActivity(intent);
+                                overridePendingTransition(0, 0);
+                                // overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
+                                return true;
+                            case R.id.action_schedule:
+                                intent = new Intent(MenuActivity.this, ScheduleActivity.class);
+                                startActivity(intent);
+                                overridePendingTransition(0, 0);
+                                return true;
+                            case R.id.action_settings:
+
+                                return true;
+
+                        }
+                        return false;
+                    }
+                });
+    }
+
+    private void setupMenuList(){
         ListView listView = (ListView) findViewById(R.id.menu_list);
 
         adapter =  new ArrayAdapter<MenuOption>(this,
@@ -80,79 +158,6 @@ public class MenuActivity extends AppCompatActivity {
 
             }
         });
-        BottomNavigationView navigation = (BottomNavigationView)
-                findViewById(R.id.navigation);
-        navigation.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED);
-        navigation.setSelectedItemId(R.id.action_settings);
-        navigation.setOnNavigationItemSelectedListener(
-                new BottomNavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(MenuItem item) {
-                        Session.setCurrentCompanyName(null);
-                        switch (item.getItemId()) {
-                            case R.id.action_companies:
-                                Intent intent = new Intent(MenuActivity.this, MainActivity.class);
-                                startActivity(intent);
-                                overridePendingTransition(0, 0);
-                                return true;
-                            case R.id.action_map:
-                                intent = new Intent(MenuActivity.this, MapActivity.class);
-                                startActivity(intent);
-                                overridePendingTransition(0, 0);
-                                // overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
-                                return true;
-                            case R.id.action_schedule:
-                                 intent = new Intent(MenuActivity.this, ScheduleActivity.class);
-                                 startActivity(intent);
-                                overridePendingTransition(0, 0);
-                                return true;
-                            case R.id.action_settings:
-
-                                return true;
-
-                        }
-                        return false;
-                    }
-                });
-
-    }
-    @Override
-    protected void onResume() {
-        super.onResume();
-        setContentView(R.layout.activity_menu);
-        BottomNavigationView navigation = (BottomNavigationView)
-                findViewById(R.id.navigation);
-        navigation.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED);
-        navigation.setSelectedItemId(R.id.action_settings);
-        navigation.setOnNavigationItemSelectedListener(
-                new BottomNavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        switch (item.getItemId()) {
-                            case R.id.action_companies:
-                                Intent intent = new Intent(MenuActivity.this, MainActivity.class);
-                                startActivity(intent);
-                                overridePendingTransition(0, 0);
-                                return true;
-                            case R.id.action_map:
-                                intent = new Intent(MenuActivity.this, MapActivity.class);
-                                startActivity(intent);
-                                overridePendingTransition(0, 0);
-                                // overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
-                                return true;
-                            case R.id.action_schedule:
-                                intent = new Intent(MenuActivity.this, ScheduleActivity.class);
-                                startActivity(intent);
-                                overridePendingTransition(0, 0);
-                                return true;
-                            case R.id.action_settings:
-
-                                return true;
-
-                        }
-                        return false;
-                    }
-                });
     }
 
     private void createMenuOptionList(){
