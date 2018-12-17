@@ -19,6 +19,8 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -230,34 +232,38 @@ public class FairFetcher {
         }
         return eventList;
     }
-    public void fetchLogo(final Company company) {
 
-            Log.d(LOG_TAG, "fetchLogos()");
-            RequestQueue queue = Volley.newRequestQueue(context);
-            Log.d(LOG_TAG, " URL: " + DEFAULT_URL + company.fileName());
-            String url = DEFAULT_URL + "/resources/logos/" + company.fileName();
+    private void fetchLogo(final Company company) {
+        Log.d(LOG_TAG, "fetchLogos()");
+        RequestQueue queue = Volley.newRequestQueue(context);
+        Log.d(LOG_TAG, " URL: " + DEFAULT_URL + "/resources/logos/" + company.fileName());
+        String url = DEFAULT_URL + "/resources/logos/" + company.fileName();
 
-        if ( ( url != null) || url.equals("null") ) {
-            // Add default url??
+        if (company.fileName() == null) {
             return;
         }
-                Log.d(LOG_TAG, "download URL: " + url);
 
-                ImageRequest imageRequest = new ImageRequest(url, new Response.Listener<Bitmap>() {
-                    @Override
-                    public void onResponse(Bitmap bitmap) {
-                        Log.d(LOG_TAG, "onResponse ok: " + bitmap.toString());
-                        try {
-                            // Create a file from the bitmap
-                            File f = Utils.createImageFile(context, company, bitmap);
-                            Log.d(LOG_TAG, " created file: " + f);
-                        } catch (IOException e) {
-                            // Since we failed creating the file, we don't need to remove any
-                            Log.d(LOG_TAG, " failed created file: " + e);
-                            e.printStackTrace();
-                            return;
-                        }
+        Log.d(LOG_TAG, "download URL: " + url);
+
+        ImageRequest imageRequest = new ImageRequest(url, new Response.Listener<Bitmap>() {
+            @Override
+            public void onResponse(Bitmap bitmap) {
+                Log.d(LOG_TAG, "onResponse ok: " + bitmap.toString());
+                if (!Utils.avatarExists(context, company)) {
+                try {
+                    // Create a file from the bitmap
+
+                        File f = Utils.createImageFile(context, company, bitmap);
+                        Log.d(LOG_TAG, " created file: " + f);
+                    } catch(IOException e){
+                        // Since we failed creating the file, we don't need to remove any
+                        Log.d(LOG_TAG, " failed created file: " + e);
+                        e.printStackTrace();
+                        return;
                     }
+                }
+            }
+
                 }, 500, 500, ImageView.ScaleType.CENTER,
                         Bitmap.Config.RGB_565,
                         new Response.ErrorListener() {
@@ -328,7 +334,6 @@ public class FairFetcher {
         }
         return sponsorList;
     }
-
 
     public interface FairListener {
 

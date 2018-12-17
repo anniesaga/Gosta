@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.bottomnavigation.LabelVisibilityMode;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -171,7 +172,44 @@ public class ScheduleActivity extends AppCompatActivity {
         fetcher.getEvents();
         resetListView(events);
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setContentView(R.layout.activity_schedule);
+        BottomNavigationView navigation = (BottomNavigationView)
+                findViewById(R.id.navigation);
+        navigation.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED);
+        navigation.setSelectedItemId(R.id.action_schedule);
+        navigation.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.action_companies:
+                                Intent intent = new Intent(ScheduleActivity.this, MainActivity.class);
+                                startActivity(intent);
+                                overridePendingTransition(0, 0);
+                                return true;
+                            case R.id.action_map:
+                                intent = new Intent(ScheduleActivity.this, MapActivity.class);
+                                startActivity(intent);
+                                overridePendingTransition(0, 0);
+                                // overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
+                                return true;
+                            case R.id.action_schedule:
 
+                                return true;
+                            case R.id.action_settings:
+                                intent = new Intent(ScheduleActivity.this, MenuActivity.class);
+                                startActivity(intent);
+                                overridePendingTransition(0, 0);
+                                return true;
+
+                        }
+                        return false;
+                    }
+                });
+    }
 
 
 
