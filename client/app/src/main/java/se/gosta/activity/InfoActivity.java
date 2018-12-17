@@ -60,8 +60,10 @@ public class InfoActivity extends AppCompatActivity {
 
 
         ImageView iv = (ImageView) findViewById(R.id.logo);
-        iv.setImageBitmap(Utils.avatarBitmap(InfoActivity.this, currentCompany));
-        Log.d(LOG_TAG, "Fetched logo of company: " + currentCompany.name());
+        if(Utils.avatarExists(InfoActivity.this,currentCompany)) {
+            iv.setImageBitmap(Utils.avatarBitmap(InfoActivity.this, currentCompany));
+            Log.d(LOG_TAG, "Fetched logo of company: " + currentCompany.name());
+        }
 
         TextView tvTitle = (TextView) findViewById(R.id.companyTitle);
         tvTitle.setText(currentCompany.name());

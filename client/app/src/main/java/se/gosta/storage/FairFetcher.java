@@ -233,6 +233,7 @@ public class FairFetcher {
         }
         return eventList;
     }
+
     private void fetchLogo(final Company company) {
         Log.d(LOG_TAG, "fetchLogos()");
         RequestQueue queue = Volley.newRequestQueue(context);
@@ -264,16 +265,18 @@ public class FairFetcher {
                     }
                 }
             }
-        }, 500, 500, ImageView.ScaleType.CENTER,
-                Bitmap.Config.RGB_565,
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.d(LOG_TAG, "onResponse fail");
-                    }
-                });
 
-        queue.add(imageRequest);
+                }, 500, 500, ImageView.ScaleType.CENTER,
+                        Bitmap.Config.RGB_565,
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Log.d(LOG_TAG, "onResponse fail");
+                            }
+                        });
+
+                queue.add(imageRequest);
+
     }
 
 
