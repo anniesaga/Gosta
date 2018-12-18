@@ -2,45 +2,35 @@ package se.gosta.activity;
 
 import android.content.Context;
 import android.content.Intent;
+
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+
+import android.net.Uri;
+
 import android.support.design.bottomnavigation.LabelVisibilityMode;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.AdapterView;
+
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import se.gosta.R;
-import se.gosta.storage.Company;
-import se.gosta.storage.Event;
-import se.gosta.storage.FairFetcher;
+
 import se.gosta.storage.Sponsor;
 
 public class SponsorActivity extends AppCompatActivity {
@@ -55,14 +45,20 @@ public class SponsorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sponsor);
-        setupSponsorList();
-        //resetListView(sponsors);
-
-
+        ImageView iv1 = (ImageView) findViewById(R.id.sponsor1);
+        iv1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initiatePopupWindow();
+                ((TextView)pw.getContentView().findViewById(R.id.popupname)).setText("Barebells");
+                ((TextView)pw.getContentView().findViewById(R.id.popuptime)).setText("Blablabla");
+                dimBehind(pw);
+            }
+        });
         BottomNavigationView navigation = (BottomNavigationView)
                 findViewById(R.id.navigation);
         navigation.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED);
-        navigation.setSelectedItemId(R.id.action_schedule);
+        navigation.setSelectedItemId(R.id.action_settings);
         navigation.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
@@ -71,22 +67,22 @@ public class SponsorActivity extends AppCompatActivity {
                             case R.id.action_companies:
                                 Intent intent = new Intent(SponsorActivity.this, MainActivity.class);
                                 startActivity(intent);
-                                overridePendingTransition(0, 0);
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                 return true;
                             case R.id.action_map:
                                 intent = new Intent(SponsorActivity.this, MapActivity.class);
                                 startActivity(intent);
-                                overridePendingTransition(0, 0);
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                 return true;
                             case R.id.action_schedule:
-                                 intent = new Intent(SponsorActivity.this, ScheduleActivity.class);
-                                 startActivity(intent);
-                                overridePendingTransition(0, 0);
+                                intent = new Intent(SponsorActivity.this, ScheduleActivity.class);
+                                startActivity(intent);
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                 return true;
                             case R.id.action_settings:
                                 intent = new Intent(SponsorActivity.this, MenuActivity.class);
                                 startActivity(intent);
-                                overridePendingTransition(0, 0);
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                 return true;
 
                         }
@@ -94,87 +90,6 @@ public class SponsorActivity extends AppCompatActivity {
                     }
                 });
     }
-   public void setupSponsorList(){
-
-        sponsors = new ArrayList<>();
-
-        listView = (ListView) findViewById(R.id.sponsor_list);
-
-        adapter = new ArrayAdapter<Sponsor>(this, android.R.layout.simple_list_item_1,
-                sponsors);
-
-        listView.setAdapter(adapter);
-
-
-        listView.setOnItemClickListener(new ListView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent,
-                                    final View view,
-                                    int position /*The position of the view in the adapter.*/,
-                                    long id /* The row id of the item that was clicked */) {
-                Log.d(LOG_TAG, "item clicked, pos:" + position + " id: " + id);
-
-                Sponsor sponsor = (Sponsor)listView.getItemAtPosition(position);
-
-
-
-                initiatePopupWindow();
-                ((TextView)pw.getContentView().findViewById(R.id.popupname)).setText(sponsor.sponsorName());
-                ((TextView)pw.getContentView().findViewById(R.id.popuptime)).setText(sponsor.sponsorInfo());
-                ((TextView)pw.getContentView().findViewById(R.id.popupinfo)).setText(sponsor.sponsorWebsite());
-
-                dimBehind(pw);
-
-
-            }
-        });
-
-
-    }
-
-    private void resetListView(List<Sponsor> sponsors) {
-        listView = (ListView) findViewById(R.id.sponsor_list);
-        adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, sponsors);
-        listView.setAdapter(adapter);
-    }
-
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        FairFetcher fetcher = new FairFetcher(this);
-        fetcher.registerFairListener(new FairFetcher.FairListener() {
-            @Override
-            public void sponsorsUpdated(List<Sponsor> sponsorList) {
-                Log.d(LOG_TAG, "sponsors: " + sponsorList);
-                for(Sponsor s : sponsorList) {
-                    sponsors.add(s);
-                }
-            }
-            @Override
-            public void companiesUpdated(List<Company> companyList){
-                // Do nothing in this activity
-            }
-
-            @Override
-            public void eventsUpdated(List<Event> eventList) {
-                // Do nothing in this activity
-            }
-
-            @Override
-            public void casesUpdated(Map<Integer, Integer[]> coordsMap) {
-                // Do nothing in this activity
-            }
-
-        });
-        fetcher.getSponsors();
-        resetListView(sponsors);
-        //getCases();
-
-    }
-
 
 
     private PopupWindow pw;

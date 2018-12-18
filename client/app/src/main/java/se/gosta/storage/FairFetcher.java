@@ -168,15 +168,14 @@ public class FairFetcher {
                 String contact = row.getString("contact_name");
                 String email = row.getString("contact_email");
                 String info = row.getString("info");
-                int empSwe = row.getInt("emp_swe");
-                int empGlobal = row.getInt("emp_global");
                 int recruiting = row.getInt("recruiting");
                 int partTime = row.getInt("part_time");
                 int thesis = row.getInt("thesis");
                 String fileName = row.getString("fileName");
                 int caseNo = row.getInt("caseNo");
+                String website = "website";
 
-                Company c = new Company(name, contact, email, info, empSwe, empGlobal, recruiting, partTime, thesis, fileName, caseNo);
+                Company c = new Company(name, contact, email, info, recruiting, partTime, thesis, fileName, caseNo, website);
                 Log.d(LOG_TAG, "jsonToCompany(): " + c);
                 companyList.add(c);
                 Collections.sort(companyList);

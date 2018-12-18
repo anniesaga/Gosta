@@ -11,7 +11,6 @@ import android.support.design.bottomnavigation.LabelVisibilityMode;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -52,18 +51,18 @@ public class MenuActivity extends AppCompatActivity {
                             case R.id.action_companies:
                                 Intent intent = new Intent(MenuActivity.this, MainActivity.class);
                                 startActivity(intent);
-                                overridePendingTransition(0, 0);
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                 return true;
                             case R.id.action_map:
                                 intent = new Intent(MenuActivity.this, MapActivity.class);
                                 startActivity(intent);
-                                overridePendingTransition(0, 0);
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                 // overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
                                 return true;
                             case R.id.action_schedule:
                                  intent = new Intent(MenuActivity.this, ScheduleActivity.class);
                                  startActivity(intent);
-                                overridePendingTransition(0, 0);
+                                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                 return true;
                             case R.id.action_settings:
 
@@ -92,18 +91,18 @@ public class MenuActivity extends AppCompatActivity {
                             case R.id.action_companies:
                                 Intent intent = new Intent(MenuActivity.this, MainActivity.class);
                                 startActivity(intent);
-                                overridePendingTransition(0, 0);
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                 return true;
                             case R.id.action_map:
                                 intent = new Intent(MenuActivity.this, MapActivity.class);
                                 startActivity(intent);
-                                overridePendingTransition(0, 0);
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                 // overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
                                 return true;
                             case R.id.action_schedule:
                                 intent = new Intent(MenuActivity.this, ScheduleActivity.class);
                                 startActivity(intent);
-                                overridePendingTransition(0, 0);
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                 return true;
                             case R.id.action_settings:
 
@@ -119,7 +118,7 @@ public class MenuActivity extends AppCompatActivity {
         ListView listView = (ListView) findViewById(R.id.menu_list);
 
         adapter =  new ArrayAdapter<MenuOption>(this,
-                android.R.layout.simple_list_item_1,
+                R.layout.layout_listview,
                 menuOptions);
 
         listView.setAdapter(adapter);
@@ -138,12 +137,42 @@ public class MenuActivity extends AppCompatActivity {
                 MenuOption menuOption = (MenuOption) listView.getItemAtPosition(position);
 
 
-                if(menuOption.menuNavigation == R.id.main){
-                    Intent mainIntent = new Intent(MenuActivity.this, MainActivity.class);
+                switch (menuOption.menuNavigation) {
+                    case R.id.main:
+                        Intent intent = new Intent(MenuActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                        break;
+                    case R.id.activity_map:
+                        intent = new Intent(MenuActivity.this, MapActivity.class);
+                        startActivity(intent);
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                        break;
+                    case R.id.activity_reader:
+                        intent = new Intent(MenuActivity.this, ReaderActivity.class);
+                        startActivity(intent);
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                        break;
+                    case R.id.activity_schedule:
+                        intent = new Intent(MenuActivity.this, ScheduleActivity.class);
+                        startActivity(intent);
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                        break;
+                    case R.id.activity_sponsor:
+                        intent = new Intent(MenuActivity.this, SponsorActivity.class);
+                        startActivity(intent);
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                        break;
+                }
+
+              /*  if(menuOption.menuNavigation == R.id.main){
+                    Intent intent = new Intent(MenuActivity.this, MainActivity.class);
                     startActivity(mainIntent);
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 } else if(menuOption.menuNavigation == R.id.activity_map){
-                    Intent mapIntent = new Intent(MenuActivity.this, MapActivity.class);
+                    intent = new Intent(MenuActivity.this, MapActivity.class);
                     startActivity(mapIntent);
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 } else if(menuOption.menuNavigation == R.id.readerLayout){
                     Intent readerIntent = new Intent(MenuActivity.this, ReaderActivity.class);
                     startActivity(readerIntent);
@@ -154,7 +183,7 @@ public class MenuActivity extends AppCompatActivity {
                     Intent sponsorIntent = new Intent(MenuActivity.this, SponsorActivity.class);
                     startActivity(sponsorIntent);
                 }
-
+*/
 
             }
         });
@@ -165,7 +194,7 @@ public class MenuActivity extends AppCompatActivity {
         menuOptions.add(new MenuOption("Företag", R.id.main));
         menuOptions.add(new MenuOption("Mässkarta", R.id.activity_map));
         menuOptions.add(new MenuOption("Mässchema", R.id.activity_schedule));
-        menuOptions.add(new MenuOption("QR-läsare", R.id.readerLayout));
+        menuOptions.add(new MenuOption("QR-läsare", R.id.activity_reader));
         menuOptions.add(new MenuOption("Sponsorer", R.id.activity_sponsor));
 
     }

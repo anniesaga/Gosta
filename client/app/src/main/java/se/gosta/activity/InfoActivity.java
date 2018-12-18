@@ -76,19 +76,22 @@ public class InfoActivity extends AppCompatActivity {
                             case R.id.action_companies:
                                 Intent intent = new Intent(InfoActivity.this, MainActivity.class);
                                 startActivity(intent);
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                 return true;
                             case R.id.action_map:
                                 intent = new Intent(InfoActivity.this, MapActivity.class);
                                 startActivity(intent);
-                               // overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                 return true;
                             case R.id.action_schedule:
-                                // intent = new Intent(StartActivity.this, ScheduleActivity.class);
-                                // startActivity(intent);
+                                intent = new Intent(InfoActivity.this, ScheduleActivity.class);
+                                startActivity(intent);
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                 return true;
                             case R.id.action_settings:
                                 intent = new Intent(InfoActivity.this, MenuActivity.class);
                                 startActivity(intent);
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                 return true;
 
                         }
@@ -134,6 +137,7 @@ public class InfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse("http://www.google.com"));
+                //TODO: Sätt varje företags URL istället för google.com
                 startActivity(intent);
             }
         });

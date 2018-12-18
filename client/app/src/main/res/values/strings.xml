@@ -16,4 +16,5 @@
     <string name="menutitle">Inställningar</string>
     <string name="sponsortitle">Sponsorer</string>
     <string name="moreinfo"><u>Mer info</u></string>
+    <string name="QR">QR-läsare</string>
 </resources>

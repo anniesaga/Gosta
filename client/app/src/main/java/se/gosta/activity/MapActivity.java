@@ -70,23 +70,23 @@ public class MapActivity extends AppCompatActivity implements OnClickableAreaCli
                             case R.id.action_companies:
                                 Intent intent = new Intent(MapActivity.this, MainActivity.class);
                                 startActivity(intent);
-                                overridePendingTransition(0, 0);
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                 return true;
                             case R.id.action_map:
                                 intent = new Intent(MapActivity.this, MapActivity.class);
                                 startActivity(intent);
-                                overridePendingTransition(0, 0);
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                 // overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
                                 return true;
                             case R.id.action_schedule:
                                 intent = new Intent(MapActivity.this, ScheduleActivity.class);
                                 startActivity(intent);
-                                overridePendingTransition(0, 0);
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                 return true;
                             case R.id.action_settings:
                                 intent = new Intent(MapActivity.this, MenuActivity.class);
                                 startActivity(intent);
-                                overridePendingTransition(0, 0);
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                 return true;
 
                         }
@@ -155,23 +155,23 @@ public class MapActivity extends AppCompatActivity implements OnClickableAreaCli
                             case R.id.action_companies:
                                 Intent intent = new Intent(MapActivity.this, MainActivity.class);
                                 startActivity(intent);
-                                overridePendingTransition(0, 0);
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                 return true;
                             case R.id.action_map:
                                 intent = new Intent(MapActivity.this, MapActivity.class);
                                 startActivity(intent);
-                                overridePendingTransition(0, 0);
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                 // overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
                                 return true;
                             case R.id.action_schedule:
                                 intent = new Intent(MapActivity.this, ScheduleActivity.class);
                                 startActivity(intent);
-                                overridePendingTransition(0, 0);
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                 return true;
                             case R.id.action_settings:
                                 intent = new Intent(MapActivity.this, MenuActivity.class);
                                 startActivity(intent);
-                                overridePendingTransition(0, 0);
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                 return true;
 
                         }
@@ -196,6 +196,7 @@ public class MapActivity extends AppCompatActivity implements OnClickableAreaCli
                     extras.putString("companyName", currentCompanyName);
                     intent.putExtras(extras);
                     startActivity(intent);
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 }
             });
             ((TextView)pw.getContentView().findViewById(R.id.popupname)).setText(company.name());

@@ -32,21 +32,71 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="10dp"
+            android:layout_marginTop="75dp"
             android:gravity="center_horizontal"
             android:layout_gravity="center_horizontal" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/rounded_corner">
-            <ListView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/sponsor_list"
-                android:layout_marginBottom="50dp"
-                android:paddingTop="10dp">
+            android:background="@drawable/rounded_corner"
+            android:orientation="vertical"
+            android:paddingTop="20dp">
 
-            </ListView>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:id="@+id/sponsor1"
+                    android:src="@drawable/barebells"
+                    android:layout_marginRight="30dp"
+                    android:clickable="true"/>
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:id="@+id/sponsor2"
+                    android:src="@drawable/fishermansfriend"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/flapjack"
+                    android:layout_marginRight="30dp"
+                    android:id="@+id/sponsor3"/>
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/njie"
+                    android:id="@+id/sponsor4"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/nordstan"
+                    android:layout_marginRight="30dp"
+                    android:id="@+id/sponsor5"/>
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/tekompaniet"
+                    android:id="@+id/sponsor6"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 

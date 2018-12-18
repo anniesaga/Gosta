@@ -23,17 +23,6 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -71,12 +60,12 @@ public class ScheduleActivity extends AppCompatActivity {
                             case R.id.action_companies:
                                 Intent intent = new Intent(ScheduleActivity.this, MainActivity.class);
                                 startActivity(intent);
-                                overridePendingTransition(0, 0);
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                 return true;
                             case R.id.action_map:
                                  intent = new Intent(ScheduleActivity.this, MapActivity.class);
                                  startActivity(intent);
-                                overridePendingTransition(0, 0);
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                 return true;
                             case R.id.action_schedule:
                                 // intent = new Intent(StartActivity.this, ScheduleActivity.class);
@@ -85,7 +74,7 @@ public class ScheduleActivity extends AppCompatActivity {
                             case R.id.action_settings:
                                 intent = new Intent(ScheduleActivity.this, MenuActivity.class);
                                 startActivity(intent);
-                                overridePendingTransition(0, 0);
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                 return true;
 
                         }
@@ -100,7 +89,7 @@ public class ScheduleActivity extends AppCompatActivity {
         events = new ArrayList<>();
         listView = (ListView) findViewById(R.id.schedule_list);
 
-        adapter = new ArrayAdapter<Event>(this, android.R.layout.simple_list_item_1,
+        adapter = new ArrayAdapter<Event>(this, R.layout.layout_listview,
                 events);
 
         listView.setAdapter(adapter);
@@ -118,6 +107,7 @@ public class ScheduleActivity extends AppCompatActivity {
                // getEvents();
 
                 initiatePopupWindow();
+                ((TextView)pw.getContentView().findViewById(R.id.textbutton)).setText("");
                 ((TextView)pw.getContentView().findViewById(R.id.popupname)).setText(event.eventName());
                 ((TextView)pw.getContentView().findViewById(R.id.popuptime)).setText(event.startTime());
                 ((TextView)pw.getContentView().findViewById(R.id.popupinfo)).setText(event.eventInfo());
@@ -134,7 +124,7 @@ public class ScheduleActivity extends AppCompatActivity {
     private void resetListView(List<Event> events) {
         listView = (ListView) findViewById(R.id.schedule_list);
         adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, events);
+                R.layout.layout_listview, events);
         listView.setAdapter(adapter);
     }
 
@@ -191,12 +181,12 @@ public class ScheduleActivity extends AppCompatActivity {
                             case R.id.action_companies:
                                 Intent intent = new Intent(ScheduleActivity.this, MainActivity.class);
                                 startActivity(intent);
-                                overridePendingTransition(0, 0);
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                 return true;
                             case R.id.action_map:
                                 intent = new Intent(ScheduleActivity.this, MapActivity.class);
                                 startActivity(intent);
-                                overridePendingTransition(0, 0);
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                 // overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
                                 return true;
                             case R.id.action_schedule:
@@ -205,7 +195,7 @@ public class ScheduleActivity extends AppCompatActivity {
                             case R.id.action_settings:
                                 intent = new Intent(ScheduleActivity.this, MenuActivity.class);
                                 startActivity(intent);
-                                overridePendingTransition(0, 0);
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                 return true;
 
                         }

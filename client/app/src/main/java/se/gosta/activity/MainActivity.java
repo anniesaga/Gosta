@@ -94,17 +94,17 @@ public class MainActivity extends AppCompatActivity {
                             case R.id.action_map:
                                 Intent intent = new Intent(MainActivity.this, MapActivity.class);
                                 startActivity(intent);
-                                overridePendingTransition(0, 0);
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                 return true;
                             case R.id.action_schedule:
                                 intent = new Intent (MainActivity.this, ScheduleActivity.class);
                                 startActivity(intent);
-                                overridePendingTransition(0, 0);
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                 return true;
                             case R.id.action_settings:
                                 intent = new Intent (MainActivity.this, MenuActivity.class);
                                 startActivity(intent);
-                                overridePendingTransition(0, 0);
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                 return true;
 
                         }
@@ -118,7 +118,6 @@ public class MainActivity extends AppCompatActivity {
 
         searchView = (SearchView) findViewById(R.id.searchView) ;
         listView = (ListView) findViewById(R.id.company_list);
-
         adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, companies);
 
         listView.setAdapter(adapter);
@@ -161,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
                 Session.setCurrentCompanyName(comp.name());
                 intent.putExtras(extras);
                 startActivity(intent);
-                overridePendingTransition(0, 0);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });
     }
@@ -235,23 +234,23 @@ public class MainActivity extends AppCompatActivity {
                             case R.id.action_companies:
                                 Intent intent = new Intent(MainActivity.this, MainActivity.class);
                                 startActivity(intent);
-                                overridePendingTransition(0, 0);
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                 return true;
                             case R.id.action_map:
                                 intent = new Intent(MainActivity.this, MapActivity.class);
                                 startActivity(intent);
-                                overridePendingTransition(0, 0);
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                 // overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
                                 return true;
                             case R.id.action_schedule:
                                 intent = new Intent(MainActivity.this, ScheduleActivity.class);
                                 startActivity(intent);
-                                overridePendingTransition(0, 0);
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                 return true;
                             case R.id.action_settings:
                                 intent = new Intent(MainActivity.this, MenuActivity.class);
                                 startActivity(intent);
-                                overridePendingTransition(0, 0);
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                 return true;
 
                         }

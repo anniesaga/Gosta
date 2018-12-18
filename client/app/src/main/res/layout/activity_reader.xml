@@ -1,33 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="se.gosta.activity.ReaderActivity"
-    android:paddingBottom="16dp"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingTop="16dp"
-    android:id="@+id/readerLayout"
-    >
+    android:background="@drawable/gradient_bg"
+    tools:context=".activity.MapActivity"
+    android:id="@+id/activity_reader">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/qr"
-        android:textSize="25sp"
-        android:layout_centerHorizontal="true"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:id="@+id/mainlinear1"
+        android:layout_gravity="top">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/scan"
-        android:background="@drawable/rounded_corner_small"
-        android:textColor="@color/colorPrimaryDark"
-        android:id="@+id/scan_button"
-        />
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="200dp"
+            android:layout_height="75dp"
+            android:padding="10dp"
+            android:src="@drawable/gosta2019vit"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:text="@string/QR"
+            android:textSize="25sp"
+            android:textColor="@color/white"
+            android:layout_marginTop="75dp"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/rounded_corner"
+            android:paddingTop="20dp">
 
-</RelativeLayout>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="@string/scan"
+                android:background="@drawable/rounded_corner_small"
+                android:textColor="@color/colorPrimaryDark"
+                android:id="@+id/scan_button"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+    <include layout="@layout/layout_menu" />
+
+</FrameLayout>
+
+
