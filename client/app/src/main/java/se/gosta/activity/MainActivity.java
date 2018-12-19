@@ -288,6 +288,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     }
 
+
+    //Method for detecting shake gestures, invoked every time the sensor detects a change (whenever the device is in motion).
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
         if (companies.size() == 0) {
