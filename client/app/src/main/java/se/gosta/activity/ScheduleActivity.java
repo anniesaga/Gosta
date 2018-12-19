@@ -41,6 +41,13 @@ public class ScheduleActivity extends AppCompatActivity {
     private ListView listView;
     private List<Event> events;
 
+
+    /**
+     * On creation of this activity it calls the method for setting up the desired list of events
+     * and initiates the bottom navigation bar with navigation options handled by a switch.
+     * @param savedInstanceState Bundle containing the activity's previously frozen state, if there was one.
+     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,8 +70,8 @@ public class ScheduleActivity extends AppCompatActivity {
                                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                 return true;
                             case R.id.action_map:
-                                 intent = new Intent(ScheduleActivity.this, MapActivity.class);
-                                 startActivity(intent);
+                                intent = new Intent(ScheduleActivity.this, MapActivity.class);
+                                startActivity(intent);
                                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                 return true;
                             case R.id.action_schedule:
@@ -84,6 +91,12 @@ public class ScheduleActivity extends AppCompatActivity {
 
 
     }
+
+    /**
+     * Method for setting up the list view for the schedule of events.
+     * Includes an OnItemClickListener to enable initialization of a popup window for information
+     * about the events.
+     */
     public void setupEventList(){
 
         events = new ArrayList<>();
@@ -95,19 +108,25 @@ public class ScheduleActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new ListView.OnItemClickListener() {
 
+            /**
+             * Method for handling a click on a list item calling the method for initialization of
+             * a popup window, displaying information about the clicked event in text views.
+             * @param parent The AdapterView where the click happened.
+             * @param view The view within the AdapterView that was clicked.
+             * @param position The position of the view in the adapter.
+             * @param id The row id of the item (event) that was clicked.
+             */
             @Override
             public void onItemClick(AdapterView<?> parent,
                                     final View view,
-                                    int position /*The position of the view in the adapter.*/,
-                                    long id /* The row id of the item that was clicked */) {
+                                    int position,
+                                    long id) {
                 Log.d(LOG_TAG, "item clicked, pos:" + position + " id: " + id);
 
                 Event event = (Event)listView.getItemAtPosition(position);
 
-               // getEvents();
-
                 initiatePopupWindow();
-              //  ((TextView)pw.getContentView().findViewById(R.id.textbutton)).setText("");
+
                 ((TextView)pw.getContentView().findViewById(R.id.schedpopupname)).setText(event.eventName());
                 ((TextView)pw.getContentView().findViewById(R.id.schedpopuptime)).setText(event.startTime());
                 ((TextView)pw.getContentView().findViewById(R.id.schedpopupinfo)).setText(event.eventInfo());
@@ -115,12 +134,16 @@ public class ScheduleActivity extends AppCompatActivity {
                 dimBehind(pw);
 
 
-              }
+            }
         });
 
 
     }
 
+    /**
+     * Method for resetting the list view for events.
+     * @param events The specific list that is being reset
+     */
     private void resetListView(List<Event> events) {
         listView = (ListView) findViewById(R.id.schedule_list);
         adapter = new ArrayAdapter<>(this,
@@ -129,7 +152,10 @@ public class ScheduleActivity extends AppCompatActivity {
     }
 
 
-
+    /**
+     * Method for fetching the all the events in the list of events.
+     * Calling FairListener for the server data for the events only and populating the list view.
+     */
     @Override
     public void onStart() {
         super.onStart();
@@ -208,6 +234,11 @@ public class ScheduleActivity extends AppCompatActivity {
 
 
     private PopupWindow pw;
+
+    /**
+     * Initiates a popup window for displaying events that are happening during the fair and
+     * dismisses it if the outside is touched.
+     */
     private void initiatePopupWindow() {
         try {
             //We need to get the instance of the LayoutInflater, use the context of this activity
@@ -236,7 +267,12 @@ public class ScheduleActivity extends AppCompatActivity {
         }
 
 
-        }
+    }
+
+    /**
+     * Dims the outside of the popup window.
+     * @param pw The popup window for which this settings apply to
+     */
     public static void dimBehind(PopupWindow pw) {
         View container = pw.getContentView().getRootView();
         Context context = pw.getContentView().getContext();
