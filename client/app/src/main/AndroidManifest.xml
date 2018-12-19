@@ -26,7 +26,9 @@
         <activity android:name=".activity.MapActivity" />
         <activity android:name=".activity.ReaderActivity" />
         <activity android:name=".activity.ScheduleActivity" />
-        <activity android:name=".activity.SponsorActivity"></activity>
+        <activity android:name=".activity.SponsorActivity" />
+        <activity android:name=".activity.ShakeActivity"/>
+
     </application>
 
 </manifest>
