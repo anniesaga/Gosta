@@ -473,7 +473,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     /**
      * Dims the outside of the popup window.
-     * @param pw The popup window
+     * @param pw The popup window for which this settings apply to
      */
     public static void dimBehind(PopupWindow pw) {
         View container = pw.getContentView().getRootView();

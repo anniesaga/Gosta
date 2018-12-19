@@ -41,6 +41,14 @@ public class SponsorActivity extends AppCompatActivity {
     private ListView listView;
     private List<Sponsor> sponsors;
 
+
+    /**
+     * On creation of this activity it initiates an image view for displaying the sponsors logos.
+     * It also implements an onClickListener for initiation of a popup window displaying information
+     * about the sponsors in the case of the logos being touched.
+     * Finally it initiates the bottom navigation bar with navigation options handled by a switch.
+     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,6 +101,12 @@ public class SponsorActivity extends AppCompatActivity {
 
 
     private PopupWindow pw;
+
+    /**
+     * Initiates a popup window for displaying sponsors name and information and dismisses it if the
+     * outside is touched.
+     */
+
     private void initiatePopupWindow() {
         try {
             //We need to get the instance of the LayoutInflater, use the context of this activity
@@ -122,6 +136,12 @@ public class SponsorActivity extends AppCompatActivity {
 
 
     }
+
+
+    /**
+     * Dims the outside of the popup window.
+     * @param pw The popup window for which this settings apply to
+     */
     public static void dimBehind(PopupWindow pw) {
         View container = pw.getContentView().getRootView();
         Context context = pw.getContentView().getContext();
