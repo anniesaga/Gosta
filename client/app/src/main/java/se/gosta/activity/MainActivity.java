@@ -214,8 +214,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
 
     /**
-     *
-     * @param companies
+     * Resets the listview and checks if the session has a current company.
+     * @param companies the list of companies
      */
     private void resetListView(List<Company> companies) {
         Log.d(LOG_TAG, "resetListView() " + companies.size());
@@ -224,6 +224,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, companies);
         listView.setAdapter(adapter);
+
+        // Checks if Session has current company and if so sets the listview to that position.
         if(Session.currentCompanyName != null) {
             int position = companies.indexOf(Session.get(Session.currentCompanyName));
             Log.d(LOG_TAG, "Fetched company on index: " + position);
