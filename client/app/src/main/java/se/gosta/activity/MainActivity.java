@@ -75,12 +75,15 @@ import static se.gosta.storage.Session.currentCompanyName;
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
+
+    //Sensor related variables for shake function
     private SensorManager senSensorManager;
     private Sensor senAccelerometer;
     private long lastUpdate = 0;
     private float last_x, last_y,last_z;
-    private static final int SHAKE_THRESHOLD = 5;
- //   final List<Company> companies = new ArrayList<>();
+    private static final int SHAKE_THRESHOLD = 20;
+
+    //Listview related variables
     private ArrayAdapter<Company> adapter;
     private ListView listView;
     private SearchView searchView;
@@ -88,19 +91,25 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     public static Map<Integer, Company> companyMap = new HashMap<>();
 
-    private static final int MENU_ENTRY_CONTACT = 0 ;
-    private static final int MENU_ENTRY_INFO = 1 ;
 
     private static final String DEFAULT_URL = "http://10.0.2.2:8080";
 
  //   private static final String DEFAULT_URL = "http://192.168.43.128:8080";
 
+    /**
+     * On creation of this activity it calls the method for setting up the desired list of companies
+     * and initiates the bottom navigation bar with navigation options handled by a switch.
+     * In this block we also grant access to the systems sensors in order to use the accelerometer
+     * for detection movements.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setupList();
         resetListView(companies);
+
         BottomNavigationView navigation = (BottomNavigationView)
                 findViewById(R.id.navigation);
         navigation.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED);
@@ -134,13 +143,24 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                     }
                 });
 
+        /*Invoke getSystemService to fetch the systems SensorManager instance to access the systems sensors
+          and gets a reference to the systems sensor service by passing the name of it*/
         senSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+
+        //Gets a reference to the systems accelerometer by invoking getDefaultSensor and passing the type
         senAccelerometer = senSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+
+        //Registers the sensor by using registerListener passing the activity's context, a sensor and in what rate that sensor events should be delivered
         senSensorManager.registerListener(this, senAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
-    public void setupList(){
+    /**
+     * Method for setting up the list view and search field for companies.
+     * Includes an OnItemClickListener to enable navigation from this activity to InfoActivity,
+     * where the company specific information is displayed.
+     */
 
+    public void setupList(){
 
         searchView = (SearchView) findViewById(R.id.searchView) ;
         listView = (ListView) findViewById(R.id.company_list);
@@ -159,6 +179,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
                 }
                 return false;
+
             }
 
             @Override
@@ -192,6 +213,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     }
 
 
+    /**
+     *
+     * @param companies
+     */
     private void resetListView(List<Company> companies) {
         Log.d(LOG_TAG, "resetListView() " + companies.size());
 
@@ -284,34 +309,48 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                     }
                 });
 
+        //Register the sensor when the application resumes
         senSensorManager.registerListener(this, senAccelerometer,SensorManager.SENSOR_DELAY_NORMAL);
 
     }
 
+    /**
+     * Detects shake gesture, invoked every time the sensor detects a change (whenever the device is in motion).
+     * If the device is shaken in a speed that reaches the value set for threshold this method calls
+     * the method that generates a random company.
+     * @param sensorEvent represents a sensor event including the type, timestamp, accuracy and data.
+     *
+     *
+     */
 
-    //Method for detecting shake gestures, invoked every time the sensor detects a change (whenever the device is in motion).
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
         if (companies.size() == 0) {
             return;
         }
         Sensor mySensor = sensorEvent.sensor;
+
+        //Check that we get a reference to the correct sensor type, then ask the sensor event for its values (the devices position).
         if(mySensor.getType() == Sensor.TYPE_ACCELEROMETER){
             float x = sensorEvent.values[0];
             float y = sensorEvent.values[1];
             float z = sensorEvent.values[2];
 
+            //Restrict the data sampling to only fetching every 1000 ms
             long curTime = System.currentTimeMillis();
 
             if ((curTime - lastUpdate) > 1000){
                 long diffTime = (curTime - lastUpdate);
                 lastUpdate = curTime;
 
+                //Calculate the device's speed to detect if it has been shaken.
                 float speed = Math.abs(x + y + z - last_x - last_y - last_z)/ diffTime * 10000;
 
                 Log.d(LOG_TAG, "speed: " + speed);
+
+                //If the device has been shaken in enough speed, get a random company from companies
                 if (speed > SHAKE_THRESHOLD) {
-                    Log.d(LOG_TAG, "grodanboll: " + speed);
+                    Log.d(LOG_TAG, "the speed is enough: " + speed);
                     getRandomCompany();
                 }
 
@@ -322,12 +361,19 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         }
     }
 
+    /**
+     * This method is required for the SensorEventListener but is not used in this project.
+     */
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
+    //Do nothing in this activity
     }
 
+
+    /**
+     * Unregister the sensor when the application is not active
+     */
     @Override
     protected void onPause(){
         super.onPause();
@@ -335,7 +381,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     }
 
 
-
+    /**
+     * Dismisses active popup window if there are one.
+     * Generates a random company from companies and calls a method for initiating a popup window
+     * that displays info about that company.
+     *
+     */
     private void getRandomCompany(){
 
         if (pw != null) {
@@ -350,16 +401,22 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         Log.d(LOG_TAG, "comp from rand: " + comp.name());
         initiatePopupWindow(comp.name(), comp.info());
         dimBehind(pw);
-
-
-
     }
 
+
+
     private PopupWindow pw;
+
+    /**
+     * Initiates a popup window for displaying company name and information and dismisses it if the
+     * outside is touched.
+     * @param name The name of the company
+     * @param info The information about the company
+     */
     private void initiatePopupWindow(String name, String info) {
         Log.d(LOG_TAG, "running initpopupwin");
         try {
-            //We need to get the instance of the LayoutInflater, use the context of this activity
+            //Get the instance of the LayoutInflater, using the context of this activity
             LayoutInflater inflater = (LayoutInflater) MainActivity.this
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             //Inflate the view from a predefined XML layout
@@ -367,11 +424,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             View layout = inflater.inflate(R.layout.companypopup,
                     (ViewGroup) findViewById(R.id.companypopup));
 
-
-            // create a 300px width and 470px height PopupWindow
             pw = new PopupWindow(layout, LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT, true);
-            // display the popup in the center
+            //Display the popup in the center
             pw.setAnimationStyle(R.style.popup_window_animation);
             pw.setOutsideTouchable(true);
             pw.setFocusable(true);
@@ -381,7 +436,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             Log.d(LOG_TAG, "before setting text to comp name.");
 
 
-
+            /*Sets a text button called "More info" that directs the user to the info activity for
+              the displayed company*/
             ((TextView)pw.getContentView().findViewById(R.id.textbutton)).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -393,6 +449,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 }
             });
+
+            //Text views for displaying the generated company's name and information
             ((TextView)pw.getContentView().findViewById(R.id.comppopupname)).setText(name);
             ((TextView)pw.getContentView().findViewById(R.id.comppopupinfo)).setText(info);
 
@@ -406,6 +464,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
 
     }
+
+    /**
+     * Dims the outside of the popup window.
+     * @param pw The popup window
+     */
     public static void dimBehind(PopupWindow pw) {
         View container = pw.getContentView().getRootView();
         Context context = pw.getContentView().getContext();
