@@ -12,7 +12,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="20dp"
-        android:background="@drawable/gradient_white"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:background="@drawable/rounded_corner"
+        android:scrollbars="none"
         >
 
     <LinearLayout
@@ -28,6 +31,7 @@
             android:id="@+id/logo"
             android:layout_width="200dp"
             android:layout_height="175dp"
+            android:paddingTop="20dp"
             android:padding="10dp"
             android:src="@drawable/defaultlogo"/>
 
@@ -37,8 +41,6 @@
             android:id="@+id/companyTitle"
             android:textSize="25sp"
             android:textColor="@color/black"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
             android:layout_marginBottom="10dp"
             android:layout_gravity="center_horizontal" />
 
@@ -55,7 +57,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:gravity="left"
-                android:layout_marginLeft="20dp"
                 >
 
 
@@ -103,7 +104,6 @@
                 android:orientation="vertical"
                 android:gravity="end"
                 android:textAlignment="textEnd"
-                android:layout_marginEnd="20dp"
                 >
 
 
@@ -114,8 +114,6 @@
                     android:id="@+id/recruit"
                     android:text="Rekryteringsbehov"
                     android:gravity="end"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
                     android:layout_marginBottom="10dp" />
 
                 <TextView
@@ -124,8 +122,7 @@
                     android:id="@+id/parttime"
                     android:text="Erbjuder deltidsjobb"
                     android:gravity="end"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
+
                     android:layout_marginBottom="10dp"
                     />
 
@@ -135,8 +132,6 @@
                     android:text="Erbjuder ex-jobb"
                     android:gravity="end"
                     android:id="@+id/thesis"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
                     android:layout_marginBottom="10dp"
                     />
             </LinearLayout>
@@ -149,8 +144,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="60dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
             android:id="@+id/companyText"
             >
         </TextView>

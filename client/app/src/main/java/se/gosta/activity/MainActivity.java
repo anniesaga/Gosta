@@ -154,15 +154,15 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             public boolean onQueryTextSubmit(String query) {
                 for (Company c : companies) {
                     if (c.name().contains(query)) {
-                        adapter.getFilter().filter(query);
+                            adapter.getFilter().filter(query);
                     }
-
                 }
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
+
                 adapter.getFilter().filter(newText);
                 return false;
             }
@@ -214,6 +214,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                      @Override
                      public void companiesUpdated(List<Company> companyList) {
                          Log.d(LOG_TAG, "companies: " + companyList);
+                         if (companies.size() > 0 ){
+                             companies.clear();
+                         }
                          for(Company c : companyList) {
                              companies.add(c);
                              companyMap.put(c.caseNo(), c);
@@ -248,6 +251,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         super.onResume();
         setContentView(R.layout.activity_main);
         setupList();
+        resetListView(companies);
         BottomNavigationView navigation = (BottomNavigationView)
                 findViewById(R.id.navigation);
         navigation.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED);
