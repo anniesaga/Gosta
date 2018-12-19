@@ -114,17 +114,17 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                             case R.id.action_map:
                                 Intent intent = new Intent(MainActivity.this, MapActivity.class);
                                 startActivity(intent);
-                                overridePendingTransition(0, 0);
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                 return true;
                             case R.id.action_schedule:
                                 intent = new Intent (MainActivity.this, ScheduleActivity.class);
                                 startActivity(intent);
-                                overridePendingTransition(0, 0);
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                 return true;
                             case R.id.action_settings:
                                 intent = new Intent (MainActivity.this, MenuActivity.class);
                                 startActivity(intent);
-                                overridePendingTransition(0, 0);
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                 return true;
 
                         }
@@ -142,12 +142,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         searchView = (SearchView) findViewById(R.id.searchView) ;
         listView = (ListView) findViewById(R.id.company_list);
-
         adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, companies);
 
         listView.setAdapter(adapter);
 
-        registerForContextMenu(listView);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -186,52 +184,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 Session.setCurrentCompanyName(comp.name());
                 intent.putExtras(extras);
                 startActivity(intent);
-                overridePendingTransition(0, 0);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });
     }
 
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-
-        ListView listview = (ListView) v;
-        AdapterView.AdapterContextMenuInfo acMenuInfo = (AdapterView.AdapterContextMenuInfo) menuInfo;
-        Company company = (Company)listview.getItemAtPosition(acMenuInfo.position);
-        menu.setHeaderTitle(company.name());
-        menu.add(Menu.NONE, MENU_ENTRY_CONTACT, Menu.NONE, company.email());
-        Session.getSession().put(company.name(), company);
-        Session.getSession().currentCompanyName = company.name();
-        menu.add(Menu.NONE,MENU_ENTRY_INFO, Menu.NONE, "More info");
-    }
-
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-
-        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        Log.d(LOG_TAG, "itemId" + item.getItemId());
-        Log.d(LOG_TAG, "title: " +item.getTitle());
-
-        if (item.getItemId() == MENU_ENTRY_CONTACT) {
-            Intent intent = new Intent(Intent.ACTION_SEND);
-            intent.setType("plain/text");
-            intent.putExtra(Intent.EXTRA_EMAIL, new String[]{Session.get(Session.currentCompanyName).email()});
-            intent.putExtra(Intent.EXTRA_SUBJECT, "subject");
-            intent.putExtra(Intent.EXTRA_TEXT, "mail body");
-            startActivity(Intent.createChooser(intent, ""));
-
-        }
-
-        if (item.getItemId() == MENU_ENTRY_INFO ) {
-            //Intent intent = new Intent(this, InfoActivity.class);
-           // Bundle extras = new Bundle();
-            //extras.putString("companyName", Session.getSession().currentCompanyName);
-
-           // intent.putExtras(extras);
-            //startActivity(intent);
-        }
-
-        return true;
-    }
 
     private void resetListView(List<Company> companies) {
         Log.d(LOG_TAG, "resetListView() " + companies.size());
@@ -282,9 +239,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
                 fetcher.getCompanies();
                 resetListView(companies);
-
-        //getCases();
-
     }
 
     @Override
@@ -304,23 +258,23 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                             case R.id.action_companies:
                                 Intent intent = new Intent(MainActivity.this, MainActivity.class);
                                 startActivity(intent);
-                                overridePendingTransition(0, 0);
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                 return true;
                             case R.id.action_map:
                                 intent = new Intent(MainActivity.this, MapActivity.class);
                                 startActivity(intent);
-                                overridePendingTransition(0, 0);
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                 // overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
                                 return true;
                             case R.id.action_schedule:
                                 intent = new Intent(MainActivity.this, ScheduleActivity.class);
                                 startActivity(intent);
-                                overridePendingTransition(0, 0);
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                 return true;
                             case R.id.action_settings:
                                 intent = new Intent(MainActivity.this, MenuActivity.class);
                                 startActivity(intent);
-                                overridePendingTransition(0, 0);
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                 return true;
 
                         }
@@ -393,6 +347,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     }
 
+
     private PopupWindow pw;
     private void initiatePopupWindow(String name) {
         Log.d(LOG_TAG, "running initpopupwin");
@@ -437,4 +392,5 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         assert wm != null;
         wm.updateViewLayout(container, p);
     }
+
 }

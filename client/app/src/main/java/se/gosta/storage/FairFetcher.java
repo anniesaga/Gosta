@@ -168,15 +168,14 @@ public class FairFetcher {
                 String contact = row.getString("contact_name");
                 String email = row.getString("contact_email");
                 String info = row.getString("info");
-                int empSwe = row.getInt("emp_swe");
-                int empGlobal = row.getInt("emp_global");
                 int recruiting = row.getInt("recruiting");
                 int partTime = row.getInt("part_time");
                 int thesis = row.getInt("thesis");
                 String fileName = row.getString("fileName");
                 int caseNo = row.getInt("caseNo");
+                String website = "website";
 
-                Company c = new Company(name, contact, email, info, empSwe, empGlobal, recruiting, partTime, thesis, fileName, caseNo);
+                Company c = new Company(name, contact, email, info, recruiting, partTime, thesis, fileName, caseNo, website);
                 Log.d(LOG_TAG, "jsonToCompany(): " + c);
                 companyList.add(c);
                 Collections.sort(companyList);
@@ -235,7 +234,7 @@ public class FairFetcher {
     }
 
     private void fetchLogo(final Company company) {
-        Log.d(LOG_TAG, "fetchLogos()");
+        Log.d(LOG_TAG, "fetchLogo()");
         RequestQueue queue = Volley.newRequestQueue(context);
         Log.d(LOG_TAG, " URL: " + DEFAULT_URL + "/resources/logos/" + company.fileName());
         String url = DEFAULT_URL + "/resources/logos/" + company.fileName();
@@ -244,17 +243,15 @@ public class FairFetcher {
             return;
         }
 
-        Log.d(LOG_TAG, "download URL: " + url);
+
 
         ImageRequest imageRequest = new ImageRequest(url, new Response.Listener<Bitmap>() {
             @Override
             public void onResponse(Bitmap bitmap) {
                 Log.d(LOG_TAG, "onResponse ok: " + bitmap.toString());
                 if (!Utils.avatarExists(context, company)) {
-
                 try {
                     // Create a file from the bitmap
-
                         File f = Utils.createImageFile(context, company, bitmap);
                         Log.d(LOG_TAG, " created file: " + f);
                     } catch(IOException e){
@@ -316,6 +313,7 @@ public class FairFetcher {
         queue.add(jsonArrayRequest);
 
     }
+
     private List<Sponsor> jsonToSponsor(JSONArray array) {
         List<Sponsor> sponsorList = new ArrayList<>();
         for (int i = 0; i < array.length(); i++) {
