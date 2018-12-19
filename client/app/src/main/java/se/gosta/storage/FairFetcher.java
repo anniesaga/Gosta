@@ -19,23 +19,23 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import se.gosta.activity.MainActivity;
 
-
+/**
+ * Class for fetching data from the server
+ */
 public class FairFetcher {
+
 
     private static final String DEFAULT_URL = "http://10.0.2.2:8080";
 
-  //  private static final String DEFAULT_URL = "http://192.168.43.128:8080";
-
+    // URL for debugging on phone
+    // private static final String DEFAULT_URL = "http://192.168.43.128:8080";
 
     private static final String LOG_TAG = FairFetcher.class.getSimpleName();
 
@@ -47,10 +47,17 @@ public class FairFetcher {
         this.context = context;
     }
 
+    /**
+     * Method used to register as listener for FairFetcher
+     * @param listener listener to be added
+     */
     public void registerFairListener(FairListener listener) {
         fairListenerList.add(listener);
     }
 
+    /**
+     * Method used to get a list of companies and their logos from the server with Volleyrequest
+     */
     public void getCompanies() {
 
         Log.d(LOG_TAG, "getCompanies()");
@@ -92,6 +99,9 @@ public class FairFetcher {
 
     }
 
+    /**
+     * Method used to get a list of cases from the server with Volleyrequest
+     */
     public void getCases() {
 
         Log.d(LOG_TAG, "getCases()");
@@ -127,6 +137,9 @@ public class FairFetcher {
 
     }
 
+    /**
+     * Method used to get a list of events from the server with Volleyrequest
+     */
     public void getEvents() {
 
         Log.d(LOG_TAG, "getEvents()");
@@ -159,6 +172,11 @@ public class FairFetcher {
 
     }
 
+    /**
+     * Method used to parse JSONArray to a list of companies
+     * @param array JSONArray fetched from the server
+     * @return List of companies
+     */
     private List<Company> jsonToCompany(JSONArray array) {
         List<Company> companyList = new ArrayList<>();
         for (int i = 0; i < array.length(); i++) {
@@ -187,8 +205,13 @@ public class FairFetcher {
         return companyList;
     }
 
-    private Map<Integer,Integer[]> jsonToCase(JSONArray array) {
+    /**
+     * Method used to parse JSONArray to a map of cases
+     * @param array JSONArray fetched from the server
+     * @return Map of Cases and ID's
+     */
 
+    private Map<Integer,Integer[]> jsonToCase(JSONArray array) {
 
         Map<Integer, Integer[]> coordsMap = new HashMap<>();
 
@@ -213,6 +236,11 @@ public class FairFetcher {
         return coordsMap;
     }
 
+    /**
+     * Method used to parse JSONArray to a list of events
+     * @param array JSONArray fetched from the server
+     * @return List of events
+     */
     private List<Event> jsonToEvent(JSONArray array) {
         List<Event> eventList = new ArrayList<>();
         for (int i = 0; i < array.length(); i++) {
@@ -233,6 +261,10 @@ public class FairFetcher {
         return eventList;
     }
 
+    /**
+     * Method used to fetch a logo for a specific company from the server
+     * @param company The company for what logo to fetch
+     */
     private void fetchLogo(final Company company) {
         Log.d(LOG_TAG, "fetchLogo()");
         RequestQueue queue = Volley.newRequestQueue(context);
@@ -277,7 +309,11 @@ public class FairFetcher {
     }
 
 
-    public void getSponsors() {
+    /**
+     * Methods used to parse JSONArray and download to a list of sponsors. Not used in this version but
+     * will be used for when sponsors are stored on the server in next sprint.
+     */
+/*    public void getSponsors() {
 
         Log.d(LOG_TAG, "getSponsors()");
         String url = DEFAULT_URL + "/sponsors";
@@ -313,7 +349,6 @@ public class FairFetcher {
         queue.add(jsonArrayRequest);
 
     }
-
     private List<Sponsor> jsonToSponsor(JSONArray array) {
         List<Sponsor> sponsorList = new ArrayList<>();
         for (int i = 0; i < array.length(); i++) {
@@ -333,7 +368,7 @@ public class FairFetcher {
             }
         }
         return sponsorList;
-    }
+    }*/
 
     public interface FairListener {
 
@@ -345,6 +380,7 @@ public class FairFetcher {
         void eventsUpdated(List<Event> eventList);
 
         void sponsorsUpdated(List<Sponsor> sponsorList);
+        // for when sponsors will be fetched from the server
 
     }
 

@@ -9,6 +9,10 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+/**
+ * Helper class for handling and creating ImageFiles for a company's logo
+ */
+
 public class Utils {
 
     // String tag for logging
@@ -24,7 +28,7 @@ public class Utils {
     private Utils() {};
 
     /**
-     * Creates a file for a Member given a bitmap
+     * Creates a file for a Company given a bitmap
      * @param context used to find the app's directory
      * @param company
      * @param bitmap
