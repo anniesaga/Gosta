@@ -347,7 +347,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     }
 
-
     private PopupWindow pw;
     private void initiatePopupWindow(String name) {
         Log.d(LOG_TAG, "running initpopupwin");
