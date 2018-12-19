@@ -50,8 +50,8 @@ public class SponsorActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 initiatePopupWindow();
-                ((TextView)pw.getContentView().findViewById(R.id.popupname)).setText("Barebells");
-                ((TextView)pw.getContentView().findViewById(R.id.popuptime)).setText("Blablabla");
+                ((TextView)pw.getContentView().findViewById(R.id.sponspopupname)).setText("Barebells");
+                ((TextView)pw.getContentView().findViewById(R.id.sponspopupinfo)).setText("Blablabla");
                 dimBehind(pw);
             }
         });
@@ -99,8 +99,8 @@ public class SponsorActivity extends AppCompatActivity {
             LayoutInflater inflater = (LayoutInflater) SponsorActivity.this
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             //Inflate the view from a predefined XML layout
-            View layout = inflater.inflate(R.layout.popup,
-                    (ViewGroup) findViewById(R.id.popup));
+            View layout = inflater.inflate(R.layout.sponsorpopup,
+                    (ViewGroup) findViewById(R.id.sponsorpopup));
 
             // create a 300px width and 470px height PopupWindow
             pw = new PopupWindow(layout, LinearLayout.LayoutParams.WRAP_CONTENT,

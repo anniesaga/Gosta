@@ -107,10 +107,10 @@ public class ScheduleActivity extends AppCompatActivity {
                // getEvents();
 
                 initiatePopupWindow();
-                ((TextView)pw.getContentView().findViewById(R.id.textbutton)).setText("");
-                ((TextView)pw.getContentView().findViewById(R.id.popupname)).setText(event.eventName());
-                ((TextView)pw.getContentView().findViewById(R.id.popuptime)).setText(event.startTime());
-                ((TextView)pw.getContentView().findViewById(R.id.popupinfo)).setText(event.eventInfo());
+              //  ((TextView)pw.getContentView().findViewById(R.id.textbutton)).setText("");
+                ((TextView)pw.getContentView().findViewById(R.id.schedpopupname)).setText(event.eventName());
+                ((TextView)pw.getContentView().findViewById(R.id.schedpopuptime)).setText(event.startTime());
+                ((TextView)pw.getContentView().findViewById(R.id.schedpopupinfo)).setText(event.eventInfo());
 
                 dimBehind(pw);
 
@@ -214,8 +214,8 @@ public class ScheduleActivity extends AppCompatActivity {
             LayoutInflater inflater = (LayoutInflater) ScheduleActivity.this
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             //Inflate the view from a predefined XML layout
-            View layout = inflater.inflate(R.layout.popup,
-                    (ViewGroup) findViewById(R.id.popup));
+            View layout = inflater.inflate(R.layout.schedulepopup,
+                    (ViewGroup) findViewById(R.id.schedulepopup));
 
             // create a 300px width and 470px height PopupWindow
             pw = new PopupWindow(layout, LinearLayout.LayoutParams.WRAP_CONTENT,

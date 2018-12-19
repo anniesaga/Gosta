@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/rounded_corner_small"
-    android:id="@+id/popup"
+    android:id="@+id/schedulepopup"
     android:padding="5dp">
 
     <LinearLayout
@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center"
-        android:id="@+id/popupheader"
+        android:id="@+id/schedpopupheader"
         android:layout_gravity="top"
         >
 
@@ -25,7 +25,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:textSize="20sp"
-            android:id="@+id/popupname"/>
+            android:id="@+id/schedpopupname"/>
 
 
     <TextView
@@ -36,7 +36,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:textSize="15sp"
-        android:id="@+id/popuptime"
+        android:id="@+id/schedpopuptime"
         android:maxLines="4"
         android:ellipsize="end"/>
 
@@ -48,20 +48,9 @@
             android:layout_margin="15dp"
             android:layout_marginBottom="5dp"
             android:textSize="15sp"
-            android:id="@+id/popupinfo"
+            android:id="@+id/schedpopupinfo"
 />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textbutton"
-            android:text="@string/moreinfo"
-            android:gravity="end"
-            android:layout_margin="15dp"
-            android:layout_marginBottom="5dp"
-            android:textSize="15sp"
-            android:clickable="true"
-            android:focusable="true"/>
 
 
 </LinearLayout>

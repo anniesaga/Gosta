@@ -69,6 +69,8 @@ import se.gosta.storage.Session;
 import se.gosta.storage.Sponsor;
 import se.gosta.storage.Utils;
 
+import static se.gosta.storage.Session.currentCompanyName;
+
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
@@ -333,22 +335,26 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
 
     private void getRandomCompany(){
+
         if (pw != null) {
             pw.dismiss();
         }
+
         int numberOfElements = companies.size();
 
         Random randomCompany = new Random();
         int n = randomCompany.nextInt(numberOfElements);
         Company comp = companies.get(n);
         Log.d(LOG_TAG, "comp from rand: " + comp.name());
-        initiatePopupWindow(comp.name());
+        initiatePopupWindow(comp.name(), comp.info());
         dimBehind(pw);
+
+
 
     }
 
     private PopupWindow pw;
-    private void initiatePopupWindow(String name) {
+    private void initiatePopupWindow(String name, String info) {
         Log.d(LOG_TAG, "running initpopupwin");
         try {
             //We need to get the instance of the LayoutInflater, use the context of this activity
@@ -356,8 +362,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             //Inflate the view from a predefined XML layout
             assert inflater != null;
-            View layout = inflater.inflate(R.layout.popup,
-                    (ViewGroup) findViewById(R.id.popup));
+            View layout = inflater.inflate(R.layout.companypopup,
+                    (ViewGroup) findViewById(R.id.companypopup));
 
 
             // create a 300px width and 470px height PopupWindow
@@ -371,7 +377,24 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             pw.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             pw.showAtLocation(layout, Gravity.CENTER, 0, 0);
             Log.d(LOG_TAG, "before setting text to comp name.");
-            ((TextView)pw.getContentView().findViewById(R.id.popupname)).setText(name);
+
+
+
+            ((TextView)pw.getContentView().findViewById(R.id.textbutton)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(MainActivity.this, InfoActivity.class);
+                    Bundle extras = new Bundle();
+                    extras.putString("companyName", currentCompanyName);
+                    intent.putExtras(extras);
+                    startActivity(intent);
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                }
+            });
+            ((TextView)pw.getContentView().findViewById(R.id.comppopupname)).setText(name);
+            ((TextView)pw.getContentView().findViewById(R.id.comppopupinfo)).setText(info);
+
+
 
 
 
