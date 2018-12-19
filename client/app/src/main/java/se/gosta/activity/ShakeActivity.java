@@ -85,6 +85,7 @@ public class ShakeActivity extends AppCompatActivity implements SensorEventListe
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
+
         if (companies.size() == 0) {
             return;
         }
@@ -105,7 +106,8 @@ public class ShakeActivity extends AppCompatActivity implements SensorEventListe
             Log.d(LOG_TAG, "speed: " + speed);
             if (speed > SHAKE_THRESHOLD) {
                 Log.d(LOG_TAG, "grodanboll: " + speed);
-                getRandomCompany();
+
+                    getRandomCompany();
             }
 
             last_x = x;
@@ -134,7 +136,6 @@ public class ShakeActivity extends AppCompatActivity implements SensorEventListe
     }
 
     private void getRandomCompany(){
-
 
         int numberOfElements = companies.size();
 
@@ -172,7 +173,6 @@ public class ShakeActivity extends AppCompatActivity implements SensorEventListe
             pw.showAtLocation(layout, Gravity.CENTER, 0, 0);
             Log.d(LOG_TAG, "before setting text to comp name.");
             ((TextView)pw.getContentView().findViewById(R.id.popupname)).setText(name);
-
 
 
         } catch (Exception e) {

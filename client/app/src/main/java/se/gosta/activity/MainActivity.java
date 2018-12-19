@@ -334,7 +334,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     private void getRandomCompany(){
 
-
         int numberOfElements = companies.size();
 
         Random randomCompany = new Random();
@@ -344,6 +343,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         initiatePopupWindow(comp.name());
         dimBehind(pw);
       //  pw.dismiss();
+
+
 
     }
 
