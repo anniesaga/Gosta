@@ -199,8 +199,8 @@ public class MapActivity extends AppCompatActivity implements OnClickableAreaCli
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 }
             });
-            ((TextView)pw.getContentView().findViewById(R.id.popupname)).setText(company.name());
-            ((TextView)pw.getContentView().findViewById(R.id.popuptime)).setText(company.info());
+            ((TextView)pw.getContentView().findViewById(R.id.comppopupname)).setText(company.name());
+            ((TextView)pw.getContentView().findViewById(R.id.comppopupinfo)).setText(company.info());
             dimBehind(pw);
         }
 
@@ -218,8 +218,8 @@ public class MapActivity extends AppCompatActivity implements OnClickableAreaCli
 
             //Inflate the view from a predefined XML layout
             assert inflater != null;
-            View layout = inflater.inflate(R.layout.popup,
-                    (ViewGroup) findViewById(R.id.popup));
+            View layout = inflater.inflate(R.layout.companypopup,
+                    (ViewGroup) findViewById(R.id.companypopup));
 
             // create a 300px width and 470px height PopupWindow
             pw = new PopupWindow(layout, LinearLayout.LayoutParams.WRAP_CONTENT,
