@@ -18,10 +18,18 @@ import com.google.zxing.integration.android.IntentResult;
 import se.gosta.R;
 import se.gosta.storage.Session;
 
+/**
+ * Activity for displaying a QR-reader
+ */
 public class ReaderActivity extends AppCompatActivity {
 
     private Button scan_button;
 
+    /**
+     * On creation of this activity the button for starting the scanner and setting up
+     * the bottom navigation bar.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +70,7 @@ public class ReaderActivity extends AppCompatActivity {
                     }
                 });
 
+        // When the button is clicked, the QR-scanner starts
         scan_button = (Button) findViewById(R.id.scan_button);
         final Activity activity = this;
         scan_button.setOnClickListener(new View.OnClickListener(){
@@ -79,12 +88,18 @@ public class ReaderActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Method to handle the QR-code scanned from the camera.
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if(result != null){
             if(result.getContents()==null) {
-                Toast.makeText(this, "You cancelled the scanning", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Scanning cancelled...", Toast.LENGTH_LONG).show();
 
             } else {
                 Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();

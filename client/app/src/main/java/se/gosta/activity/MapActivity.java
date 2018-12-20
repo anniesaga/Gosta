@@ -41,6 +41,9 @@ import uk.co.senab.photoview.PhotoViewAttacher;
 
 import static se.gosta.storage.Session.currentCompanyName;
 
+/**
+ * Activity that displays a map over the fair
+ */
 
 public class MapActivity extends AppCompatActivity implements OnClickableAreaClickedListener {
 
@@ -53,6 +56,11 @@ public class MapActivity extends AppCompatActivity implements OnClickableAreaCli
 
     private Context context;
 
+    /**
+     * On creation of this activity it calls the method for displaying the map and
+     * sets up the navigation bar at the bottom.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -95,6 +103,11 @@ public class MapActivity extends AppCompatActivity implements OnClickableAreaCli
                 });
     }
 
+    /**
+     * Method that reloads the map and registers as a listener for FairFetcher.
+     * Calls a method for loading all coordinates for the map and creates touchable
+     * areas for those coordinates.
+     */
     @Override
     public void onStart() {
         super.onStart();
@@ -115,9 +128,11 @@ public class MapActivity extends AppCompatActivity implements OnClickableAreaCli
 
                 //Tried coords.forEach(coordsMap::putIfAbsent) but required API level 24..
 
+                // Puts all coordinates in hashmap in a temporary hashmap and then to regular map.
                 Map tmp = new HashMap(coords);
                 tmp.keySet().removeAll(coordsMap.keySet());
                 coordsMap.putAll(tmp);
+                //Call to create ClickableAreas from coordinates.
                 setClickableAreas();
 
             }
@@ -134,11 +149,14 @@ public class MapActivity extends AppCompatActivity implements OnClickableAreaCli
             }
 
         });
-
+        // Call method in FairFetcher to download cases from db
         fetcher.getCases();
 
     }
 
+    /**
+     * On resuming this activity, the bottom navigation bar is reloaded.
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -161,7 +179,6 @@ public class MapActivity extends AppCompatActivity implements OnClickableAreaCli
                                 intent = new Intent(MapActivity.this, MapActivity.class);
                                 startActivity(intent);
                                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                                // overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
                                 return true;
                             case R.id.action_schedule:
                                 intent = new Intent(MapActivity.this, ScheduleActivity.class);
@@ -180,11 +197,17 @@ public class MapActivity extends AppCompatActivity implements OnClickableAreaCli
                 });
     }
 
+    /**
+     * Method for handling click events on ClickableArea
+     * @param item The Company associated with the ClickableArea
+     */
     @Override
     public void onClickableAreaTouched(Object item){
         if (item instanceof Company) {
             Company company = ((Company) item);
             Log.d(LOG_TAG, "Clicked on ClickableArea");
+
+            // Set current company to company clicked
             Session.setCurrentCompanyName(company.name());
             Session.getSession().put(company.name(), company);
             initiatePopupWindow();
@@ -199,6 +222,7 @@ public class MapActivity extends AppCompatActivity implements OnClickableAreaCli
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 }
             });
+            // Find text for current company and display in textviews
             ((TextView)pw.getContentView().findViewById(R.id.comppopupname)).setText(company.name());
             ((TextView)pw.getContentView().findViewById(R.id.comppopupinfo)).setText(company.info());
             dimBehind(pw);
@@ -210,6 +234,10 @@ public class MapActivity extends AppCompatActivity implements OnClickableAreaCli
 
     private PopupWindow pw;
 
+    /**
+     * Initiates a popup window for displaying more information about a specific company.
+     * Dismisses it if the outside is touched.
+     */
     private void initiatePopupWindow() {
         try {
             //We need to get the instance of the LayoutInflater, use the context of this activity
@@ -236,9 +264,12 @@ public class MapActivity extends AppCompatActivity implements OnClickableAreaCli
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
     }
+
+    /**
+     * Dims the outside of the popup window.
+     * @param pw The popup window for which this settings apply to
+     */
     public static void dimBehind(PopupWindow pw) {
         View container = pw.getContentView().getRootView();
         Context context = pw.getContentView().getContext();
@@ -251,33 +282,39 @@ public class MapActivity extends AppCompatActivity implements OnClickableAreaCli
 
     }
 
-
+    /**
+     * Method for setting up all ClickableAreas on the map based on the Map
+     * with coordinates and company associated with them.
+     */
     private void setClickableAreas() {
 
         ImageView img = (ImageView) findViewById(R.id.map);
         img.setImageResource(R.drawable.gostamap);
+
+        // Cast the Image to a ClickableAreasImage
         clickableAreasImage = new ClickableAreasImage(new PhotoViewAttacher(img), this);
         List<ClickableArea> clickableAreas = new ArrayList<>();
+
+        // Loop through all coordinates in Map and create ClickableArea for each keyset and add area
+        // to list of clickableareas.
         for(int caseNo : coordsMap.keySet()) {
 
-
             try {
+                if (MainActivity.companyMap.get(caseNo) != null) {
+                    clickableAreas.add(new ClickableArea(coordsMap.get(caseNo)[0],
+                            coordsMap.get(caseNo)[1],
+                            coordsMap.get(caseNo)[2],
+                            coordsMap.get(caseNo)[3],
+                            MainActivity.companyMap.get(caseNo)));
+                }
 
-            if (MainActivity.companyMap.get(caseNo) != null) {
-                clickableAreas.add(new ClickableArea(coordsMap.get(caseNo)[0],
-                        coordsMap.get(caseNo)[1],
-                        coordsMap.get(caseNo)[2],
-                        coordsMap.get(caseNo)[3],
-                        MainActivity.companyMap.get(caseNo)));
-            }
-
-        }catch (NullPointerException npe){
-            Log.d(LOG_TAG, "Error when fetching from coordsMap" + npe.getMessage());
+            }catch (NullPointerException npe){
+                Log.d(LOG_TAG, "Error when fetching from coordsMap" + npe.getMessage());
             }
 
         }
+        // Add ClickableAreas to the Image.
         clickableAreasImage.setClickableAreas(clickableAreas);
     }
 
 }
-

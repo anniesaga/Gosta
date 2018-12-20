@@ -196,12 +196,13 @@ public class FairFetcher {
                 Company c = new Company(name, contact, email, info, recruiting, partTime, thesis, fileName, caseNo, website);
                 Log.d(LOG_TAG, "jsonToCompany(): " + c);
                 companyList.add(c);
-                Collections.sort(companyList);
+
 
             } catch (JSONException e) {
                 Log.d(LOG_TAG, "Error parsing JSON: " + e.getMessage());
             }
         }
+        Collections.sort(companyList);
         return companyList;
     }
 
@@ -255,9 +256,10 @@ public class FairFetcher {
 
 
             } catch (JSONException ex) {
-                ;
+                Log.d(LOG_TAG, "Error parsing JSON: " +ex.getMessage());
             }
         }
+        Collections.sort(eventList);
         return eventList;
     }
 
@@ -282,8 +284,8 @@ public class FairFetcher {
             public void onResponse(Bitmap bitmap) {
                 Log.d(LOG_TAG, "onResponse ok: " + bitmap.toString());
                 if (!Utils.avatarExists(context, company)) {
-                try {
-                    // Create a file from the bitmap
+                    try {
+                        // Create a file from the bitmap
                         File f = Utils.createImageFile(context, company, bitmap);
                         Log.d(LOG_TAG, " created file: " + f);
                     } catch(IOException e){
@@ -295,16 +297,16 @@ public class FairFetcher {
                 }
             }
 
-                }, 500, 500, ImageView.ScaleType.CENTER,
-                        Bitmap.Config.RGB_565,
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                Log.d(LOG_TAG, "onResponse fail");
-                            }
-                        });
+        }, 500, 500, ImageView.ScaleType.CENTER,
+                Bitmap.Config.RGB_565,
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d(LOG_TAG, "onResponse fail");
+                    }
+                });
 
-                queue.add(imageRequest);
+        queue.add(imageRequest);
 
     }
 

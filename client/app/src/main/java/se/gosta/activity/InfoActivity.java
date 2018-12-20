@@ -31,14 +31,23 @@ import se.gosta.storage.Utils;
 
 import static se.gosta.storage.Session.currentCompanyName;
 
+/**
+ * Activity that displays detailed information about a specific Company
+ */
 public class InfoActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = InfoActivity.class.getSimpleName();
 
     private static final String DEFAULT_URL = "http://10.0.2.2:8080/resources/logos/";
 
- //   private static final String DEFAULT_URL = "http://192.168.43.128:8080/resources/logos/";
+    //   private static final String DEFAULT_URL = "http://192.168.43.128:8080/resources/logos/";
 
+    /**
+     * On creation of this activity it calls the method for setting up all detailed information
+     * about the company and initiates the bottom navigation bar with navigation options
+     * handled by a switch.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +72,7 @@ public class InfoActivity extends AppCompatActivity {
         setupInfo();
         Log.d(LOG_TAG, "Displaying company: " + Session.get(currentCompanyName));
 
+        //Sets up the navigation bar at the bottom of the screen
         BottomNavigationView navigation = (BottomNavigationView)
                 findViewById(R.id.navigation);
         navigation.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED);
@@ -100,6 +110,11 @@ public class InfoActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     * Method for fetching data from current companys variables and passing
+     * the information to the designated view. Also registers onclick-listeners
+     * for certain views.
+     */
     private void setupInfo() {
         ImageView iv = (ImageView) findViewById(R.id.logo);
         if(Utils.avatarExists(InfoActivity.this, Session.get(currentCompanyName))) {
@@ -146,6 +161,7 @@ public class InfoActivity extends AppCompatActivity {
         tv.setText(Session.get(currentCompanyName).info());
         Log.d(LOG_TAG, "Description set: " + Session.get(currentCompanyName).info());
 
+        // If-statements to check if company is recruiting etc and highlights the text if true
         TextView recruit = (TextView) findViewById(R.id.recruit);
         if(Session.get(currentCompanyName).isRecruiting()){
             recruit.setTextColor(getResources().getColor(R.color.red));

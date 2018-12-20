@@ -71,6 +71,9 @@ import se.gosta.storage.Utils;
 
 import static se.gosta.storage.Session.currentCompanyName;
 
+/**
+ * Starting activity of app which displays a list of all companies at the fair.
+ */
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
@@ -94,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     private static final String DEFAULT_URL = "http://10.0.2.2:8080";
 
- //   private static final String DEFAULT_URL = "http://192.168.43.128:8080";
+    //   private static final String DEFAULT_URL = "http://192.168.43.128:8080";
 
     /**
      * On creation of this activity it calls the method for setting up the desired list of companies
@@ -174,7 +177,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             public boolean onQueryTextSubmit(String query) {
                 for (Company c : companies) {
                     if (c.name().contains(query)) {
-                            adapter.getFilter().filter(query);
+                        adapter.getFilter().filter(query);
                     }
                 }
                 return false;
@@ -238,39 +241,39 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         super.onStart();
         FairFetcher fetcher = new FairFetcher(this);
         fetcher.registerFairListener(new FairFetcher.FairListener() {
-                     @Override
-                     public void companiesUpdated(List<Company> companyList) {
-                         Log.d(LOG_TAG, "companies: " + companyList);
-                         if (companies.size() > 0 ){
-                             companies.clear();
-                         }
-                         for(Company c : companyList) {
-                             companies.add(c);
-                             companyMap.put(c.caseNo(), c);
-                             listView.requestLayout();
-                         }
-                     }
+            @Override
+            public void companiesUpdated(List<Company> companyList) {
+                Log.d(LOG_TAG, "companies: " + companyList);
+                if (companies.size() > 0 ){
+                    companies.clear();
+                }
+                for(Company c : companyList) {
+                    companies.add(c);
+                    companyMap.put(c.caseNo(), c);
+                    listView.requestLayout();
+                }
+            }
 
-                     @Override
-                     public void casesUpdated(Map<Integer, Integer[]> coordsMap) {
-                         // Do nothing with cases in this Activity
-                     }
-
-
-                    @Override
-                    public void eventsUpdated(List<Event> eventList) {
-                        // Do nothing with events in this Activity
-                    }
+            @Override
+            public void casesUpdated(Map<Integer, Integer[]> coordsMap) {
+                // Do nothing with cases in this Activity
+            }
 
 
-                     @Override
-                     public void sponsorsUpdated(List<Sponsor> sponsorList){
+            @Override
+            public void eventsUpdated(List<Event> eventList) {
+                // Do nothing with events in this Activity
+            }
 
-                     }
-                 });
 
-                fetcher.getCompanies();
-                resetListView(companies);
+            @Override
+            public void sponsorsUpdated(List<Sponsor> sponsorList){
+
+            }
+        });
+
+        fetcher.getCompanies();
+        resetListView(companies);
     }
 
     @Override
@@ -373,7 +376,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
-    //Do nothing in this activity
+        //Do nothing in this activity
     }
 
 

@@ -1,8 +1,8 @@
 package se.gosta.storage;
 
-    /**
-     * Represents a Company at the fair.
-     */
+/**
+ * Represents a Company at the fair.
+ */
 
 public class Company implements Comparable<Company> {
 
@@ -82,99 +82,99 @@ public class Company implements Comparable<Company> {
     }
 
 
-        /**
-         * Method that returns a company's name
-         * @return Name of company
-         */
+    /**
+     * Method that returns a company's name
+     * @return Name of company
+     */
     public String name(){
         return name;
     }
 
-        /**
-         * Method that returns the name of a company's contact person
-         * @return Name of contactperson
-         */
+    /**
+     * Method that returns the name of a company's contact person
+     * @return Name of contactperson
+     */
     public String contact(){
         return contact;
     }
 
-        /**
-         * Method that returns the email address of a company's contact person
-         * @return Email address of contact person
-         */
+    /**
+     * Method that returns the email address of a company's contact person
+     * @return Email address of contact person
+     */
     public String email(){
         return email;
     }
 
-        /**
-         * Method that returns the information text of a company
-         * @return Information text of company
-         */
+    /**
+     * Method that returns the information text of a company
+     * @return Information text of company
+     */
     public String info(){
         return info;
     }
 
-        /**
-         * Method that returns if the company is recruiting
-         * @return True/false if the company is recruiting
-         */
+    /**
+     * Method that returns if the company is recruiting
+     * @return True/false if the company is recruiting
+     */
     public boolean isRecruiting(){
         return recruiting;
     }
 
-        /**
-         * Method that returns if the company has available part time jobs
-         * @return True/false if the company has available part time jobs
-         */
+    /**
+     * Method that returns if the company has available part time jobs
+     * @return True/false if the company has available part time jobs
+     */
     public boolean hasPartTime(){
         return partTime;
     }
 
-        /**
-         * Method that returns if the company offers thesis subjects for students
-         * @return True/false if the company offers thesis subjects
-         */
+    /**
+     * Method that returns if the company offers thesis subjects for students
+     * @return True/false if the company offers thesis subjects
+     */
     public boolean hasThesis(){
         return thesis;
     }
 
-        /**
-         * Method that returns the filename of a company's logo on the server
-         * @return Filename of company logo
-         */
+    /**
+     * Method that returns the filename of a company's logo on the server
+     * @return Filename of company logo
+     */
     public String fileName(){
         return fileName;
     }
 
-        /**
-         * Method that returns a company's case number
-         * @return A company's case number
-         */
+    /**
+     * Method that returns a company's case number
+     * @return A company's case number
+     */
     public int caseNo(){
         return caseNo;
     }
 
-        /**
-         * Method that returns the URL to a company's website
-         * @return URL to company website
-         */
+    /**
+     * Method that returns the URL to a company's website
+     * @return URL to company website
+     */
     public String wesbite() {
         return website;
     }
 
-        /**
-         * Returns a String representation of the Company
-         * @return a String representation of the Company
-         */
+    /**
+     * Returns a String representation of the Company
+     * @return a String representation of the Company
+     */
     public String toString(){
         return name;
     }
 
-        /**
-         * Check if this Company equals other
-         * @return true if this Company equals other
-         * @param o The Object to check if this Company is equal to
-         */
+    /**
+     * Check if this Company equals other
+     * @return true if this Company equals other
+     * @param o The Object to check if this Company is equal to
+     */
     @Override
     public boolean equals(Object o){
         if(!(o instanceof Company))
@@ -183,11 +183,11 @@ public class Company implements Comparable<Company> {
         return other.name().equals(this.name);
     }
 
-        /**
-         * Check if this Company is bigger/smaller than other
-         * @return int value of which is bigger/smaller
-         * @param c The Company to compare this Company to
-         */
+    /**
+     * Check if this Company is bigger/smaller than other
+     * @return int value of which is bigger/smaller
+     * @param c The Company to compare this Company to
+     */
     @Override
     public int compareTo(Company c) {
         return this.name.compareTo(c.name());

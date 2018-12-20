@@ -20,7 +20,10 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Activity that displays more options that is not displayed
+ * in the bottom navigation bar
+ */
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -29,7 +32,11 @@ public class MenuActivity extends AppCompatActivity {
     private List<MenuOption>menuOptions;
     private ListView listView;
 
-
+    /**
+     * On creation of this activity it calls the method to create and setup the list of MenuOptions and
+     * also sets up the navigation bar at the bottom.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,9 +67,9 @@ public class MenuActivity extends AppCompatActivity {
                                 // overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
                                 return true;
                             case R.id.action_schedule:
-                                 intent = new Intent(MenuActivity.this, ScheduleActivity.class);
-                                 startActivity(intent);
-                                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                                intent = new Intent(MenuActivity.this, ScheduleActivity.class);
+                                startActivity(intent);
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                 return true;
                             case R.id.action_settings:
 
@@ -74,6 +81,11 @@ public class MenuActivity extends AppCompatActivity {
                 });
 
     }
+
+    /**
+     * On resuming this activity it calls the method to setup the list of MenuOptions and
+     * also sets up the navigation bar at the bottom.
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -114,6 +126,9 @@ public class MenuActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     * Method for loading and displaying the listview
+     */
     private void setupMenuList(){
         ListView listView = (ListView) findViewById(R.id.menu_list);
 
@@ -123,7 +138,7 @@ public class MenuActivity extends AppCompatActivity {
 
         listView.setAdapter(adapter);
 
-
+        // Switch-statement to handle click-events and start corresponding activity
         listView.setOnItemClickListener(new ListView.OnItemClickListener(){
 
             @Override
@@ -165,30 +180,13 @@ public class MenuActivity extends AppCompatActivity {
                         break;
                 }
 
-              /*  if(menuOption.menuNavigation == R.id.main){
-                    Intent intent = new Intent(MenuActivity.this, MainActivity.class);
-                    startActivity(mainIntent);
-                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                } else if(menuOption.menuNavigation == R.id.activity_map){
-                    intent = new Intent(MenuActivity.this, MapActivity.class);
-                    startActivity(mapIntent);
-                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                } else if(menuOption.menuNavigation == R.id.readerLayout){
-                    Intent readerIntent = new Intent(MenuActivity.this, ReaderActivity.class);
-                    startActivity(readerIntent);
-                }else if(menuOption.menuNavigation == R.id.activity_schedule) {
-                    Intent scheduleIntent = new Intent(MenuActivity.this, ScheduleActivity.class);
-                    startActivity(scheduleIntent);
-                }else if(menuOption.menuNavigation == R.id.activity_sponsor) {
-                    Intent sponsorIntent = new Intent(MenuActivity.this, SponsorActivity.class);
-                    startActivity(sponsorIntent);
-                }
-*/
-
             }
         });
     }
 
+    /**
+     * Method for creating MenuOption objects and store in ArrayList
+     */
     private void createMenuOptionList(){
         menuOptions = new ArrayList<>();
         menuOptions.add(new MenuOption("Företag", R.id.main));
