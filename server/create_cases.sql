@@ -26,20 +26,20 @@ INSERT INTO "cases" VALUES(7,      735,
       333,
       90,
       130);
-INSERT INTO "cases" VALUES(8,      954,
-      329,
+INSERT INTO "cases" VALUES(8,      865,
+      335,
       90,
       130);
 INSERT INTO "cases" VALUES(9,      954,
-      329,
+      335,
       90,
       130);
 INSERT INTO "cases" VALUES(10,      953,
-      461,
+      465,
       90,
       130);
 INSERT INTO "cases" VALUES(11,      865,
-      460,
+      465,
       90,
       130);
 INSERT INTO "cases" VALUES(12,      882,
@@ -47,23 +47,23 @@ INSERT INTO "cases" VALUES(12,      882,
       130,
       90);
 INSERT INTO "cases" VALUES(13,      737,
-      644,
+      650,
       90,
       130);
 INSERT INTO "cases" VALUES(14,      737,
-      776,
+      780,
       90,
       130);
 INSERT INTO "cases" VALUES(15,      737,
-      906,
+      910,
       90,
       130);
 INSERT INTO "cases" VALUES(16,      737,
-      1039,
+      1045,
       90,
       130);
 INSERT INTO "cases" VALUES(17,      737,
-      1173,
+      1177,
       90,
       130);
 
