@@ -1,8 +1,6 @@
 package se.gosta.activity;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.icu.text.IDNA;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.bottomnavigation.LabelVisibilityMode;
@@ -15,17 +13,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageRequest;
-import com.android.volley.toolbox.Volley;
-
-import java.io.File;
-import java.io.IOException;
-
 import se.gosta.R;
-import se.gosta.storage.Company;
 import se.gosta.storage.Session;
 import se.gosta.storage.Utils;
 
@@ -46,7 +34,8 @@ public class InfoActivity extends AppCompatActivity {
      * On creation of this activity it calls the method for setting up all detailed information
      * about the company and initiates the bottom navigation bar with navigation options
      * handled by a switch.
-     * @param savedInstanceState
+     * @param savedInstanceState Bundle containing the activity's previously frozen state, if there
+     *      *                    was one.
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {

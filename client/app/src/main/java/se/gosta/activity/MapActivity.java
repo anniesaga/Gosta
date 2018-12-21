@@ -59,7 +59,8 @@ public class MapActivity extends AppCompatActivity implements OnClickableAreaCli
     /**
      * On creation of this activity it calls the method for displaying the map and
      * sets up the navigation bar at the bottom.
-     * @param savedInstanceState
+     * @param savedInstanceState Bundle containing the activity's previously frozen state, if there
+     *      *                    was one.
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {

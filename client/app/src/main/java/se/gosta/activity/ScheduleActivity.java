@@ -33,6 +33,10 @@ import se.gosta.storage.Event;
 import se.gosta.storage.FairFetcher;
 import se.gosta.storage.Sponsor;
 
+/**
+ * Activity that displays information about events that are happening during the fair.
+ */
+
 public class ScheduleActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = ScheduleActivity.class.getSimpleName();
@@ -45,7 +49,8 @@ public class ScheduleActivity extends AppCompatActivity {
     /**
      * On creation of this activity it calls the method for setting up the desired list of events
      * and initiates the bottom navigation bar with navigation options handled by a switch.
-     * @param savedInstanceState Bundle containing the activity's previously frozen state, if there was one.
+     * @param savedInstanceState Bundle containing the activity's previously frozen state, if there
+     *                           was one.
      */
 
     @Override
@@ -190,6 +195,11 @@ public class ScheduleActivity extends AppCompatActivity {
         resetListView(events);
 
     }
+
+    /**
+     * Method for initializing components that have been released during onPause().
+     * Initializing the event list and the bottom navigation menu again.
+     */
     @Override
     protected void onResume() {
         super.onResume();

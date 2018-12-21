@@ -35,7 +35,8 @@ public class MenuActivity extends AppCompatActivity {
     /**
      * On creation of this activity it calls the method to create and setup the list of MenuOptions and
      * also sets up the navigation bar at the bottom.
-     * @param savedInstanceState
+     * @param savedInstanceState Bundle containing the activity's previously frozen state, if there
+     *      *                    was one.
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {

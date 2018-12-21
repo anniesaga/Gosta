@@ -38,6 +38,10 @@ import se.gosta.storage.Event;
 import se.gosta.storage.FairFetcher;
 import se.gosta.storage.Sponsor;
 
+/**
+ * Activity that displays information about the companies that are sponsoring the fair.
+ */
+
 public class SponsorActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = SponsorActivity.class.getSimpleName();
@@ -49,6 +53,8 @@ public class SponsorActivity extends AppCompatActivity {
      * It also implements an onClickListener for initiation of a popup window displaying information
      * about the sponsors in the case of the logos being touched.
      * Finally it initiates the bottom navigation bar with navigation options handled by a switch.
+     * @param savedInstanceState Bundle containing the activity's previously frozen state, if there
+     *      *                    was one.
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
