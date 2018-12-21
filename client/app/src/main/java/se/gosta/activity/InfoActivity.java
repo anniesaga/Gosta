@@ -147,15 +147,19 @@ public class InfoActivity extends AppCompatActivity {
             }
         });
 
-        ImageView ivWeb = (ImageView) findViewById(R.id.webimg);
-        ivWeb.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse("http://www.google.com"));
-                //TODO: Sätt varje företags URL istället för google.com
-                startActivity(intent);
-            }
-        });
+        //Sets website image clickable if company has URL
+        if (!(Session.get(Session.currentCompanyName).website().equals("URL saknas"))) {
+            Log.d(LOG_TAG, "Created clickable imgview: " + Session.get(Session.currentCompanyName).website());
+            ImageView ivWeb = (ImageView) findViewById(R.id.webimg);
+            ivWeb.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse(Session.get(Session.currentCompanyName).website()));
+                    Log.d(LOG_TAG, "Clicked website: " + Session.get(Session.currentCompanyName).website());
+                    startActivity(intent);
+                }
+            });
+        }
 
         TextView tv = (TextView)findViewById(R.id.companyText);
         tv.setText(Session.get(currentCompanyName).info());

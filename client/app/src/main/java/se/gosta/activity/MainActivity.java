@@ -267,8 +267,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
 
             @Override
-            public void sponsorsUpdated(List<Sponsor> sponsorList){
-
+            public void sponsorsUpdated(Map<String, Sponsor> sponsors){
+                // Do nothing with sponsors in this activity
             }
         });
 

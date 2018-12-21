@@ -12,6 +12,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -22,24 +23,26 @@ import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import java.util.HashMap;
+
 import java.util.List;
+import java.util.Map;
 
 import se.gosta.R;
 
+import se.gosta.storage.Company;
+import se.gosta.storage.Event;
+import se.gosta.storage.FairFetcher;
 import se.gosta.storage.Sponsor;
 
 public class SponsorActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = SponsorActivity.class.getSimpleName();
 
-    private ArrayAdapter<Sponsor> adapter;
-    private ListView listView;
-    private List<Sponsor> sponsors;
-
+    private Map<String, Sponsor> sponsorMap = new HashMap<>();
 
     /**
      * On creation of this activity it initiates an image view for displaying the sponsors logos.
@@ -47,21 +50,11 @@ public class SponsorActivity extends AppCompatActivity {
      * about the sponsors in the case of the logos being touched.
      * Finally it initiates the bottom navigation bar with navigation options handled by a switch.
      */
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(LOG_TAG, "Running onCreate()");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sponsor);
-        ImageView iv1 = (ImageView) findViewById(R.id.sponsor1);
-        iv1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                initiatePopupWindow();
-                ((TextView)pw.getContentView().findViewById(R.id.sponspopupname)).setText("Barebells");
-                ((TextView)pw.getContentView().findViewById(R.id.sponspopupinfo)).setText("Blablabla");
-                dimBehind(pw);
-            }
-        });
         BottomNavigationView navigation = (BottomNavigationView)
                 findViewById(R.id.navigation);
         navigation.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED);
@@ -98,6 +91,121 @@ public class SponsorActivity extends AppCompatActivity {
                 });
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FairFetcher fetcher = new FairFetcher(this);
+        fetcher.registerFairListener(new FairFetcher.FairListener() {
+            @Override
+            public void companiesUpdated(List<Company> companyList) {
+                // Do nothing with companies in this activity
+            }
+
+
+            @Override
+            public void casesUpdated(Map<Integer, Integer[]> coords) {
+                // Do nothing with cases in this activity
+
+            }
+
+            @Override
+            public void eventsUpdated(List<Event> eventList) {
+                //Do nothing with events in this activity
+            }
+
+
+            @Override
+            public void sponsorsUpdated(Map<String, Sponsor> sponsors){
+
+                Log.d(LOG_TAG, "cases: " + sponsors);
+
+                // Puts all sponsors in a temporary hashmap and then to regular map.
+                Map tmp = new HashMap(sponsors);
+                tmp.keySet().removeAll(sponsorMap.keySet());
+                sponsorMap.putAll(tmp);
+                setupSponsors();
+            }
+
+        });
+        // Call method in FairFetcher to download cases from db
+        fetcher.getSponsors();
+
+    }
+
+    private void setupSponsors(){
+        ImageView iv1 = (ImageView) findViewById(R.id.sponsor1);
+        iv1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (sponsorMap.get(getString(R.string.sponsor1)) != null) {
+                    initiatePopupWindow();
+                    ((TextView) pw.getContentView().findViewById(R.id.sponspopupname)).setText(sponsorMap.get(getString(R.string.sponsor1)).sponsorName());
+                    ((TextView) pw.getContentView().findViewById(R.id.sponspopupinfo)).setText(sponsorMap.get(getString(R.string.sponsor1)).sponsorInfo());
+                    dimBehind(pw);
+                }
+            }
+        });
+        ImageView iv2 = (ImageView) findViewById(R.id.sponsor2);
+        iv2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (sponsorMap.get(getString(R.string.sponsor2)) != null) {
+                    initiatePopupWindow();
+                    ((TextView) pw.getContentView().findViewById(R.id.sponspopupname)).setText(sponsorMap.get(getString(R.string.sponsor2)).sponsorName());
+                    ((TextView) pw.getContentView().findViewById(R.id.sponspopupinfo)).setText(sponsorMap.get(getString(R.string.sponsor2)).sponsorInfo());
+                    dimBehind(pw);
+                }
+            }
+        });
+        ImageView iv3 = (ImageView) findViewById(R.id.sponsor3);
+        iv3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (sponsorMap.get(getString(R.string.sponsor3)) != null) {
+                    initiatePopupWindow();
+                    ((TextView) pw.getContentView().findViewById(R.id.sponspopupname)).setText(sponsorMap.get(getString(R.string.sponsor3)).sponsorName());
+                    ((TextView) pw.getContentView().findViewById(R.id.sponspopupinfo)).setText(sponsorMap.get(getString(R.string.sponsor3)).sponsorInfo());
+                    dimBehind(pw);
+                }
+            }
+        });
+        ImageView iv4 = (ImageView) findViewById(R.id.sponsor4);
+        iv4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (sponsorMap.get(getString(R.string.sponsor4)) != null) {
+                    initiatePopupWindow();
+                    ((TextView) pw.getContentView().findViewById(R.id.sponspopupname)).setText(sponsorMap.get(getString(R.string.sponsor4)).sponsorName());
+                    ((TextView) pw.getContentView().findViewById(R.id.sponspopupinfo)).setText(sponsorMap.get(getString(R.string.sponsor4)).sponsorInfo());
+                    dimBehind(pw);
+                }
+            }
+        });
+        ImageView iv5 = (ImageView) findViewById(R.id.sponsor5);
+        iv5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (sponsorMap.get(getString(R.string.sponsor5)) != null) {
+                    initiatePopupWindow();
+                    ((TextView) pw.getContentView().findViewById(R.id.sponspopupname)).setText(sponsorMap.get(getString(R.string.sponsor5)).sponsorName());
+                    ((TextView) pw.getContentView().findViewById(R.id.sponspopupinfo)).setText(sponsorMap.get(getString(R.string.sponsor5)).sponsorInfo());
+                    dimBehind(pw);
+                }
+            }
+        });
+        ImageView iv6 = (ImageView) findViewById(R.id.sponsor6);
+        iv6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (sponsorMap.get(getString(R.string.sponsor6)) != null) {
+                    initiatePopupWindow();
+                    ((TextView) pw.getContentView().findViewById(R.id.sponspopupname)).setText(sponsorMap.get(getString(R.string.sponsor6)).sponsorName());
+                    ((TextView) pw.getContentView().findViewById(R.id.sponspopupinfo)).setText(sponsorMap.get(getString(R.string.sponsor6)).sponsorInfo());
+                    dimBehind(pw);
+                }
+            }
+        });
+    }
 
     private PopupWindow pw;
 

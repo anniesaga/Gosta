@@ -17,4 +17,10 @@
     <string name="sponsortitle">Sponsorer</string>
     <string name="moreinfo"><u>Mer info</u></string>
     <string name="QR">QR-läsare</string>
+    <string name="sponsor1">Barebells</string>
+    <string name="sponsor2">Fisherman\'s Friend</string>
+    <string name="sponsor3">Swift Export</string>
+    <string name="sponsor4">NJIE</string>
+    <string name="sponsor5">Nordstan</string>
+    <string name="sponsor6">Tekompaniet</string>
 </resources>

@@ -52,13 +52,16 @@
                     android:layout_height="100dp"
                     android:id="@+id/sponsor1"
                     android:src="@drawable/barebells"
-                    android:layout_marginRight="30dp"
-                    android:clickable="true"/>
+                    android:layout_marginEnd="30dp"
+                    android:clickable="true"
+                    android:focusable="true"/>
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:id="@+id/sponsor2"
-                    android:src="@drawable/fishermansfriend"/>
+                    android:src="@drawable/fishermansfriend"
+                    android:clickable="true"
+                    android:focusable="true"/>
 
             </LinearLayout>
 
@@ -70,13 +73,17 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:src="@drawable/flapjack"
-                    android:layout_marginRight="30dp"
-                    android:id="@+id/sponsor3"/>
+                    android:layout_marginEnd="30dp"
+                    android:id="@+id/sponsor3"
+                    android:clickable="true"
+                    android:focusable="true"/>
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:src="@drawable/njie"
-                    android:id="@+id/sponsor4"/>
+                    android:id="@+id/sponsor4"
+                    android:clickable="true"
+                    android:focusable="true"/>
 
             </LinearLayout>
 
@@ -88,13 +95,17 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:src="@drawable/nordstan"
-                    android:layout_marginRight="30dp"
-                    android:id="@+id/sponsor5"/>
+                    android:layout_marginEnd="30dp"
+                    android:id="@+id/sponsor5"
+                    android:clickable="true"
+                    android:focusable="true"/>
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:src="@drawable/tekompaniet"
-                    android:id="@+id/sponsor6"/>
+                    android:id="@+id/sponsor6"
+                    android:clickable="true"
+                    android:focusable="true"/>
 
             </LinearLayout>
 

@@ -144,8 +144,8 @@ public class MapActivity extends AppCompatActivity implements OnClickableAreaCli
 
 
             @Override
-            public void sponsorsUpdated(List<Sponsor> sponsorList){
-
+            public void sponsorsUpdated(Map<String, Sponsor> sponsors) {
+                // Do nothing with sponsors in this activity
             }
 
         });

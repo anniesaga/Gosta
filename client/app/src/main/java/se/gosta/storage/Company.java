@@ -158,7 +158,7 @@ public class Company implements Comparable<Company> {
      * Method that returns the URL to a company's website
      * @return URL to company website
      */
-    public String wesbite() {
+    public String website() {
         return website;
     }
 

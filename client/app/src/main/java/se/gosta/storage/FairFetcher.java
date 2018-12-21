@@ -108,7 +108,6 @@ public class FairFetcher {
 
         String url = DEFAULT_URL + "/cases";
 
-
         RequestQueue queue = Volley.newRequestQueue(context);
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
@@ -173,25 +172,83 @@ public class FairFetcher {
     }
 
     /**
+     * Methods used to parse JSONArray and download to a map of sponsors.
+     */
+    public void getSponsors() {
+
+        Log.d(LOG_TAG, "getSponsors()");
+        String url = DEFAULT_URL + "/sponsors";
+
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
+                Request.Method.GET,
+                url,
+                null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+
+                        Map<String, Sponsor> sponsors = jsonToSponsor(response);
+
+                        for(FairListener listener : fairListenerList) {
+                            listener.sponsorsUpdated(sponsors);
+                        }
+                        Log.d(LOG_TAG, "onResponse ok");
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(LOG_TAG, " cause 2: " + error.getCause().getMessage());
+
+            }
+        });
+        queue.add(jsonArrayRequest);
+
+    }
+
+    /**
      * Method used to parse JSONArray to a list of companies
      * @param array JSONArray fetched from the server
      * @return List of companies
      */
     private List<Company> jsonToCompany(JSONArray array) {
         List<Company> companyList = new ArrayList<>();
+
         for (int i = 0; i < array.length(); i++) {
+            String name, contact = null, email = null, info = null, fileName = null, website = null;
+            int recruiting = 0, partTime = 0, thesis = 0, caseNo = 0;
             try {
                 JSONObject row = array.getJSONObject(i);
-                String name = row.getString("name");
-                String contact = row.getString("contact_name");
-                String email = row.getString("contact_email");
-                String info = row.getString("info");
-                int recruiting = row.getInt("recruiting");
-                int partTime = row.getInt("part_time");
-                int thesis = row.getInt("thesis");
-                String fileName = row.getString("fileName");
-                int caseNo = row.getInt("caseNo");
-                String website = "website";
+                name = row.getString("name");
+                if (!row.isNull("contact_name")) {
+                    contact = row.getString("contact_name");
+                }
+                if (!row.isNull("contact_email")) {
+                    email = row.getString("contact_email");
+                }
+                if (!row.isNull("info")) {
+                    info = row.getString("info");
+                }
+                if (!row.isNull("recruiting")) {
+                    recruiting = row.getInt("recruiting");
+                }
+                if (!row.isNull("part_time")) {
+                    partTime = row.getInt("part_time");
+                }
+                if (!row.isNull("thesis")) {
+                    thesis = row.getInt("thesis");
+                }
+                if (!row.isNull("fileName")) {
+                    fileName = row.getString("fileName");
+                }
+                if (!row.isNull("caseNo")) {
+                    caseNo = row.getInt("caseNo");
+                }
+                if (!row.isNull("website")) {
+                    website = row.getString("website");
+                }
 
                 Company c = new Company(name, contact, email, info, recruiting, partTime, thesis, fileName, caseNo, website);
                 Log.d(LOG_TAG, "jsonToCompany(): " + c);
@@ -263,6 +320,27 @@ public class FairFetcher {
         return eventList;
     }
 
+    private Map<String, Sponsor> jsonToSponsor(JSONArray array) {
+        Map<String, Sponsor> sponsorMap = new HashMap<>();
+        for (int i = 0; i < array.length(); i++) {
+            try {
+                JSONObject row = array.getJSONObject(i);
+                String name = row.getString("name");
+                String website = row.getString("website");
+                String info = row.getString("info");
+                String fileName = row.getString("fileName");
+                Sponsor s = new Sponsor(name, website, info, fileName);
+                Log.d(LOG_TAG, "jsonToSponsor(): " + s);
+                sponsorMap.put(name, s);
+
+
+            } catch (JSONException ex) {
+                Log.d(LOG_TAG, "Error parsing JSON: " + ex.getMessage());
+            }
+        }
+        return sponsorMap;
+    }
+
     /**
      * Method used to fetch a logo for a specific company from the server
      * @param company The company for what logo to fetch
@@ -311,67 +389,6 @@ public class FairFetcher {
     }
 
 
-    /**
-     * Methods used to parse JSONArray and download to a list of sponsors. Not used in this version but
-     * will be used for when sponsors are stored on the server in next sprint.
-     */
-/*    public void getSponsors() {
-
-        Log.d(LOG_TAG, "getSponsors()");
-        String url = DEFAULT_URL + "/sponsors";
-
-
-        RequestQueue queue = Volley.newRequestQueue(context);
-
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
-                Request.Method.GET,
-                url,
-                null,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-
-                        List<Sponsor> sponsors = new ArrayList<>();
-
-                        sponsors = jsonToSponsor(response);
-
-
-                        for(FairListener listener : fairListenerList) {
-                            listener.sponsorsUpdated(sponsors);
-                        }
-                        Log.d(LOG_TAG, "onResponse ok");
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d(LOG_TAG, " cause 2: " + error.getCause().getMessage());
-
-            }
-        });
-        queue.add(jsonArrayRequest);
-
-    }
-    private List<Sponsor> jsonToSponsor(JSONArray array) {
-        List<Sponsor> sponsorList = new ArrayList<>();
-        for (int i = 0; i < array.length(); i++) {
-            try {
-                JSONObject row = array.getJSONObject(i);
-                String name = row.getString("name");
-                String website = row.getString("website");
-                String info = row.getString("info");
-                String fileName = row.getString("fileName");
-                Sponsor s = new Sponsor(name, website, info, fileName);
-                Log.d(LOG_TAG, "jsonToSponsor(): " + s);
-                sponsorList.add(s);
-
-
-            } catch (JSONException ex) {
-                ;
-            }
-        }
-        return sponsorList;
-    }*/
-
     public interface FairListener {
 
         void companiesUpdated(List<Company> companyList);
@@ -381,8 +398,7 @@ public class FairFetcher {
 
         void eventsUpdated(List<Event> eventList);
 
-        void sponsorsUpdated(List<Sponsor> sponsorList);
-        // for when sponsors will be fetched from the server
+        void sponsorsUpdated(Map<String, Sponsor> sponsors);
 
     }
 

@@ -182,7 +182,7 @@ public class ScheduleActivity extends AppCompatActivity {
             }
 
             @Override
-            public void sponsorsUpdated(List<Sponsor> sponsorList) {
+            public void sponsorsUpdated(Map<String, Sponsor> sponsors) {
                 //Do nothing in this activity
             }
         });
