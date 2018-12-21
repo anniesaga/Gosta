@@ -49,7 +49,8 @@ public class ScheduleActivity extends AppCompatActivity {
     /**
      * On creation of this activity it calls the method for setting up the desired list of events
      * and initiates the bottom navigation bar with navigation options handled by a switch.
-     * @param savedInstanceState Bundle containing the activity's previously frozen state, if there was one.
+     * @param savedInstanceState Bundle containing the activity's previously frozen state, if there
+     *                           was one.
      */
 
     @Override

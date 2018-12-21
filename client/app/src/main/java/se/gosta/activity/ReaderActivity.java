@@ -28,7 +28,8 @@ public class ReaderActivity extends AppCompatActivity {
     /**
      * On creation of this activity the button for starting the scanner and setting up
      * the bottom navigation bar.
-     * @param savedInstanceState
+     * @param savedInstanceState Bundle containing the activity's previously frozen state, if there
+     *      *                    was one.
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,9 +91,9 @@ public class ReaderActivity extends AppCompatActivity {
 
     /**
      * Method to handle the QR-code scanned from the camera.
-     * @param requestCode
-     * @param resultCode
-     * @param data
+     * @param requestCode The integer request code for identifying who the result came from.
+     * @param resultCode The integer result code returned by the child activity through its setResult()
+     * @param data An intent which return result data to the caller.
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

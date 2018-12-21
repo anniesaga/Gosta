@@ -104,7 +104,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
      * and initiates the bottom navigation bar with navigation options handled by a switch.
      * In this block we also grant access to the systems sensors in order to use the accelerometer
      * for detection movements.
-     * @param savedInstanceState
+     * @param savedInstanceState Bundle containing the activity's previously frozen state, if there
+     *      *                    was one.
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -238,7 +239,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     /**
      * Method for fetching all the companies in the list of companies.
-     * Calling FairListener for the server data for the companies, matching them with the correct case number and populating the list view.
+     * Registers as a listener for FairFetcher and calls a method in FairFetcher for loading all
+     * the companies from the database, matching them with the correct case number and populating
+     * the list view.
      */
 
     @Override

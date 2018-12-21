@@ -50,6 +50,8 @@ public class SponsorActivity extends AppCompatActivity {
      * It also implements an onClickListener for initiation of a popup window displaying information
      * about the sponsors in the case of the logos being touched.
      * Finally it initiates the bottom navigation bar with navigation options handled by a switch.
+     * @param savedInstanceState Bundle containing the activity's previously frozen state, if there
+     *      *                    was one.
      */
 
     @Override
