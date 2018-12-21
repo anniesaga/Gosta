@@ -24,7 +24,11 @@ public class Event implements Comparable<Event> {
         }
         this.startTime = startTime;
         this.eventName = eventName;
-        this.eventInfo = eventInfo;
+        if (eventInfo == null) {
+            this.eventInfo = "Information saknas";
+        } else {
+            this.eventInfo = eventInfo;
+        }
     }
 
     /**

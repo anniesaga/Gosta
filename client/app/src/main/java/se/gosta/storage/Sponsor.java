@@ -28,9 +28,23 @@ public class Sponsor {
 
         // Will have to check for null here before usage.
         this.sponsorName = sponsorName;
-        this.sponsorWebsite = sponsorWebsite;
-        this.sponsorInfo = sponsorInfo;
-        this.sponsorFileName = sponsorFileName;
+        if (sponsorWebsite == null){
+            this.sponsorWebsite = "URL saknas";
+        } else {
+            this.sponsorWebsite = sponsorWebsite;
+        }
+
+        if (sponsorInfo == null) {
+            this.sponsorInfo = "Information saknas";
+        } else {
+            this.sponsorInfo = sponsorInfo;
+        }
+
+        if (sponsorFileName == null) {
+            this.sponsorFileName = "defaultlogo.png";
+        } else {
+            this.sponsorFileName = sponsorFileName;
+        }
     }
 
     /**

@@ -306,7 +306,10 @@ public class FairFetcher {
                 JSONObject row = array.getJSONObject(i);
                 String start_time = row.getString("start_time");
                 String name = row.getString("name");
-                String info = row.getString("info");
+                String info = null;
+                if (!row.isNull("info")) {
+                    info = row.getString("info");
+                }
                 Event e = new Event(start_time, name, info);
                 Log.d(LOG_TAG, "jsonToEvent(): " + e);
                 eventList.add(e);
@@ -323,12 +326,20 @@ public class FairFetcher {
     private Map<String, Sponsor> jsonToSponsor(JSONArray array) {
         Map<String, Sponsor> sponsorMap = new HashMap<>();
         for (int i = 0; i < array.length(); i++) {
+            String website = null, info = null, fileName = null;
             try {
                 JSONObject row = array.getJSONObject(i);
                 String name = row.getString("name");
-                String website = row.getString("website");
-                String info = row.getString("info");
-                String fileName = row.getString("fileName");
+                if (!row.isNull("website")) {
+                    website = row.getString("website");
+                }
+                if (!row.isNull("info")) {
+                    info = row.getString("info");
+                }
+                if (!row.isNull("fileName")) {
+                    fileName = row.getString("fileName");
+                }
+
                 Sponsor s = new Sponsor(name, website, info, fileName);
                 Log.d(LOG_TAG, "jsonToSponsor(): " + s);
                 sponsorMap.put(name, s);
