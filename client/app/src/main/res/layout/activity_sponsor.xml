@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--Frame layout for the SponsorActivity that contains the layout components for the page
+that contains the companies that are sponsoring the fair.-->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,6 +11,8 @@
     tools:context=".activity.SponsorActivity"
     android:id="@+id/activity_sponsor">
 
+    <!--The main linear layout containing all the elements of the page, divided into different
+   views.-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -16,12 +21,15 @@
         android:id="@+id/header"
         android:layout_gravity="top">
 
+        <!--Image view displaying the logo for the fair at the top of the page.-->
         <ImageView
             android:id="@+id/logo"
             android:layout_width="200dp"
             android:layout_height="75dp"
             android:padding="10dp"
             android:src="@drawable/gosta2019vit"/>
+
+        <!--Text view displaying the title of the page.-->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -36,6 +44,7 @@
             android:gravity="center_horizontal"
             android:layout_gravity="center_horizontal" />
 
+        <!--Linear layout holding the clickable logos for all the sponsors-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -43,6 +52,7 @@
             android:orientation="vertical"
             android:paddingTop="20dp">
 
+            <!--Linear layout holding two image views displaying the logos for two sponsors.-->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -65,6 +75,7 @@
 
             </LinearLayout>
 
+            <!--Linear layout holding two image views displaying the logos for two sponsors.-->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -87,6 +98,7 @@
 
             </LinearLayout>
 
+            <!--Linear layout holding two image views displaying the logos for two sponsors.-->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -113,6 +125,7 @@
 
     </LinearLayout>
 
+    <!--Adding the bottom navigation bar at the bottom of the page.-->
     <include layout="@layout/layout_menu" />
 
 

@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--Frame layout for the MainActivity that contains the layout components for the page
+that contains the list of companies.-->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,6 +11,8 @@
     android:id="@+id/main"
     android:background="@drawable/gradient_bg">
 
+    <!--The main linear layout containing components of the page for displaying the list of
+    companies. Contains additional linear layout and views.-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -16,12 +21,15 @@
         android:id="@+id/mainlinear1"
         android:layout_gravity="top">
 
+        <!--Image view displaying the logo for the fair at the top of the page.-->
         <ImageView
             android:id="@+id/logo"
             android:layout_width="200dp"
             android:layout_height="75dp"
             android:padding="10dp"
             android:src="@drawable/gosta2019vit"/>
+
+    <!--Linear layout containing a search view and text view for the page title.-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -31,6 +39,8 @@
         android:layout_gravity="top"
         >
 
+    <!--Search view for applying a search field to enable users to search the list through text
+    input. With a search hint telling the user what to search for.-->
     <SearchView
         android:id="@+id/searchView"
         android:layout_width="match_parent"
@@ -41,10 +51,9 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="5dp" />
 
-        />
-
+        <!--Text view displaying the title of the page.-->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -59,6 +68,7 @@
             android:layout_gravity="center_horizontal" />
     </LinearLayout>
 
+        <!--List view where the list of companies is displayed.-->
         <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -71,6 +81,7 @@
 
     </LinearLayout>
 
+    <!--Adding the bottom navigation bar at the bottom of the page.-->
     <include layout="@layout/layout_menu" />
 
     </FrameLayout>

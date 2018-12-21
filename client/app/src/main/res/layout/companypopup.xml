@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--Frame layout that contains the components for the popup window displaying information about
+a company. The layout is used in the MapActivity as well as in the event of the user performing a
+shaking gesture in MainActivity.-->
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -7,6 +11,7 @@
     android:id="@+id/companypopup"
     android:padding="5dp">
 
+    <!--Linear layout holding all the text views for the popup window.-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,6 +21,7 @@
         android:layout_gravity="top"
         >
 
+        <!--Text view displaying the company's name in the popup window.-->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -27,7 +33,7 @@
             android:textSize="20sp"
             android:id="@+id/comppopupname"/>
 
-
+    <!--Text view displaying the information about the company in the popup window.-->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -40,7 +46,8 @@
         android:maxLines="4"
         android:ellipsize="end"/>
 
-
+        <!--Text view representing a text button for more information about the company, redirecting
+        the user to the InfoActivity for the selected company.-->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--Frame layout that contains the components for the popup window displaying information about
+the companies that is sponsoring the fair.-->
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -7,6 +10,7 @@
     android:id="@+id/sponsorpopup"
     android:padding="5dp">
 
+    <!--Linear layout holding all the text views for the popup window.-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,6 +20,7 @@
         android:layout_gravity="top"
         >
 
+        <!--Text view displaying the name of the sponsor in the popup window.-->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -27,7 +32,7 @@
             android:textSize="20sp"
             android:id="@+id/sponspopupname"/>
 
-
+        <!--Text view displaying the information about the event in the popup window.-->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -35,12 +40,10 @@
             android:layout_margin="15dp"
             android:layout_marginBottom="5dp"
             android:textSize="15sp"
-            android:id="@+id/sponspopupinfo"
-/>
+            android:id="@+id/sponspopupinfo" />
 
 
 </LinearLayout>
-
 
 
 </FrameLayout>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!--Frame layout for the InfoActivity that contains the components for displaying information
-    about a company.-->
+<!--Frame layout for the InfoActivity that contains the components for the page displaying
+information about a company.-->
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -22,8 +22,8 @@
         android:scrollbars="none"
         >
 
-    <!--The linear layout for displaying information about a company. Contains additional linear
-      layouts and text views.-->
+    <!--The main linear layout for displaying information about a company. Contains additional linear
+      layouts and views.-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<!--Frame layout for the MapActivity that contains the layout components for the page
+holding the map for where the different companies are located in the exhibition hall.-->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,6 +11,7 @@
     tools:context=".activity.MapActivity"
     android:id="@+id/activity_map">
 
+<!--The main linear layout containing all the elements of the page, divided into different views.-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,12 +20,16 @@
         android:id="@+id/mainlinear1"
         android:layout_gravity="top">
 
+        <!--Image view displaying the logo for the fair at the top of the page.-->
         <ImageView
             android:id="@+id/logo"
             android:layout_width="200dp"
             android:layout_height="75dp"
             android:padding="10dp"
             android:src="@drawable/gosta2019vit"/>
+
+
+    <!--Text view displaying the title of the page.-->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -30,8 +37,10 @@
         android:gravity="center_horizontal"
         android:text="Mässkarta"
         android:textSize="25sp"
-        android:textColor="@color/white"
-        />
+        android:textColor="@color/white" />
+
+<!--Linear layout containing the actual image of the map and setting the background to a custom
+drawable with rounded corners.-->
 <LinearLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -39,6 +48,7 @@
     android:background="@drawable/rounded_corner"
     android:paddingTop="20dp">
 
+    <!--Image view displaying the image of the map.-->
     <ImageView
         android:contentDescription="@string/map"
         android:layout_width="fill_parent"
@@ -49,6 +59,7 @@
     </LinearLayout>
     </LinearLayout>
 
+    <!--Adding the bottom navigation bar at the bottom of the page.-->
     <include layout="@layout/layout_menu" />
 
 </FrameLayout>
