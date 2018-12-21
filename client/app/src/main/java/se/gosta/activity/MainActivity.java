@@ -236,6 +236,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         }
     }
 
+    /**
+     * Method for fetching all the companies in the list of companies.
+     * Calling FairListener for the server data for the companies, matching them with the correct case number and populating the list view.
+     */
+
     @Override
     public void onStart() {
         super.onStart();
@@ -275,6 +280,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         fetcher.getCompanies();
         resetListView(companies);
     }
+
+    /**
+     * Method for initializing components that have been released during onPause().
+     * Initializing the company list and the bottom navigation menu again.
+     * Registering the sensor listener for device movements again.
+     */
 
     @Override
     protected void onResume() {

@@ -32,6 +32,10 @@ import se.gosta.R;
 
 import se.gosta.storage.Sponsor;
 
+/**
+ * Activity that displays information about the companies that are sponsoring the fair.
+ */
+
 public class SponsorActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = SponsorActivity.class.getSimpleName();
