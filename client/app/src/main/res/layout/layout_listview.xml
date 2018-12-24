@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--Layout for the list view in  ScheduleActivity and MenuActivity, making the text larger and
+centered.-->
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@android:id/text1"
     android:layout_height="?android:attr/listPreferredItemHeight"

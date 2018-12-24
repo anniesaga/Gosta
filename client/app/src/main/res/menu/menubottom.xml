@@ -1,22 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--Menu layout for the icons in the bottom navigation menu.-->
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
+        <!--Item layout for the icon representing navigation to the list view for the companies.-->
         <item android:id="@+id/action_companies"
             android:enabled="true"
             app:showAsAction="ifRoom"
             android:title="@string/companies"
             android:icon="@drawable/companies"/>
+        <!--Item layout for the icon representing navigation to the map.-->
         <item android:id="@+id/action_map"
             android:title="@string/map"
             android:icon="@drawable/mapicon"
             android:enabled="true"
             app:showAsAction="ifRoom" />
+        <!--Item layout for the icon representing navigation to the schedule.-->
         <item android:id="@+id/action_schedule"
             android:title="@string/schedule"
             android:icon="@drawable/scheduleicon"
             android:enabled="true"
             app:showAsAction="ifRoom"/>
+        <!--Item layout for the icon representing navigation to the menu.-->
         <item android:id="@+id/action_settings"
             android:title="@string/settings"
             android:icon="@drawable/menuicon"
