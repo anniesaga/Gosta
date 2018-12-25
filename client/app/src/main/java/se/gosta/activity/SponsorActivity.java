@@ -20,7 +20,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -54,7 +53,7 @@ public class SponsorActivity extends AppCompatActivity {
      * about the sponsors in the case of the logos being touched.
      * Finally it initiates the bottom navigation bar with navigation options handled by a switch.
      * @param savedInstanceState Bundle containing the activity's previously frozen state, if there
-     *      *                    was one.
+     * was one.
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -12,10 +12,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
-        android:screenOrientation="portrait"
+
         >
         <activity
             android:name=".activity.MainActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,12 +24,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MenuActivity" />
-        <activity android:name=".activity.InfoActivity" />
-        <activity android:name=".activity.MapActivity" />
-        <activity android:name=".activity.ReaderActivity" />
-        <activity android:name=".activity.ScheduleActivity" />
-        <activity android:name=".activity.SponsorActivity" />
+        <activity
+            android:name=".activity.MenuActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.InfoActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.MapActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.ReaderActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.ScheduleActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.SponsorActivity"
+            android:screenOrientation="portrait"/>
 
     </application>
 

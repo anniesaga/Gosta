@@ -35,7 +35,7 @@ public class InfoActivity extends AppCompatActivity {
      * about the company and initiates the bottom navigation bar with navigation options
      * handled by a switch.
      * @param savedInstanceState Bundle containing the activity's previously frozen state, if there
-     *      *                    was one.
+     * was one.
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -19,7 +19,7 @@ public class Company implements Comparable<Company> {
     private boolean partTime;
     private boolean thesis;
 
-    //Int variable for Company-objetcts
+    //Int variable for Company-objects
     private int caseNo;
 
     /**

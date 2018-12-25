@@ -2,60 +2,39 @@ package se.gosta.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
+
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.icu.text.IDNA;
+
 import android.support.annotation.NonNull;
 import android.support.design.bottomnavigation.LabelVisibilityMode;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.transition.Transition;
+
 import android.util.Log;
-import android.view.ContextMenu;
+
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageRequest;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -67,7 +46,6 @@ import se.gosta.storage.Event;
 import se.gosta.storage.FairFetcher;
 import se.gosta.storage.Session;
 import se.gosta.storage.Sponsor;
-import se.gosta.storage.Utils;
 
 import static se.gosta.storage.Session.currentCompanyName;
 
@@ -86,6 +64,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private float last_x, last_y,last_z;
     private static final int SHAKE_THRESHOLD = 20;
 
+    private PopupWindow pw;
+
     //Listview related variables
     private ArrayAdapter<Company> adapter;
     private ListView listView;
@@ -94,18 +74,13 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     public static Map<Integer, Company> companyMap = new HashMap<>();
 
-
-    private static final String DEFAULT_URL = "http://10.0.2.2:8080";
-
-    //   private static final String DEFAULT_URL = "http://192.168.43.128:8080";
-
     /**
      * On creation of this activity it calls the method for setting up the desired list of companies
      * and initiates the bottom navigation bar with navigation options handled by a switch.
      * In this block we also grant access to the systems sensors in order to use the accelerometer
      * for detection movements.
      * @param savedInstanceState Bundle containing the activity's previously frozen state, if there
-     *      *                    was one.
+     * was one.
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -426,9 +401,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         dimBehind(pw);
     }
 
-
-
-    private PopupWindow pw;
 
     /**
      * Initiates a popup window for displaying company name and information and dismisses it if the
