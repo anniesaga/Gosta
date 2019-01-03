@@ -41,7 +41,7 @@ public class Sponsors extends HttpServlet {
         array.put(obj);
       }
       out.println(array.toString(1));
-
+      stm.close();
     } catch(SQLException sqle){
       out.println("Database error: " + sqle.getMessage());
     }
