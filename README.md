@@ -1,6 +1,12 @@
+Description
+===========
+
 This application is intended to be used as an aid during the GOSTA work fair
 to help the students navigate the exhibition and prepare for the meetings with
 the exhibitors.
+
+User Manual
+===========
 
 There are two menus for navigating through the application. One bottom
 navigation menu for the most commonly used pages; the list of exhibitors, the
@@ -26,3 +32,18 @@ Clicking the forth and last icon of the bottom navigation menu displays the
 menu page, which can also be used to reach the previously mentioned pages. And
 additional pages such as; a page displaying information about which companies
 that are sponsoring the fair and a QR-reader for scanning QR-codes.
+
+Thanks to
+=========
+[ClickableAreasImage](https://github.com/Lukle/ClickableAreasImages/), for the library which the clickable map is using. 
+
+
+License
+======
+
+Copyright 2019 Annie Petersson, Johannes Carli
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
