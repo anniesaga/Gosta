@@ -1,4 +1,4 @@
-package se.gosta.storage;
+package se.gosta.net;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -24,6 +24,12 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import se.gosta.storage.Company;
+import se.gosta.storage.Event;
+import se.gosta.storage.Session;
+import se.gosta.storage.Sponsor;
+import se.gosta.storage.Utils;
 
 
 /**

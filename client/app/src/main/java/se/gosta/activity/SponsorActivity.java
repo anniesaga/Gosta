@@ -34,7 +34,7 @@ import se.gosta.R;
 
 import se.gosta.storage.Company;
 import se.gosta.storage.Event;
-import se.gosta.storage.FairFetcher;
+import se.gosta.net.FairFetcher;
 import se.gosta.storage.Sponsor;
 
 /**
