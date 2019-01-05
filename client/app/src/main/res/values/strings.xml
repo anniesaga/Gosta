@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">GÖSTA Studentförening</string>
+    <string name="app_name">GÖSTA</string>
     <string name="title_activity_menu">MenuActivity</string>
     <string name="companies">Företag</string>
     <string name="map">Karta</string>
