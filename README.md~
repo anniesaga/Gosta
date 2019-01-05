@@ -33,13 +33,17 @@ menu page, which can also be used to reach the previously mentioned pages. And
 additional pages such as; a page displaying information about which companies
 that are sponsoring the fair and a QR-reader for scanning QR-codes.
 
+Developer Manual
+================
+
+
 Thanks to
 =========
 [ClickableAreasImage](https://github.com/Lukle/ClickableAreasImages/), for the library which the clickable map is using. 
 
 
 License
-======
+=======
 
 Copyright 2019 Annie Petersson, Johannes Carli
 

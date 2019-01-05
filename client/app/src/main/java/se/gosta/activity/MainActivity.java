@@ -44,10 +44,10 @@ import se.gosta.R;
 import se.gosta.storage.Company;
 import se.gosta.storage.Event;
 import se.gosta.net.FairFetcher;
-import se.gosta.storage.Session;
+import se.gosta.utils.Session;
 import se.gosta.storage.Sponsor;
 
-import static se.gosta.storage.Session.currentCompanyName;
+import static se.gosta.utils.Session.currentCompanyName;
 
 /**
  * Starting activity of app which displays a list of all companies at the fair.

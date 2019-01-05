@@ -27,9 +27,9 @@ import java.util.Map;
 
 import se.gosta.storage.Company;
 import se.gosta.storage.Event;
-import se.gosta.storage.Session;
+import se.gosta.utils.Session;
 import se.gosta.storage.Sponsor;
-import se.gosta.storage.Utils;
+import se.gosta.utils.Utils;
 
 
 /**

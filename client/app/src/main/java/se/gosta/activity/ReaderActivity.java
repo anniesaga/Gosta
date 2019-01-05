@@ -16,7 +16,7 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 import se.gosta.R;
-import se.gosta.storage.Session;
+import se.gosta.utils.Session;
 
 /**
  * Activity for displaying a QR-reader

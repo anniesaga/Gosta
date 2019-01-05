@@ -2,7 +2,7 @@ package se.gosta.activity;
 
 import se.gosta.R;
 import se.gosta.storage.MenuOption;
-import se.gosta.storage.Session;
+import se.gosta.utils.Session;
 
 import android.content.Intent;
 import android.os.Bundle;

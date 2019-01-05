@@ -36,6 +36,34 @@ that are sponsoring the fair and a QR-reader for scanning QR-codes.
 Developer Manual
 ================
 
+Client
+
+Packages
+
+The android client packages are divided by category. Java classes for each activity can be found in the package se.gosta.activity. Java classes handling network and containing all network related code is located in the package se.gosta.net. The package se.gosta.storage contains all classes creating the main objects, for instance the company and sponsor objects. Finally, the package se.gosta.utils contains all helper classes needed for the client.
+
+Classes
+
+No activity in the se.gosta.activity package will not be explained here. See comments inside classes for more info regarding the particular class.
+FairFetcher.java is used to fetch data from Json-files on the server. The activities register listeners to be notified when data is fetched.
+Company.java represents a company at the fair and contains all information regarding the company. This information is fetched from Json through FairFetcher.
+The Java class Event represents an event at the fair, for example at what time the fair opens. MenuOption.java is used to create Menu-objects for displaying a menu in the MenuActivity.
+Sponsor.java represents a sponsor of the fair. This class contains all information regarding the actual sponsor, including their logotype.
+Session.java is a helper class for the client to keep track on the current company. This is for example necessary to display information about the correct company when the user clicks on a company.
+Utils.java is a helper class for handling logotypes for each company and storing them on the internal memory.
+XML-files
+The XML-files are divided into a number of folders based on category. The folders anim and animator contains all XML-files that controls animations. The folder color contains an XML- file creating a tint for the bottom navigation bar depending on the selected item.
+The folder drawable contains all drawables and images used in the application that are not fetched from the server and xml-files for rounded corner and gradient backgrounds.
+The layout folder contains all XML-files controlling the layout of each activity. These layouts are named accordingly. It also contains the layouts of the popups, menus and a custom listview.
+The menu folder contains the XML-files for the bottom navigation bar and the popup menu. Mipmap is used for the launcher icons and if a customized icon is desired.
+The values folder contains the XML-files regarding colors, strings and styles. Change values here instead of hard coding it.
+Finally, the xml folder contains XML-files for network configuration and miscellaneous.
+
+Servlet
+
+The servlet is powered by winstone and is divided in a number of sections. These sections are schedule, cases, sponsors and companies. The servlet xml is located in the package server/WEB-INF/web.xml.
+The database is called companies.db and is located in the folder /server. This is the database used to create Json-files on the server. The database contains the tables companies, sponsors, cases and schedule. The corresponding Java class for parsing the data to Json is located in the folder server/WEB-INF/classes.
+To start the server, there is a script located in the server folder called start_server.sh. Run this script inside the folder to start up the server. The script checks which OS the user is running, and then compiles and runs the Java classes in server/WEB-INF/classes.
 
 Thanks to
 =========

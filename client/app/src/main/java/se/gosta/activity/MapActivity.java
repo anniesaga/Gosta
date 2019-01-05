@@ -35,11 +35,11 @@ import se.gosta.R;
 import se.gosta.storage.Company;
 import se.gosta.storage.Event;
 import se.gosta.net.FairFetcher;
-import se.gosta.storage.Session;
+import se.gosta.utils.Session;
 import se.gosta.storage.Sponsor;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
-import static se.gosta.storage.Session.currentCompanyName;
+import static se.gosta.utils.Session.currentCompanyName;
 
 /**
  * Activity that displays a map over the fair

@@ -1,8 +1,10 @@
-package se.gosta.storage;
+package se.gosta.utils;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import se.gosta.storage.Company;
 
 /**
  * Represents the current Session

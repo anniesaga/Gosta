@@ -1,4 +1,4 @@
-package se.gosta.storage;
+package se.gosta.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -8,6 +8,8 @@ import android.util.Log;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
+import se.gosta.storage.Company;
 
 /**
  * Helper class for handling and creating ImageFiles for a company's logo

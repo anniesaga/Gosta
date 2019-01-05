@@ -14,10 +14,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import se.gosta.R;
-import se.gosta.storage.Session;
-import se.gosta.storage.Utils;
+import se.gosta.utils.Session;
+import se.gosta.utils.Utils;
 
-import static se.gosta.storage.Session.currentCompanyName;
+import static se.gosta.utils.Session.currentCompanyName;
 
 /**
  * Activity that displays detailed information about a specific Company
