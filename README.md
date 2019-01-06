@@ -28,7 +28,7 @@ The calendar icon in the bottom navigation menu represents the page holding the
 schedule for the fair. A list of events is displayed and clicking an event
 initiates a popup window with more information about the event.
 
-Clicking the forth and last icon of the bottom navigation menu displays the
+Clicking the fourth and last icon of the bottom navigation menu displays the
 menu page, which can also be used to reach the previously mentioned pages. And
 additional pages such as; a page displaying information about which companies
 that are sponsoring the fair and a QR-reader for scanning QR-codes.
