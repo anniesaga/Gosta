@@ -45,7 +45,7 @@ The android client packages are divided by category. Java classes for each activ
 
 Classes
 -------
-No activity in the se.gosta.activity package will not be explained here. See comments inside classes for more info regarding the particular class.
+No activity in the se.gosta.activity package will be explained here. See comments inside classes for more info regarding the particular class.
 
 FairFetcher.java is used to fetch data from Json-files on the server. The activities register listeners to be notified when data is fetched.
 
@@ -84,6 +84,7 @@ Thanks to
 =========
 [ClickableAreasImage](https://github.com/Lukle/ClickableAreasImages/), for the library which the clickable map is using. 
 
+[ZXing](https://github.com/zxing/zxing), for the library used for the QR-reader.
 
 License
 =======
