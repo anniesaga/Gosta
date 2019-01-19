@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private Sensor senAccelerometer;
     private long lastUpdate = 0;
     private float last_x, last_y,last_z;
-    private static final int SHAKE_THRESHOLD = 20;
+    private static final int SHAKE_THRESHOLD = 600;
 
     private PopupWindow pw;
 
