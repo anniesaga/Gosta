@@ -63,7 +63,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private long lastUpdate = 0;
     private float last_x, last_y,last_z;
     private static final int SHAKE_THRESHOLD = 600;
-
+    /*Treshold set to appropriate value for a physical device.
+    Change to 20 to test with the emulator.*/
     private PopupWindow pw;
 
     //Listview related variables
