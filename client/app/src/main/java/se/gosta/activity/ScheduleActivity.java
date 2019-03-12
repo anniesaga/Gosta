@@ -103,7 +103,7 @@ public class ScheduleActivity extends AppCompatActivity {
      * about the events.
      */
     public void setupEventList(){
-
+        Log.d(LOG_TAG, "setupEventList()");
         events = new ArrayList<>();
         listView = (ListView) findViewById(R.id.schedule_list);
 
@@ -183,6 +183,7 @@ public class ScheduleActivity extends AppCompatActivity {
             public void eventsUpdated(List<Event> eventList) {
                 for (Event e : eventList) {
                     events.add(e);
+                    listView.requestLayout();
                 }
             }
 

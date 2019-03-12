@@ -2,11 +2,13 @@ package se.gosta.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.bottomnavigation.LabelVisibilityMode;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +24,8 @@ import se.gosta.utils.Session;
  * Activity for displaying a QR-reader
  */
 public class ReaderActivity extends AppCompatActivity {
+
+    private static final String LOG_TAG = InfoActivity.class.getSimpleName();
 
     private Button scan_button;
 
@@ -97,13 +101,18 @@ public class ReaderActivity extends AppCompatActivity {
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if(result != null){
             if(result.getContents()==null) {
                 Toast.makeText(this, "Scanning cancelled...", Toast.LENGTH_LONG).show();
 
             } else {
-                Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
+
+                Intent intent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse(result.getContents()));
+                Log.d(LOG_TAG, "Scanned QR-code: " + result.getContents());
+                startActivity(intent);
+
             }
         } else {
 

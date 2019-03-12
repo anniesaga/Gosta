@@ -48,10 +48,11 @@ public class Utils {
         // Fileame
         String fileName = completeFileName(context, company);
 
-        // Write to file
-        FileOutputStream outputStream;
-        try {
-            outputStream = new FileOutputStream (fileName);
+        try (
+                // Write to file
+                FileOutputStream outputStream = new FileOutputStream (fileName);
+
+        ) {
             bitmap.compress(Bitmap.CompressFormat.PNG, 85, outputStream);
             outputStream.flush();
         } catch (Exception e) {

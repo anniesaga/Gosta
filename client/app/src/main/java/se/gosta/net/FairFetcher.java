@@ -38,7 +38,7 @@ import se.gosta.utils.Utils;
 public class FairFetcher {
 
 
-    private static final String DEFAULT_URL = "http://10.0.2.2:8080";
+    private static final String DEFAULT_URL = "http://94.46.49.221:8080";
 
     // URL for debugging on phone
     // private static final String DEFAULT_URL = "http://192.168.43.128:8080";
